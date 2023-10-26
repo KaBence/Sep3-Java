@@ -1,0 +1,26 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+package proof;
+
+message getStringsReq{
+
+}
+
+message getStringRes{
+  repeated string ominous=1;
+}
+
+message putStringReq{
+  string ominous=1;
+}
+
+message putStringRes{
+  string resp=1;
+}
+
+service ProofService{
+  rpc getStrings(getStringsReq) returns (getStringRes);
+
+  rpc putString(putStringReq) returns (putStringRes);
+}
