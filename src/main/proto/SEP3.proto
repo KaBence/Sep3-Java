@@ -3,24 +3,24 @@ option java_multiple_files = true;
 
 package proof;
 
-message getStringsReq{
+message GetStringsReq{
 
 }
 
-message getStringRes{
+message GetStringRes{
   repeated string ominous=1;
 }
 
-message putStringReq{
+message PutStringReq{
   string ominous=1;
 }
 
-message putStringRes{
+message PutStringRes{
   string resp=1;
 }
 
 service ProofService{
-  rpc getStrings(getStringsReq) returns (getStringRes);
+  rpc getStrings(GetStringsReq) returns (GetStringRes);
 
-  rpc putString(putStringReq) returns (putStringRes);
+  rpc putString(PutStringReq) returns (PutStringRes);
 }

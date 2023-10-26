@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="the database connection">
-      <change afterPath="$PROJECT_DIR$/src/lib/postgresql.jar" afterDir="false" />
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="proto and maven are happy with each other now">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/ProofClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Server/ProofServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Server/ProofServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Bullshit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bullshit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/proto/SEP3.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/SEP3.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -81,7 +81,7 @@
       <recent name="C:\Users\veslo\IdeaProjects\Sep3-Java\src\main\java\Utility\Log" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.ProofClient">
     <configuration name="Bullshit" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Bullshit" />
       <module name="Sep3-Project" />
@@ -89,9 +89,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ProofClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Client.ProofClient" />
+      <module name="Sep3-Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProofServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.ProofServer" />
+      <module name="Sep3-Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ProofClient" />
         <item itemvalue="Application.Bullshit" />
+        <item itemvalue="Application.ProofServer" />
       </list>
     </recent_temporary>
   </component>
@@ -114,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698327193951</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="proto and maven are happy with each other now">
+      <created>1698334866189</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698334866189</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +168,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="the database connection" />
-    <option name="LAST_COMMIT_MESSAGE" value="the database connection" />
+    <MESSAGE value="proto and maven are happy with each other now" />
+    <option name="LAST_COMMIT_MESSAGE" value="proto and maven are happy with each other now" />
   </component>
 </project>
