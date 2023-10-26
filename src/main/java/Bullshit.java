@@ -4,8 +4,9 @@ import Utility.DataBase.String.StringDataImplementation;
 public class Bullshit {
     public static void main(String[] args) {
         StringData data= new StringDataImplementation();
-       data.addSOmeValueToThisTest("THIS IS BULLSHIT");
-        System.out.println(data.getString());
+
+     //  data.addSOmeValueToThisTest("THIS IS just slightly offensive");
+       // System.out.println(data.getString());
     }
 
 }
