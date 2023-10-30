@@ -14,12 +14,24 @@ public class ProofClient
         .usePlaintext()
         .build();
     ProofServiceGrpc.ProofServiceBlockingStub proofStub = ProofServiceGrpc.newBlockingStub(managedChannel);
+
+
+   PutStringReq req = PutStringReq.newBuilder().setOminous("This is bullshit as well. YES OFFENSE").build();
+   PutStringRes res= proofStub.putString(req);
+    System.out.println(res.getResp());
+
+
     GetStringsReq request = GetStringsReq.newBuilder()
-        .build();
+            .build();
     GetStringRes response = proofStub.getStrings(request);
+
+
     for (String item: response.getOminousList()){
       System.out.println(item);
     }
+
+
+
     managedChannel.shutdown();
   }
 }
