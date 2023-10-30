@@ -35,7 +35,7 @@ public class ProofServiceImpl extends ProofServiceGrpc.ProofServiceImplBase
     String temp=req.getOminous();
 
     stringData.addSOmeValueToThisTest(temp);
-
+    System.out.println(temp);
     PutStringRes res=PutStringRes.newBuilder()
         .setResp("Good Job")
         .build();
