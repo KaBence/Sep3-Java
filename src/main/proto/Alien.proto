@@ -1,0 +1,352 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+package sep;
+
+//----------Login----------\\
+
+message DtoLogin
+{
+  string phoneNumber = 1;
+  string password = 2;
+}
+
+message loginRequest
+{
+  DtoLogin login = 1;
+}
+
+//----------Register----------\\
+
+////--------Customer--------\\\\
+message DtoRegisterCustomer
+{
+  string phoneNumber = 1;
+  string password = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string address = 5;
+}
+
+message registerCustomerRequest
+{
+  DtoRegisterCustomer newCustomer = 1;
+}
+
+
+////--------Farmer--------\\\\
+message DtoRegisterFarmer
+{
+  string phoneNumber = 1;
+  string password = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string address = 5;
+  bool pesticides = 6;
+  double rating = 7;
+}
+
+message registerFarmerRequest
+{
+  DtoRegisterFarmer newFarmer = 1;
+}
+
+//----------Customer----------\\
+
+message DtoCustomer
+{
+  string phoneNumber = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string address = 4;
+}
+
+message getAllCustomersRequest{}
+
+message getAllCustomersResponse
+{
+  repeated DtoCustomer allCustomers = 1;
+}
+
+message getCustomerByPhoneRequest
+{
+  string customersPhone = 1;
+}
+
+message getCustomerByPhoneResponse
+{
+  DtoCustomer customer = 1;
+}
+
+
+//----------Farmer----------\\
+
+message DtoFarmer
+{
+  string phoneNumber = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string address = 4;
+  bool pesticides = 5;
+  double rating = 6;
+}
+
+message getAllFarmersRequest{}
+
+message getAllFarmersResponse
+{
+  repeated DtoFarmer allFarmers = 1;
+}
+
+message getFarmerByPhoneRequest
+{
+  string farmersPhone = 1;
+}
+
+message getFarmerByPhoneResponse
+{
+  DtoFarmer farmer = 1;
+}
+
+//----------Order----------\\
+
+message DtoOrder
+{
+  int32 orderId = 1;
+  string status = 2;
+  string date = 3;
+  string customerId = 4;
+}
+
+message createOrderRequest
+{
+  DtoOrder newOrder = 1;
+}
+
+message getAllOrdersRequest{}
+
+message getAllOrdersResponse
+{
+  repeated DtoOrder allOrders = 1;
+}
+
+message getOrderByIdRequest
+{
+  int32 id = 1;
+}
+
+message getOrderByIdResponse
+{
+  DtoOrder order = 1;
+}
+
+//----------Product----------\\
+
+message DtoProduct
+{
+  int32 id = 1;
+  bool availability = 2;
+  double amount = 3;
+  string type = 4;
+  double price = 5;
+  string pickedDate = 6;
+  string expirationDate = 7;
+  string farmerId = 8;
+}
+
+message createProductRequest
+{
+  DtoProduct newProduct = 1;
+}
+
+message getAllProductsByFarmerRequest
+{
+  DtoFarmer farmer = 1;
+}
+
+message getAllProductsByFarmerResponse
+{
+  repeated DtoProduct allProducts = 1;
+}
+
+message getProductByIdRequest
+{
+  int32 id = 1;
+}
+
+message getProductByIdResponse
+{
+  DtoProduct product = 1;
+}
+
+//----------OrderItem----------\\
+
+message DtoOrderItem
+{
+  int32 orderId = 1;
+  int32 productId = 2;
+  double  amount = 3;
+}
+
+message createOrderItemRequest
+{
+  DtoOrderItem newOrderItem = 1;
+}
+
+message getAllOrderItemsFromOrderRequest
+{
+  DtoOrder order = 1;
+}
+
+message getAllOrderItemsFromOrderResponse
+{
+  repeated DtoOrderItem allOrderItems = 1;
+}
+
+
+//----------Receipt----------\\
+
+message DtoReceipt
+{
+  int32 orderId = 1;
+  double amount = 2;
+  double price = 3;
+  string paymentMethod = 4;
+  string paymentDate = 5;
+  string text = 6;
+  string farmerId = 7;
+  string customerId = 8;
+}
+
+message createReceiptRequest
+{
+  DtoReceipt newReceipt = 1;
+}
+
+message getAllReceiptsRequest
+{
+  string user = 1;
+}
+
+message getAllReceiptsResponse
+{
+  repeated DtoReceipt allReceipts = 1;
+}
+
+message getReceiptByIdRequest
+{
+  int32 orderId = 1;
+  string farmerId = 2;
+  string customerId = 3;
+}
+
+message getReceiptByIdResponse
+{
+  DtoReceipt receipt = 1;
+}
+
+//----------Comment----------\\
+
+message DtoComment
+{
+  int32 commentId = 1;
+  string text = 2;
+  string farmerId = 3;
+  string customerId = 4;
+}
+
+message putCommentRequest
+{
+  DtoComment comment = 1;
+}
+
+//----------Review----------\\
+
+message DtoReview
+{
+  string text = 1;
+  double star = 2;
+  string farmerId = 3;
+  string customerId = 4;
+  repeated DtoComment comments = 5;
+}
+
+message postReviewRequest
+{
+  DtoReview review = 1;
+}
+
+message getAllReviewsByFarmerRequest
+{
+  DtoFarmer farmer = 1;
+}
+
+message getAllReviewsByFarmerResponse
+{
+  repeated DtoReview allReviews = 1;
+}
+
+message getReviewByIdRequest
+{
+  string farmerId = 1;
+  string customerId = 2;
+}
+
+message getReviewByIdResponse
+{
+  DtoReview review = 1;
+}
+
+//----------GeneralPutResponse----------\\
+
+message generalPutResponse
+{
+  string resp = 1;
+}
+
+//----------Service----------\\
+
+service SepService
+{
+  //--------Login--------\\
+  rpc login(loginRequest) returns (generalPutResponse);
+
+  //--------Register--------\\
+  rpc registerCustomer(registerCustomerRequest) returns (generalPutResponse);
+  rpc registerFarmer(registerFarmerRequest) returns (generalPutResponse);
+
+  //--------Customer--------\\
+  rpc getAllCustomers(getAllCustomersRequest) returns (getAllCustomersResponse);
+  rpc getCustomerByPhone(getCustomerByPhoneRequest) returns (getCustomerByPhoneResponse);
+
+  //--------Farmer--------\\
+  rpc getAllFarmers(getAllFarmersRequest) returns (getAllFarmersResponse);
+  rpc getFarmerByPhone(getCustomerByPhoneRequest) returns (getCustomerByPhoneResponse);
+
+  //--------Order--------\\
+  rpc createNewOrder(createOrderRequest) returns (generalPutResponse);
+  rpc getAllOrders(getAllOrdersRequest) returns (getAllOrdersResponse);
+  rpc getOrderById(getOrderByIdRequest) returns (getOrderByIdResponse);
+
+  //--------Product--------\\
+  rpc createProduct(createProductRequest) returns (generalPutResponse);
+  rpc getProductsByFarmer(getAllProductsByFarmerRequest) returns (getAllProductsByFarmerResponse);
+  rpc getProductById(getProductByIdRequest) returns (getProductByIdResponse);
+
+  //--------OrderItem--------\\
+  rpc createNewOrderItem(createOrderItemRequest) returns (generalPutResponse);
+  rpc getAllOrderItemsFromOrder(getAllOrderItemsFromOrderRequest) returns (getAllOrderItemsFromOrderResponse);
+
+  //--------Receipt--------\\
+  rpc createReceipt(createReceiptRequest) returns (generalPutResponse);
+  rpc getAllReceipts(getAllReceiptsRequest) returns (getAllReceiptsResponse);
+  rpc getReceiptById(getReceiptByIdRequest) returns (getReceiptByIdResponse);
+
+  //--------Comment--------\\
+  rpc postComment(putCommentRequest) returns (generalPutResponse);
+
+  //--------Review--------\\
+  rpc postReview(postReviewRequest) returns (generalPutResponse);
+  rpc getAllReviewsByFarmer(getAllReviewsByFarmerRequest) returns (getAllReviewsByFarmerResponse);
+  rpc getReviewBy(getReviewByIdRequest) returns (getReviewByIdResponse);
+}
