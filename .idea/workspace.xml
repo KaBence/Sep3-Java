@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="Proto">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/RegisterDaoImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Users/LoginDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Users/RegisterDao.java" afterDir="false" />
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="registering without double password">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Server/SepGrpServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/ProofClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/ProofClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/RegisterDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/RegisterDaoImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +87,7 @@
       <recent name="C:\Users\veslo\IdeaProjects\Sep3-Java\src\main\java\Utility\Log" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ProofClient">
+  <component name="RunManager" selected="Application.SepClient">
     <configuration name="Bullshit" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Bullshit" />
       <module name="Sep3-Project" />
@@ -119,8 +121,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SepClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Client.SepClient" />
+      <module name="Sep3-Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SepGrpServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.SepGrpServer" />
+      <module name="Sep3-Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SepClient" />
+        <item itemvalue="Application.SepGrpServer" />
         <item itemvalue="Application.ProofServer" />
         <item itemvalue="Application.ProofClient" />
         <item itemvalue="Application.Bullshit" />
@@ -149,7 +179,7 @@
       <workItem from="1700152483490" duration="8306000" />
       <workItem from="1700164053226" duration="1102000" />
       <workItem from="1700211906162" duration="15000" />
-      <workItem from="1700225294364" duration="5607000" />
+      <workItem from="1700225294364" duration="8592000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />
@@ -181,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700165138806</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="registering without double password">
+      <option name="closed" value="true" />
+      <created>1700231028718</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1700231028718</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,6 +241,7 @@
     <MESSAGE value="proto and maven are happy with each other now" />
     <MESSAGE value="client and server" />
     <MESSAGE value="Proto" />
-    <option name="LAST_COMMIT_MESSAGE" value="Proto" />
+    <MESSAGE value="registering without double password" />
+    <option name="LAST_COMMIT_MESSAGE" value="registering without double password" />
   </component>
 </project>

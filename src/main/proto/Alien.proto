@@ -40,11 +40,12 @@ message DtoRegisterFarmer
 {
   string phoneNumber = 1;
   string password = 2;
-  string firstName = 3;
-  string lastName = 4;
-  string address = 5;
-  bool pesticides = 6;
-  double rating = 7;
+  string repeatPassword=3;
+  string firstName = 4;
+  string lastName = 5;
+  string address = 6;
+  bool pesticides = 7;
+  double rating = 8;
 }
 
 message registerFarmerRequest

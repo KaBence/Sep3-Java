@@ -15,7 +15,6 @@ public class ProofClient
         .build();
     ProofServiceGrpc.ProofServiceBlockingStub proofStub = ProofServiceGrpc.newBlockingStub(managedChannel);
 
-
    PutStringReq req = PutStringReq.newBuilder().setOminous("This is bullshit as well. YES OFFENSE").build();
    PutStringRes res= proofStub.putString(req);
     System.out.println(res.getResp());

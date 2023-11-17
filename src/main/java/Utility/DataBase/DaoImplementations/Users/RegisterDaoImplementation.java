@@ -38,6 +38,10 @@ public class RegisterDaoImplementation implements RegisterDao
             return "Error: Phone number cannot be empty!";
         if (dtoCustomer.getPassword().isEmpty())
             return "Error: Password cannot be empty!";
+        if (dtoCustomer.getRepeatPassword().isEmpty())
+            return "Error: Reaped Password cannot be empty!";
+        if (!dtoCustomer.getRepeatPassword().equals(dtoCustomer.getPassword()))
+            return "Error: Passwords mismatch!";
         if (dtoCustomer.getFirstName().isEmpty())
             return "Error: First name cannot be empty!";
         if (dtoCustomer.getLastName().isEmpty())
@@ -58,7 +62,7 @@ public class RegisterDaoImplementation implements RegisterDao
         {
             try (Connection connection = getConnection())
             {
-                PreparedStatement user= connection.prepareStatement("INSERT INTO user(phonenumber,password,active) VALUES(?,?,?)");
+                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password,active) VALUES(?,?,?)");
                 user.setString(1,dtoCustomer.getPhoneNumber());
                 user.setString(2,dtoCustomer.getPassword());
                 user.setBoolean(3,true);
@@ -75,6 +79,10 @@ public class RegisterDaoImplementation implements RegisterDao
             }
             catch (SQLException e)
             {
+                if (e.getMessage().contains("ERROR: duplicate key value"))
+                {
+                    return "Error: Phone number: "+dtoCustomer.getPhoneNumber()+", is already registered in the system";
+                }
                 return "Error: Internal data base Error!\n"+e.getMessage();
             }
         }
@@ -87,6 +95,10 @@ public class RegisterDaoImplementation implements RegisterDao
             return "Error: Phone number cannot be empty!";
         if (dtoFarmer.getPassword().isEmpty())
             return "Error: Password cannot be empty!";
+        if (dtoFarmer.getRepeatPassword().isEmpty())
+            return "Error: Reaped Password cannot be empty!";
+        if (!dtoFarmer.getRepeatPassword().equals(dtoFarmer.getPassword()))
+            return "Error: Passwords mismatch!";
         if (dtoFarmer.getFirstName().isEmpty())
             return "Error: First name cannot be empty!";
         if (dtoFarmer.getLastName().isEmpty())
@@ -107,7 +119,7 @@ public class RegisterDaoImplementation implements RegisterDao
         {
             try (Connection connection = getConnection())
             {
-                PreparedStatement user= connection.prepareStatement("INSERT INTO user(phonenumber,password,active) VALUES(?,?,?)");
+                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password,active) VALUES(?,?,?)");
                 user.setString(1,dtoFarmer.getPhoneNumber());
                 user.setString(2,dtoFarmer.getPassword());
                 user.setBoolean(3,true);
@@ -126,6 +138,10 @@ public class RegisterDaoImplementation implements RegisterDao
             }
             catch (SQLException e)
             {
+                if (e.getMessage().contains("ERROR: duplicate key value"))
+                {
+                    return "Error: Phone number: "+dtoFarmer.getPhoneNumber()+", is already registered in the system";
+                }
                 return "Error: Internal data base Error!\n"+e.getMessage();
             }
         }

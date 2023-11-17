@@ -1,5 +1,6 @@
 package Server;
 
+import Utility.DataBase.DaoImplementations.Users.RegisterDaoImplementation;
 import Utility.DataBase.Daos.Users.RegisterDao;
 import io.grpc.stub.StreamObserver;
 import sep.*;
@@ -8,9 +9,9 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
 {
     private RegisterDao registerDao;
 
-    public SepServiceImplementation(RegisterDao registerDao)
+    public SepServiceImplementation()
     {
-        this.registerDao = registerDao;
+        this.registerDao = new RegisterDaoImplementation();
     }
 
     //----------Login----------\\
