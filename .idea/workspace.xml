@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="client and server">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="Proto">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/RegisterDaoImplementation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Users/LoginDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Users/RegisterDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +19,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -144,7 +147,9 @@
       <workItem from="1699470230963" duration="861000" />
       <workItem from="1699472861880" duration="60000" />
       <workItem from="1700152483490" duration="8306000" />
-      <workItem from="1700164053226" duration="1075000" />
+      <workItem from="1700164053226" duration="1102000" />
+      <workItem from="1700211906162" duration="15000" />
+      <workItem from="1700225294364" duration="5607000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />
@@ -168,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698347577879</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Proto">
+      <option name="closed" value="true" />
+      <created>1700165138806</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1700165138806</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,6 +202,7 @@
     <MESSAGE value="the database connection" />
     <MESSAGE value="proto and maven are happy with each other now" />
     <MESSAGE value="client and server" />
-    <option name="LAST_COMMIT_MESSAGE" value="client and server" />
+    <MESSAGE value="Proto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Proto" />
   </component>
 </project>
