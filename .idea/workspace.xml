@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="registering without double password">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Server/SepGrpServer.java" afterDir="false" />
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="registering double password working">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/LoginDaoImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/ProofClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/ProofClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/RegisterDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/RegisterDaoImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +84,7 @@
       <recent name="C:\Users\veslo\IdeaProjects\Sep3-Java\src\main\java\Utility\Log" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SepClient">
+  <component name="RunManager" selected="Application.SepGrpServer">
     <configuration name="Bullshit" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Bullshit" />
       <module name="Sep3-Project" />
@@ -179,7 +176,7 @@
       <workItem from="1700152483490" duration="8306000" />
       <workItem from="1700164053226" duration="1102000" />
       <workItem from="1700211906162" duration="15000" />
-      <workItem from="1700225294364" duration="8592000" />
+      <workItem from="1700225294364" duration="9905000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />
@@ -219,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700231028718</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="registering double password working">
+      <option name="closed" value="true" />
+      <created>1700233907476</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1700233907476</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,6 +247,7 @@
     <MESSAGE value="client and server" />
     <MESSAGE value="Proto" />
     <MESSAGE value="registering without double password" />
-    <option name="LAST_COMMIT_MESSAGE" value="registering without double password" />
+    <MESSAGE value="registering double password working" />
+    <option name="LAST_COMMIT_MESSAGE" value="registering double password working" />
   </component>
 </project>

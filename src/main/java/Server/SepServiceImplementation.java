@@ -1,6 +1,8 @@
 package Server;
 
+import Utility.DataBase.DaoImplementations.Users.LoginDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.RegisterDaoImplementation;
+import Utility.DataBase.Daos.Users.LoginDao;
 import Utility.DataBase.Daos.Users.RegisterDao;
 import io.grpc.stub.StreamObserver;
 import sep.*;
@@ -8,17 +10,27 @@ import sep.*;
 public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
 {
     private RegisterDao registerDao;
+    private LoginDao loginDao;
 
     public SepServiceImplementation()
     {
         this.registerDao = new RegisterDaoImplementation();
+        this.loginDao = new LoginDaoImplementation();
     }
 
     //----------Login----------\\
     @Override
     public void login(loginRequest request, StreamObserver<generalPutResponse> responseObserver)
     {
-        super.login(request, responseObserver);
+       String temp = loginDao.login(request.getLogin());
+        System.out.println(temp);
+
+        generalPutResponse response = generalPutResponse.newBuilder()
+                .setResp(temp)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     //----------Register----------\\

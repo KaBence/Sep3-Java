@@ -43,5 +43,14 @@ public class SepClient
         registerFarmerRequest req1 = registerFarmerRequest.newBuilder().setNewFarmer(y).build();
         generalPutResponse res1 = proofStub.registerFarmer(req1);
         System.out.println(res1.getResp());
+
+        DtoLogin z = DtoLogin.newBuilder()
+                .setPhoneNumber("123456789")
+                .setPassword("password")
+                .build();
+
+        loginRequest loginRequest = sep.loginRequest.newBuilder().setLogin(z).build();
+        generalPutResponse loginRes = proofStub.login(loginRequest);
+        System.out.println(loginRes.getResp());
     }
 }
