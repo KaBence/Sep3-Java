@@ -45,7 +45,8 @@ message DtoRegisterFarmer
   string lastName = 5;
   string address = 6;
   bool pesticides = 7;
-  double rating = 8;
+  string farmName = 8;
+  double rating = 9;
 }
 
 message registerFarmerRequest
@@ -80,6 +81,11 @@ message getCustomerByPhoneResponse
   DtoCustomer customer = 1;
 }
 
+message editCustomerRequest
+{
+  DtoRegisterCustomer editedCustomer = 1;
+}
+
 
 //----------Farmer----------\\
 
@@ -90,7 +96,8 @@ message DtoFarmer
   string lastName = 3;
   string address = 4;
   bool pesticides = 5;
-  double rating = 6;
+  string farmName = 6;
+  double rating = 7;
 }
 
 message getAllFarmersRequest{}
@@ -108,6 +115,11 @@ message getFarmerByPhoneRequest
 message getFarmerByPhoneResponse
 {
   DtoFarmer farmer = 1;
+}
+
+message editFarmerRequest
+{
+  DtoRegisterFarmer editedFarmer = 1;
 }
 
 //----------Order----------\\
@@ -211,13 +223,14 @@ message getAllOrderItemsFromOrderResponse
 message DtoReceipt
 {
   int32 orderId = 1;
-  double amount = 2;
-  double price = 3;
-  string paymentMethod = 4;
-  string paymentDate = 5;
-  string text = 6;
-  string farmerId = 7;
-  string customerId = 8;
+  bool processed = 2;
+  double amount = 3;
+  double price = 4;
+  string paymentMethod = 5;
+  string paymentDate = 6;
+  string text = 7;
+  string farmerId = 8;
+  string customerId = 9;
 }
 
 message createReceiptRequest
@@ -238,8 +251,9 @@ message getAllReceiptsResponse
 message getReceiptByIdRequest
 {
   int32 orderId = 1;
-  string farmerId = 2;
-  string customerId = 3;
+  bool processed = 2;
+  string farmerId = 3;
+  string customerId = 4;
 }
 
 message getReceiptByIdResponse
@@ -320,10 +334,12 @@ service SepService
   //--------Customer--------\\
   rpc getAllCustomers(getAllCustomersRequest) returns (getAllCustomersResponse);
   rpc getCustomerByPhone(getCustomerByPhoneRequest) returns (getCustomerByPhoneResponse);
+  rpc editCustomer(editCustomerRequest) returns (generalPutResponse);
 
   //--------Farmer--------\\
   rpc getAllFarmers(getAllFarmersRequest) returns (getAllFarmersResponse);
-  rpc getFarmerByPhone(getCustomerByPhoneRequest) returns (getCustomerByPhoneResponse);
+  rpc getFarmerByPhone(getFarmerByPhoneRequest) returns (getFarmerByPhoneResponse);
+  rpc editFarmer(editFarmerRequest) returns (generalPutResponse);
 
   //--------Order--------\\
   rpc createNewOrder(createOrderRequest) returns (generalPutResponse);

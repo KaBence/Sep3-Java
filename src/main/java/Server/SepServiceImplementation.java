@@ -1,21 +1,30 @@
 package Server;
 
+import Utility.DataBase.DaoImplementations.Users.CustomerDaoImplementation;
+import Utility.DataBase.DaoImplementations.Users.FarmerDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.LoginDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.RegisterDaoImplementation;
+import Utility.DataBase.Daos.Users.CustomerDao;
+import Utility.DataBase.Daos.Users.FarmerDao;
 import Utility.DataBase.Daos.Users.LoginDao;
 import Utility.DataBase.Daos.Users.RegisterDao;
 import io.grpc.stub.StreamObserver;
 import sep.*;
 
+import java.util.ArrayList;
+
 public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
 {
     private RegisterDao registerDao;
     private LoginDao loginDao;
-
+    private CustomerDao customerDao;
+    private FarmerDao farmerDao;
     public SepServiceImplementation()
     {
         this.registerDao = new RegisterDaoImplementation();
         this.loginDao = new LoginDaoImplementation();
+        this.customerDao = new CustomerDaoImplementation();
+        this.farmerDao = new FarmerDaoImplementation();
     }
 
     //----------Login----------\\
@@ -64,24 +73,66 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
 
     //----------Customer----------\\
     @Override
-    public void getAllCustomers(getAllCustomersRequest request, StreamObserver<getAllCustomersResponse> responseObserver) {
-        super.getAllCustomers(request, responseObserver);
+    public void getAllCustomers(getAllCustomersRequest request, StreamObserver<getAllCustomersResponse> responseObserver)
+    {
+        ArrayList<DtoCustomer> list = customerDao.getAllCustomers();
+        getAllCustomersResponse res = getAllCustomersResponse.newBuilder()
+                .addAllAllCustomers(list)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     @Override
-    public void getCustomerByPhone(getCustomerByPhoneRequest request, StreamObserver<getCustomerByPhoneResponse> responseObserver) {
-        super.getCustomerByPhone(request, responseObserver);
+    public void getCustomerByPhone(getCustomerByPhoneRequest request, StreamObserver<getCustomerByPhoneResponse> responseObserver)
+    {
+        DtoCustomer x = customerDao.getCustomerById(request.getCustomersPhone());
+        getCustomerByPhoneResponse res = getCustomerByPhoneResponse.newBuilder()
+                .setCustomer(x)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void editCustomer(editCustomerRequest request, StreamObserver<generalPutResponse> responseObserver) {
+        String x = customerDao.editCustomer(request.getEditedCustomer());
+        generalPutResponse res = generalPutResponse.newBuilder()
+                .setResp(x)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     //----------Farmer----------\\
     @Override
     public void getAllFarmers(getAllFarmersRequest request, StreamObserver<getAllFarmersResponse> responseObserver) {
-        super.getAllFarmers(request, responseObserver);
+        ArrayList<DtoFarmer> list = farmerDao.getAllFarmers();
+        getAllFarmersResponse res = getAllFarmersResponse.newBuilder()
+                .addAllAllFarmers(list)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     @Override
-    public void getFarmerByPhone(getCustomerByPhoneRequest request, StreamObserver<getCustomerByPhoneResponse> responseObserver) {
-        super.getFarmerByPhone(request, responseObserver);
+    public void getFarmerByPhone(getFarmerByPhoneRequest request, StreamObserver<getFarmerByPhoneResponse> responseObserver) {
+        DtoFarmer x = farmerDao.getFarmersById(request.getFarmersPhone());
+        getFarmerByPhoneResponse res = getFarmerByPhoneResponse.newBuilder()
+                .setFarmer(x)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void editFarmer(editFarmerRequest request, StreamObserver<generalPutResponse> responseObserver) {
+        String x = farmerDao.editFarmer(request.getEditedFarmer());
+        generalPutResponse res = generalPutResponse.newBuilder()
+                .setResp(x)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     //----------Order----------\\
