@@ -174,11 +174,17 @@ message DtoProduct
   string farmerId = 8;
 }
 
+message ProductSearchParameters{
+  string type=1;
+  double price=2;
+  double amount=3;
+}
+
 message createProductRequest
 {
   DtoProduct newProduct = 1;
 }
-
+//selecting the farm first and then their product
 message getAllProductsByFarmerRequest
 {
   DtoFarmer farmer = 1;
@@ -188,7 +194,7 @@ message getAllProductsByFarmerResponse
 {
   repeated DtoProduct allProducts = 1;
 }
-
+//editing the product
 message getProductByIdRequest
 {
   int32 id = 1;
@@ -197,6 +203,14 @@ message getProductByIdRequest
 message getProductByIdResponse
 {
   DtoProduct product = 1;
+}
+//Selecting the product first and then farm
+message getAllProductsRequest{
+  ProductSearchParameters parameters=1;
+}
+
+message getAllProductsResponse{
+  repeated DtoProduct allProducts=1;
 }
 
 //----------OrderItem----------\\
@@ -356,6 +370,7 @@ service SepService
   rpc createProduct(createProductRequest) returns (generalPutResponse);
   rpc getProductsByFarmer(getAllProductsByFarmerRequest) returns (getAllProductsByFarmerResponse);
   rpc getProductById(getProductByIdRequest) returns (getProductByIdResponse);
+  rpc getAllProducts(getAllProductsRequest) returns (getAllProductsResponse);
 
   //--------OrderItem--------\\
   rpc createNewOrderItem(createOrderItemRequest) returns (generalPutResponse);
