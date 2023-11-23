@@ -4,5 +4,5 @@ import sep.DtoLogin;
 
 public interface LoginDao
 {
-    String login(DtoLogin dto);
+    String login(DtoLogin dto) throws Exception;
 }

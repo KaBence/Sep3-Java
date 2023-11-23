@@ -34,10 +34,14 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
 
     //----------Login----------\\
     @Override
-    public void login(loginRequest request, StreamObserver<loginResponse> responseObserver)
-    {
-       String temp = loginDao.login(request.getLogin());
-       String out = "Not Found";
+    public void login(loginRequest request, StreamObserver<loginResponse> responseObserver) {
+        String temp = null;
+        try {
+            temp = loginDao.login(request.getLogin());
+        } catch (Exception e) {
+            temp="Exception "+e.getMessage();
+        }
+        String out = "Not Found";
        ArrayList<DtoFarmer> farmers = farmerDao.getAllFarmers();
        ArrayList<DtoCustomer> customers = customerDao.getAllCustomers();
        boolean found = false;

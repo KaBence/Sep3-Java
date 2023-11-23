@@ -27,13 +27,12 @@ public class LoginDaoImplementation implements LoginDao
     }
 
     @Override
-    public String login(DtoLogin dto)
-    {
+    public String login(DtoLogin dto) throws Exception {
         ArrayList<DtoLogin> list = new ArrayList<>();
         if (dto.getPhoneNumber().isEmpty())
-            return "Error: Phone number cannot be empty!";
+            throw new Exception("Error: Phone number cannot be empty!");
         if (dto.getPassword().isEmpty())
-            return "Error: Password cannot be empty!";
+            throw new Exception("Error: Password cannot be empty!");
         else
         {
             try (Connection connection = getConnection())
@@ -58,14 +57,14 @@ public class LoginDaoImplementation implements LoginDao
                     {
                         if (list.get(i).getPassword().equals(dto.getPassword()))
                             return list.get(i).getPhoneNumber();
-                        return "Error: Password mismatch";
+                        throw new Exception("Error: Password mismatch");
                     }
                 }
-                return "Error: User doesn't exist";
+                throw new Exception("Error: User doesn't exist");
             }
             catch (SQLException e)
             {
-                return "Error: Internal data base Error!\n"+e.getMessage();
+                throw new Exception("Error: Internal data base Error!\n"+e.getMessage());
             }
         }
     }
