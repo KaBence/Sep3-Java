@@ -57,7 +57,7 @@ public class LoginDaoImplementation implements LoginDao
                     if (list.get(i).getPhoneNumber().equals(dto.getPhoneNumber()))
                     {
                         if (list.get(i).getPassword().equals(dto.getPassword()))
-                            return "Success!";
+                            return list.get(i).getPhoneNumber();
                         return "Error: Password mismatch";
                     }
                 }

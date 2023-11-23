@@ -62,10 +62,9 @@ public class RegisterDaoImplementation implements RegisterDao
         {
             try (Connection connection = getConnection())
             {
-                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password,active) VALUES(?,?,?)");
+                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password) VALUES(?,?)");
                 user.setString(1,dtoCustomer.getPhoneNumber());
                 user.setString(2,dtoCustomer.getPassword());
-                user.setBoolean(3,true);
                 user.executeUpdate();
 
                 PreparedStatement customer= connection.prepareStatement("INSERT INTO Customer(phonenumber,firstname,lastname,address) VALUES(?,?,?,?)");
@@ -105,6 +104,8 @@ public class RegisterDaoImplementation implements RegisterDao
             return "Error: Last name cannot be empty!";
         if (dtoFarmer.getAddress().isEmpty())
             return "Error: Address cannot be empty!";
+        if (dtoFarmer.getFarmName().isEmpty())
+            return  "Error: Farm name cannot be empty!";
         if (dtoFarmer.getPhoneNumber().length()>=50)
             return "Error: Phone number cannot be longer than 50 characters!";
         if (dtoFarmer.getPassword().length()>=50)
@@ -115,23 +116,25 @@ public class RegisterDaoImplementation implements RegisterDao
             return "Error: Last name cannot be longer than 50 characters!";
         if (dtoFarmer.getAddress().length()>=50)
             return "Error: Address cannot be longer than 50 characters!";
+        if (dtoFarmer.getFarmName().length()>=50)
+            return "Error: Farm name cannot be longer than 50 characters!";
         else
         {
             try (Connection connection = getConnection())
             {
-                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password,active) VALUES(?,?,?)");
+                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password) VALUES(?,?)");
                 user.setString(1,dtoFarmer.getPhoneNumber());
                 user.setString(2,dtoFarmer.getPassword());
-                user.setBoolean(3,true);
                 user.executeUpdate();
 
-                PreparedStatement farmer= connection.prepareStatement("INSERT INTO Farmer(phonenumber,firstname,lastname,address,pestecides,rating) VALUES(?,?,?,?,?,?)");
+                PreparedStatement farmer= connection.prepareStatement("INSERT INTO Farmer(phonenumber,firstname,lastname,address,pestecides,farmName,rating) VALUES(?,?,?,?,?,?,?)");
                 farmer.setString(1,dtoFarmer.getPhoneNumber());
                 farmer.setString(2,dtoFarmer.getFirstName());
                 farmer.setString(3,dtoFarmer.getLastName());
                 farmer.setString(4,dtoFarmer.getAddress());
                 farmer.setBoolean(5,dtoFarmer.getPesticides());
-                farmer.setDouble(6,dtoFarmer.getRating());
+                farmer.setString(6,dtoFarmer.getFarmName());
+                farmer.setDouble(7,dtoFarmer.getRating());
                 farmer.executeUpdate();
 
                 return "Success!";

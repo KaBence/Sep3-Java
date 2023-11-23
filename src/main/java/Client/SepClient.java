@@ -50,7 +50,7 @@ public class SepClient
                 .build();
 
         loginRequest loginRequest = sep.loginRequest.newBuilder().setLogin(z).build();
-        generalPutResponse loginRes = proofStub.login(loginRequest);
-        System.out.println(loginRes.getResp());
+        //generalPutResponse loginRes = proofStub.login(loginRequest);
+        //System.out.println(loginRes.getResp());
     }
 }
