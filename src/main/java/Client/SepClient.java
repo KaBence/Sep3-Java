@@ -1,9 +1,7 @@
 package Client;
 
-import Server.SepGrpServer;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import proof.*;
 import sep.*;
 
 public class SepClient
