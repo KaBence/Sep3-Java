@@ -45,7 +45,6 @@ message DtoRegisterFarmer
   string lastName = 5;
   string address = 6;
   bool pesticides = 7;
-  double rating = 8;
 }
 
 message registerFarmerRequest
