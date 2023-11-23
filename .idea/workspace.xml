@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="changes for login">
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="product stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Product/ProductDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Product/ProductDaoImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Product/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Product/ProductDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,6 +179,8 @@
       <workItem from="1700225294364" duration="9999000" />
       <workItem from="1700493989178" duration="6036000" />
       <workItem from="1700740801882" duration="2115000" />
+      <workItem from="1700750060921" duration="396000" />
+      <workItem from="1700750497527" duration="3418000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />

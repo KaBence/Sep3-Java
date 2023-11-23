@@ -1,6 +1,6 @@
 package Utility.DataBase.Daos.Product;
 
-import sep.DtoProduct;
+import sep.*;
 
 import java.util.ArrayList;
 
@@ -9,5 +9,6 @@ public interface ProductDao {
     ArrayList<DtoProduct> getProductsByFarmer(String farmerId);
     DtoProduct getProductById(int productId);
     ArrayList<DtoProduct> getAllProducts();
+    ArrayList<DtoProduct> getFilteredProducts(ProductSearchParameters dto);
 
 }

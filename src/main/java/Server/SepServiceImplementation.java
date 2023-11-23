@@ -214,6 +214,20 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
         responseObserver.onCompleted();
     }
 
+
+    @Override
+    public void getAllProducts(getAllProductsRequest request, StreamObserver<getAllProductsResponse> responseObserver)
+    {
+        ArrayList<DtoProduct> list =productDao.getFilteredProducts(request.getParameters());
+        getAllProductsResponse res = getAllProductsResponse.newBuilder()
+                .addAllAllProducts(list)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
+    }
+
+
+
     //----------OrderItem----------\\
     @Override
     public void createNewOrderItem(createOrderItemRequest request, StreamObserver<generalPutResponse> responseObserver) {

@@ -3,6 +3,7 @@ package Utility.DataBase.DaoImplementations.Product;
 import Utility.DataBase.Daos.Product.ProductDao;
 import sep.DtoCustomer;
 import sep.DtoProduct;
+import sep.ProductSearchParameters;
 
 import java.sql.*;
 import java.text.ParseException;
@@ -131,6 +132,72 @@ public class ProductDaoImplementation implements ProductDao {
         {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @Override //THIS SHIT MAY NOT BE WORKING IF SO CHECK WHAT IS NULL THEN CHECK WHAT IS NOT NULL THEN COMBINE THE FILTERS
+    public ArrayList<DtoProduct> getFilteredProducts(ProductSearchParameters dto) {
+        ArrayList<DtoProduct> all = getAllProducts();
+        ArrayList<DtoProduct> filtered = new ArrayList<>();
+
+        if (!dto.getType().isEmpty())
+        {
+            for (int i = 0; i < all.size(); i++) {
+               if(dto.getType().equals(all.get(i).getType()))
+               {
+                   filtered.add(all.get(i));
+               }
+            }
+        }
+        if (dto.getPrice()!= 0)
+        {
+            if(filtered.isEmpty())
+            {
+                for (int i = 0; i < all.size(); i++) {
+                    if(dto.getPrice()<= all.get(i).getPrice())
+                    {
+                        filtered.add(all.get(i));
+                    }
+                }
+            }
+            else {
+                for (int i = 0; i < filtered.size(); i++) {
+                    if(dto.getPrice()> filtered.get(i).getPrice())
+                    {
+                        if (filtered.remove(i)!=null)
+                        {
+                            i--;
+                        }
+                    }
+                }
+            }
+        }
+        if(dto.getAmount()!=0)
+        {
+            if(filtered.isEmpty())
+            {
+                for (int i = 0; i < all.size(); i++) {
+                    if(dto.getAmount()<= all.get(i).getAmount())
+                    {
+                        filtered.add(all.get(i));
+                    }
+                }
+            }
+            else {
+                for (int i = 0; i < filtered.size(); i++) {
+                    if(dto.getAmount()> filtered.get(i).getAmount())
+                    {
+                        if (filtered.remove(i)!=null)
+                        {
+                            i--;
+                        }
+                    }
+                }
+            }
+        }
+        if(filtered.isEmpty())
+            return all;
+        else
+            return filtered;
     }
 
 }
