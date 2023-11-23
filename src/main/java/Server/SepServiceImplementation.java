@@ -1,9 +1,11 @@
 package Server;
 
+import Utility.DataBase.DaoImplementations.Product.ProductDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.CustomerDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.FarmerDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.LoginDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.RegisterDaoImplementation;
+import Utility.DataBase.Daos.Product.ProductDao;
 import Utility.DataBase.Daos.Users.CustomerDao;
 import Utility.DataBase.Daos.Users.FarmerDao;
 import Utility.DataBase.Daos.Users.LoginDao;
@@ -19,12 +21,15 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
     private LoginDao loginDao;
     private CustomerDao customerDao;
     private FarmerDao farmerDao;
+
+    private ProductDao productDao;
     public SepServiceImplementation()
     {
         this.registerDao = new RegisterDaoImplementation();
         this.loginDao = new LoginDaoImplementation();
         this.customerDao = new CustomerDaoImplementation();
         this.farmerDao = new FarmerDaoImplementation();
+        this.productDao = new ProductDaoImplementation();
     }
 
     //----------Login----------\\
@@ -179,17 +184,34 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
     //----------Product----------\\
     @Override
     public void createProduct(createProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        super.createProduct(request, responseObserver);
+        String temp = productDao.createProduct(request.getNewProduct());
+        System.out.println(temp);
+
+        generalPutResponse response = generalPutResponse.newBuilder()
+                .setResp(temp)
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void getProductsByFarmer(getAllProductsByFarmerRequest request, StreamObserver<getAllProductsByFarmerResponse> responseObserver) {
-        super.getProductsByFarmer(request, responseObserver);
+       ArrayList<DtoProduct> list =productDao.getProductsByFarmer(request.getFarmer().getPhoneNumber());
+       getAllProductsByFarmerResponse res = getAllProductsByFarmerResponse.newBuilder()
+               .addAllAllProducts(list)
+               .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void getProductById(getProductByIdRequest request, StreamObserver<getProductByIdResponse> responseObserver) {
-        super.getProductById(request, responseObserver);
+        DtoProduct x = productDao.getProductById(request.getId());
+        getProductByIdResponse res = getProductByIdResponse.newBuilder()
+                .setProduct(x)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     //----------OrderItem----------\\

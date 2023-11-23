@@ -39,7 +39,7 @@ public class RegisterDaoImplementation implements RegisterDao
         if (dtoCustomer.getPassword().isEmpty())
             return "Error: Password cannot be empty!";
         if (dtoCustomer.getRepeatPassword().isEmpty())
-            return "Error: Reaped Password cannot be empty!";
+            return "Error: Repeated Password cannot be empty!";
         if (!dtoCustomer.getRepeatPassword().equals(dtoCustomer.getPassword()))
             return "Error: Passwords mismatch!";
         if (dtoCustomer.getFirstName().isEmpty())
