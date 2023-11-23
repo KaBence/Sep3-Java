@@ -211,6 +211,10 @@ message getAllProductsRequest{
 message getAllProductsResponse{
   repeated DtoProduct allProducts=1;
 }
+//Updating a product -> needs DTOProduct
+message updateProductRequest{
+  DtoProduct product=1;
+}
 
 //----------OrderItem----------\\
 
@@ -370,6 +374,7 @@ service SepService
   rpc getProductsByFarmer(getAllProductsByFarmerRequest) returns (getAllProductsByFarmerResponse);
   rpc getProductById(getProductByIdRequest) returns (getProductByIdResponse);
   rpc getAllProducts(getAllProductsRequest) returns (getAllProductsResponse);
+  rpc updateProduct(updateProductRequest) returns (generalPutResponse);
 
   //--------OrderItem--------\\
   rpc createNewOrderItem(createOrderItemRequest) returns (generalPutResponse);
