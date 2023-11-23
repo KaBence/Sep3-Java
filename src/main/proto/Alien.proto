@@ -16,6 +16,11 @@ message loginRequest
   DtoLogin login = 1;
 }
 
+message loginResponse{
+  string phoneNumber=1;
+  string instanceOf = 2;
+}
+
 //----------Register----------\\
 
 ////--------Customer--------\\\\
@@ -325,7 +330,7 @@ message generalPutResponse
 service SepService
 {
   //--------Login--------\\
-  rpc login(loginRequest) returns (generalPutResponse);
+  rpc login(loginRequest) returns (loginResponse);
 
   //--------Register--------\\
   rpc registerCustomer(registerCustomerRequest) returns (generalPutResponse);

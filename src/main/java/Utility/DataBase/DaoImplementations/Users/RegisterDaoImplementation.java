@@ -62,10 +62,9 @@ public class RegisterDaoImplementation implements RegisterDao
         {
             try (Connection connection = getConnection())
             {
-                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password,active) VALUES(?,?,?)");
+                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password) VALUES(?,?)");
                 user.setString(1,dtoCustomer.getPhoneNumber());
                 user.setString(2,dtoCustomer.getPassword());
-                user.setBoolean(3,true);
                 user.executeUpdate();
 
                 PreparedStatement customer= connection.prepareStatement("INSERT INTO Customer(phonenumber,firstname,lastname,address) VALUES(?,?,?,?)");
@@ -123,10 +122,9 @@ public class RegisterDaoImplementation implements RegisterDao
         {
             try (Connection connection = getConnection())
             {
-                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password,active) VALUES(?,?,?)");
+                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password) VALUES(?,?)");
                 user.setString(1,dtoFarmer.getPhoneNumber());
                 user.setString(2,dtoFarmer.getPassword());
-                user.setBoolean(3,true);
                 user.executeUpdate();
 
                 PreparedStatement farmer= connection.prepareStatement("INSERT INTO Farmer(phonenumber,firstname,lastname,address,pestecides,farmName,rating) VALUES(?,?,?,?,?,?,?)");

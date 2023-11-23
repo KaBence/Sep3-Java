@@ -29,13 +29,38 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
 
     //----------Login----------\\
     @Override
-    public void login(loginRequest request, StreamObserver<generalPutResponse> responseObserver)
+    public void login(loginRequest request, StreamObserver<loginResponse> responseObserver)
     {
        String temp = loginDao.login(request.getLogin());
+       String out = "Not Found";
+       ArrayList<DtoFarmer> farmers = farmerDao.getAllFarmers();
+       ArrayList<DtoCustomer> customers = customerDao.getAllCustomers();
+       boolean found = false;
+       for (int i = 0; i < farmers.size(); i++)
+       {
+           if (farmers.get(i).getPhoneNumber().equals(temp))
+           {
+               out = "Farmer";
+               found = true;
+               break;
+           }
+       }
+       if (!found) {
+           for (int i = 0; i <customers.size(); i++)
+           {
+                if (customers.get(i).getPhoneNumber().equals(temp))
+                {
+                    out = "Customer";
+                    break;
+                }
+           }
+       }
+
         System.out.println(temp);
 
-        generalPutResponse response = generalPutResponse.newBuilder()
-                .setResp(temp)
+        loginResponse response = loginResponse.newBuilder()
+                .setPhoneNumber(temp)
+                .setInstanceOf(out)
                 .build();
 
         responseObserver.onNext(response);
