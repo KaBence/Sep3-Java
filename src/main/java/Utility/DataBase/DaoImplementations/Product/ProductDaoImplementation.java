@@ -30,44 +30,41 @@ public class ProductDaoImplementation implements ProductDao {
                 "postgres", "password");
     }
     @Override
-    public String createProduct(DtoProduct dtoProduct) {
-        if (dtoProduct.getId() == 0)
-            return "Error: Product id cannot be empty";
-        //availability
-        if (dtoProduct.getAmount() == 0)
-            return "Error: Amount cannot be empty";
-        if (dtoProduct.getType().isEmpty())
-            return "Error: Type cannot be empty";
-        if (dtoProduct.getPrice() == 0)
-            return "Error: Price cannot be empty";
-        if (dtoProduct.getPickedDate().isEmpty())
-            return "Error: Picked date cannot be empty";
-        if (dtoProduct.getExpirationDate().isEmpty())
-            return "Error: Expiration date cannot be empty";
-        if (dtoProduct.getFarmerId().isEmpty())
-            return "Error: Farmer id cannot be empty";
+    public String createProduct(DtoProduct dtoProduct) throws Exception {
+        Date picked = Date.valueOf(dtoProduct.getPickedDate());
+        Date expired = Date.valueOf(dtoProduct.getExpirationDate());
 
+        if (dtoProduct.getType().isEmpty())
+            throw new Exception("Error: Type cannot be empty");
+        if (dtoProduct.getPrice() == 0)
+            throw new Exception("Error: Price cannot be empty");
+        if (dtoProduct.getPickedDate().equals("0001-01-01"))
+            throw new Exception("Error: Picked date cannot be empty");
+        if (dtoProduct.getExpirationDate().equals("0001-01-01"))
+            throw new Exception("Error: Expiration date cannot be empty");
+        if (dtoProduct.getPickedDate().equals("9999-12-12") || dtoProduct.getExpirationDate().equals("9999-12-12"))
+            throw new Exception("Error: Invalid Date - Format Date is DD/MM/YYYY");
+        if (dtoProduct.getAmount() == 0)
+            throw new Exception("Error: Amount cannot be empty");
+        if (expired.before(picked))
+            throw new Exception("Error: Expiration date cannot be before Picked date");
         else {
             try (Connection connection = getConnection()) {
-                PreparedStatement product = connection.prepareStatement("INSERT INTO \"Product\"(productID, availability,amount, \"type\", price, pickedDate, expirationDate,farmerID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                PreparedStatement product = connection.prepareStatement("INSERT INTO Product(availability,amount, \"type\", price, pickedDate, expirationDate,farmerID) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-                product.setInt(1, dtoProduct.getId());
-                product.setBoolean(2, dtoProduct.getAvailability());
-                product.setDouble(3, dtoProduct.getAmount());
-                product.setString(4, dtoProduct.getType());
-                product.setDouble(5, dtoProduct.getPrice());
-                product.setString(6, dtoProduct.getPickedDate());
-                product.setString(7, dtoProduct.getExpirationDate());
-                product.setString(8, dtoProduct.getFarmerId());
+                product.setBoolean(1, true);
+                product.setDouble(2, dtoProduct.getAmount());
+                product.setString(3, dtoProduct.getType());
+                product.setDouble(4, dtoProduct.getPrice());
+                product.setDate(5, picked);
+                product.setDate(6, expired);
+                product.setString(7, dtoProduct.getFarmerId());
 
                 product.executeUpdate();
 
                 return "Success!";
             } catch (SQLException e) {
-                if (e.getMessage().contains("ERROR: duplicate key value")) {
-                    return "Error: Product id: " + dtoProduct.getId() + ", is already used in the system";
-                }
-                return "Error: Internal data base Error!\n" + e.getMessage();
+                throw new Exception("Error: Internal data base Error!\n" + e.getMessage());
             }
         }
     }

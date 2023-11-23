@@ -39,7 +39,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
         try {
             temp = loginDao.login(request.getLogin());
         } catch (Exception e) {
-            temp="Exception "+e.getMessage();
+            temp=e.getMessage();
         }
         String out = "Not Found";
        ArrayList<DtoFarmer> farmers = farmerDao.getAllFarmers();
@@ -188,7 +188,13 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
     //----------Product----------\\
     @Override
     public void createProduct(createProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        String temp = productDao.createProduct(request.getNewProduct());
+        String temp = null;
+
+        try {
+            temp = productDao.createProduct(request.getNewProduct());
+        } catch (Exception e) {
+            temp = e.getMessage();
+        }
         System.out.println(temp);
 
         generalPutResponse response = generalPutResponse.newBuilder()

@@ -5,7 +5,7 @@ import sep.*;
 import java.util.ArrayList;
 
 public interface ProductDao {
-    String createProduct(DtoProduct dtoProduct);
+    String createProduct(DtoProduct dtoProduct) throws Exception;
     ArrayList<DtoProduct> getProductsByFarmer(String farmerId);
     DtoProduct getProductById(int productId);
     ArrayList<DtoProduct> getAllProducts();
