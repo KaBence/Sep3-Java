@@ -39,7 +39,7 @@ public class RegisterDaoImplementation implements RegisterDao
         if (dtoCustomer.getPassword().isEmpty())
             return "Error: Password cannot be empty!";
         if (dtoCustomer.getRepeatPassword().isEmpty())
-            return "Error: Reaped Password cannot be empty!";
+            return "Error: Repeated Password cannot be empty!";
         if (!dtoCustomer.getRepeatPassword().equals(dtoCustomer.getPassword()))
             return "Error: Passwords mismatch!";
         if (dtoCustomer.getFirstName().isEmpty())
@@ -127,14 +127,13 @@ public class RegisterDaoImplementation implements RegisterDao
                 user.setString(2,dtoFarmer.getPassword());
                 user.executeUpdate();
 
-                PreparedStatement farmer= connection.prepareStatement("INSERT INTO Farmer(phonenumber,firstname,lastname,address,pestecides,farmName,rating) VALUES(?,?,?,?,?,?,?)");
+                PreparedStatement farmer= connection.prepareStatement("INSERT INTO Farmer(phonenumber,firstname,lastname,address,pestecides,farmName) VALUES(?,?,?,?,?,?)");
                 farmer.setString(1,dtoFarmer.getPhoneNumber());
                 farmer.setString(2,dtoFarmer.getFirstName());
                 farmer.setString(3,dtoFarmer.getLastName());
                 farmer.setString(4,dtoFarmer.getAddress());
                 farmer.setBoolean(5,dtoFarmer.getPesticides());
                 farmer.setString(6,dtoFarmer.getFarmName());
-                farmer.setDouble(7,dtoFarmer.getRating());
                 farmer.executeUpdate();
 
                 return "Success!";

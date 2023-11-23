@@ -3,6 +3,7 @@ option java_multiple_files = true;
 
 package sep;
 
+
 //----------Login----------\\
 
 message DtoLogin
@@ -24,6 +25,7 @@ message loginResponse{
 //----------Register----------\\
 
 ////--------Customer--------\\\\
+//this fto serves for editing as well
 message DtoRegisterCustomer
 {
   string phoneNumber = 1;
@@ -51,7 +53,6 @@ message DtoRegisterFarmer
   string address = 6;
   bool pesticides = 7;
   string farmName = 8;
-  double rating = 9;
 }
 
 message registerFarmerRequest

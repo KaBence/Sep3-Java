@@ -37,7 +37,6 @@ public class SepClient
                 .setLastName("TestLastName")
                 .setAddress("idk")
                 .setPesticides(true)
-                .setRating(4.6)
                 .build();
 
         registerFarmerRequest req1 = registerFarmerRequest.newBuilder().setNewFarmer(y).build();

@@ -74,6 +74,7 @@ public class FarmerDaoImplementation implements FarmerDao
         throw new RuntimeException("Error: Farmer with "+phoneNo+" not found!");
     }
 
+    //DtoRegisterFarmer is used for edit farmer as well
     @Override
     public String editFarmer(DtoRegisterFarmer editedFarmer)
     {
@@ -85,7 +86,6 @@ public class FarmerDaoImplementation implements FarmerDao
         String address = editedFarmer.getAddress();
         boolean pesticides = editedFarmer.getPesticides();
         String farmName = editedFarmer.getFarmName();
-        double rating = editedFarmer.getRating();
 
         if (phoneNo.isEmpty())
             return "Error: Phone number cannot be empty!";
@@ -125,14 +125,13 @@ public class FarmerDaoImplementation implements FarmerDao
 
 
             PreparedStatement psFarmer = connection.prepareStatement(
-                    "UPDATE customer SET firstname = ?, lastname = ?, address = ?,pestecides = ?,farmName=?,rating =? WHERE phonenumber = ?");
+                    "UPDATE customer SET firstname = ?, lastname = ?, address = ?,pestecides = ?,farmName=?WHERE phonenumber = ?");
             psFarmer.setString(1, firstName);
             psFarmer.setString(2, lastName);
             psFarmer.setString(3, address);
             psFarmer.setBoolean(4,pesticides);
             psFarmer.setString(5,farmName);
-            psFarmer.setDouble(6,rating);
-            psFarmer.setString(7, phoneNo);
+            psFarmer.setString(6, phoneNo);
             psFarmer.executeUpdate();
             return "Success!";
         }
