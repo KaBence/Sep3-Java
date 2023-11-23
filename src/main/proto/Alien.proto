@@ -3,6 +3,7 @@ option java_multiple_files = true;
 
 package sep;
 
+
 //----------Login----------\\
 
 message DtoLogin
@@ -24,6 +25,7 @@ message loginResponse{
 //----------Register----------\\
 
 ////--------Customer--------\\\\
+//this fto serves for editing as well
 message DtoRegisterCustomer
 {
   string phoneNumber = 1;
