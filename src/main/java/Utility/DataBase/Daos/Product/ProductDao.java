@@ -11,5 +11,5 @@ public interface ProductDao {
     ArrayList<DtoProduct> getAllProducts();
     ArrayList<DtoProduct> getFilteredProducts(ProductSearchParameters dto);
     String editProduct(DtoProduct dto) throws Exception;
-    String deleteProduct(int id);
+    String deleteProduct(int id) throws Exception;
 }

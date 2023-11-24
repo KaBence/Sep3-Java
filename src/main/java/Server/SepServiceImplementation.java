@@ -255,7 +255,20 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
 
     @Override
     public void deleteProduct(deleteProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        super.deleteProduct(request, responseObserver);
+        String temp = null;
+
+        try {
+            temp = productDao.deleteProduct(request.getId());
+        } catch (Exception e) {
+            temp = e.getMessage();
+        }
+        System.out.println(temp);
+
+        generalPutResponse response = generalPutResponse.newBuilder()
+                .setResp(temp)
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     //----------OrderItem----------\\

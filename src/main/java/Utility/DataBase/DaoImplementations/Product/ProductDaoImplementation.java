@@ -226,15 +226,18 @@ public class ProductDaoImplementation implements ProductDao {
     }
 
     @Override
-    public String deleteProduct(int id) {
-
+    public String deleteProduct(int id) throws Exception {
         try(Connection connection = getConnection())
         {
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM product WHERE productID = ?");
+            ps.setInt(1,id);
+            ps.executeUpdate();
+            return "Success!";
         }
-        return "";
+        catch (SQLException e)
+        {
+            throw new Exception("Error: Unable to remove product with id "+id);
+        }
     }
 
 
