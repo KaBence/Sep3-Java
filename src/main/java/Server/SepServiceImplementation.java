@@ -238,7 +238,19 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
 
     @Override
     public void updateProduct(updateProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        super.updateProduct(request, responseObserver);
+        String x="wtf?";
+        try {
+            x="w";
+            x = productDao.editProduct(request.getProduct());
+        } catch (Exception e) {
+            x="tf";
+            x=e.getMessage();
+        }
+        generalPutResponse res = generalPutResponse.newBuilder()
+                .setResp(x)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     @Override

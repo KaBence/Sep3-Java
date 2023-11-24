@@ -8,6 +8,7 @@ import sep.ProductSearchParameters;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ProductDaoImplementation implements ProductDao {
@@ -198,8 +199,30 @@ public class ProductDaoImplementation implements ProductDao {
     }
 
     @Override
-    public String editProduct(DtoProduct dto) {
-        return null;
+    public String editProduct(DtoProduct dto) throws Exception {
+        boolean avl=true;
+        Date exDate=Date.valueOf(dto.getExpirationDate());
+        try (Connection connection=getConnection()){
+            if (dto.getAmount()==0)
+                avl=false;
+            if (dto.getAmount()<0)
+                throw new Exception("Error : There isn't enough products");
+            if (exDate.after(today()))
+                avl=false;
+            PreparedStatement ps=connection.prepareStatement("update product set availability=?, amount=?,\"type\"=?,price=?,pickedDate=?,expirationDate=? where productid=?");
+            ps.setBoolean(1,avl);
+            ps.setDouble(2,dto.getAmount());
+            ps.setString(3,dto.getType());
+            ps.setDouble(4,dto.getPrice());
+            ps.setDate(5,Date.valueOf(dto.getPickedDate()));
+            ps.setDate(6,Date.valueOf(dto.getExpirationDate()));
+            ps.setInt(7,dto.getId());
+            ps.executeUpdate();
+            return "Success!";
+
+        } catch (SQLException e) {
+            throw new Exception("Error: "+e.getMessage());
+        }
     }
 
     @Override
@@ -214,4 +237,9 @@ public class ProductDaoImplementation implements ProductDao {
         return "";
     }
 
+
+    private Date today() {
+        LocalDate current = LocalDate.now();
+        return new Date(current.getDayOfMonth(), current.getMonthValue(), current.getYear());
+    }
 }
