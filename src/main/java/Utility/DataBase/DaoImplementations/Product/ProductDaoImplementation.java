@@ -197,4 +197,21 @@ public class ProductDaoImplementation implements ProductDao {
             return filtered;
     }
 
+    @Override
+    public String editProduct(DtoProduct dto) {
+        return null;
+    }
+
+    @Override
+    public String deleteProduct(int id) {
+
+        try(Connection connection = getConnection())
+        {
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "";
+    }
+
 }

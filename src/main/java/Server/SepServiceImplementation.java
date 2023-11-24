@@ -236,7 +236,15 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void updateProduct(updateProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
+        super.updateProduct(request, responseObserver);
+    }
 
+    @Override
+    public void deleteProduct(deleteProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
+        super.deleteProduct(request, responseObserver);
+    }
 
     //----------OrderItem----------\\
     @Override
