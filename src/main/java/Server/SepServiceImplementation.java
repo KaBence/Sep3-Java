@@ -208,7 +208,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
 
     @Override
     public void getProductsByFarmer(getAllProductsByFarmerRequest request, StreamObserver<getAllProductsByFarmerResponse> responseObserver) {
-        ArrayList<DtoProduct> list = productDao.getProductsByFarmer(request.getFarmer().getPhoneNumber());
+        ArrayList<DtoProduct> list = productDao.getProductsByFarmer(request.getFarmer());
         System.out.println("Get Product by Farmer - size: "+list.size());
         getAllProductsByFarmerResponse res = getAllProductsByFarmerResponse.newBuilder()
                 .addAllAllProducts(list)
