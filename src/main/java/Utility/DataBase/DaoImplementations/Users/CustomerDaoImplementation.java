@@ -74,17 +74,19 @@ public class CustomerDaoImplementation implements CustomerDao
     {
         String phoneNo = editedCustomer.getPhoneNumber();
         String password = editedCustomer.getPassword();
-        String repeatedPassword = editedCustomer.getPassword();
+        String repeatedPassword = editedCustomer.getRepeatPassword();
         String firstName = editedCustomer.getFirstName();
         String lastName = editedCustomer.getLastName();
         String address = editedCustomer.getAddress();
+        System.out.println(password);
+        System.out.println(repeatedPassword);
 
         if (phoneNo.isEmpty())
             return "Error: Phone number cannot be empty!";
         if (password.isEmpty())
             return "Error: Password cannot be empty!";
         if (repeatedPassword.isEmpty())
-            return "Error: Reaped Password cannot be empty!";
+            return "Error: Repeated Password cannot be empty!";
         if (!password.equals(repeatedPassword))
             return "Error: Passwords mismatch!";
         if (firstName.isEmpty())

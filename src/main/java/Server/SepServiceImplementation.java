@@ -36,7 +36,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     public void login(loginRequest request, StreamObserver<loginResponse> responseObserver) {
         String temp = null;
         int pesticides= 0;
-        String farmName= " ";
+        String farmName= "";
         double rating=0.0;
         try {
             temp = loginDao.login(request.getLogin());
@@ -45,9 +45,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
         }
         String out = "Not Found";
         ArrayList<DtoFarmer> farmers = farmerDao.getAllFarmers(pesticides, farmName, rating);
-        System.out.println("all farmers size: "+farmers.size());
         ArrayList<DtoCustomer> customers = customerDao.getAllCustomers();
-        System.out.println("Login: "+temp);
         for (int i = 0; i < farmers.size(); i++)
         {
             if (farmers.get(i).getPhoneNumber().equals(temp))
@@ -67,8 +65,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
                 }
             }
         }
-
-        System.out.println("Out: "+out);
+        System.out.println("Login - "+out+": "+temp);
 
         loginResponse response = loginResponse.newBuilder()
                 .setPhoneNumber(temp)
@@ -83,7 +80,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void registerCustomer(registerCustomerRequest request, StreamObserver<generalPutResponse> responseObserver) {
         String temp = registerDao.RegisterCustomer(request.getNewCustomer());
-        System.out.println(temp);
+        System.out.println("Register Customer - "+temp);
 
         generalPutResponse response = generalPutResponse.newBuilder()
                 .setResp(temp)
@@ -96,7 +93,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void registerFarmer(registerFarmerRequest request, StreamObserver<generalPutResponse> responseObserver) {
         String temp = registerDao.RegisterFarmer(request.getNewFarmer());
-        System.out.println(temp);
+        System.out.println("Register Farmer - "+temp);
 
         generalPutResponse response = generalPutResponse.newBuilder()
                 .setResp(temp)
@@ -110,6 +107,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void getAllCustomers(getAllCustomersRequest request, StreamObserver<getAllCustomersResponse> responseObserver) {
         ArrayList<DtoCustomer> list = customerDao.getAllCustomers();
+        System.out.println("Get all Customers - size: "+list.size());
         getAllCustomersResponse res = getAllCustomersResponse.newBuilder()
                 .addAllAllCustomers(list)
                 .build();
@@ -120,6 +118,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void getCustomerByPhone(getCustomerByPhoneRequest request, StreamObserver<getCustomerByPhoneResponse> responseObserver) {
         DtoCustomer x = customerDao.getCustomerById(request.getCustomersPhone());
+        System.out.println("Get Customer by Phone number - "+x.getPhoneNumber());
         getCustomerByPhoneResponse res = getCustomerByPhoneResponse.newBuilder()
                 .setCustomer(x)
                 .build();
@@ -130,6 +129,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void editCustomer(editCustomerRequest request, StreamObserver<generalPutResponse> responseObserver) {
         String x = customerDao.editCustomer(request.getEditedCustomer());
+        System.out.println("Edit Customer - "+x);
         generalPutResponse res = generalPutResponse.newBuilder()
                 .setResp(x)
                 .build();
@@ -140,11 +140,8 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     //----------Farmer----------\\
     @Override
     public void getAllFarmers(getAllFarmersRequest request, StreamObserver<getAllFarmersResponse> responseObserver) {
-        System.out.println("Request received - Pesticides: " + request.getPesticides() +
-                ", FarmName: " + request.getFarmName() +
-                ", Rating: " + request.getRating());
         ArrayList<DtoFarmer> list = farmerDao.getAllFarmers(request.getPesticides(), request.getFarmName(), request.getRating());
-        System.out.println("Number of farmers retrieved: " + list.size());
+        System.out.println("Get all Farmers - size: "+list.size());
         getAllFarmersResponse res = getAllFarmersResponse.newBuilder()
                 .addAllAllFarmers(list)
                 .build();
@@ -155,6 +152,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void getFarmerByPhone(getFarmerByPhoneRequest request, StreamObserver<getFarmerByPhoneResponse> responseObserver) {
         DtoFarmer x = farmerDao.getFarmersById(request.getFarmersPhone());
+        System.out.println("Get Product by PhoneNumber - "+x.getPhoneNumber());
         getFarmerByPhoneResponse res = getFarmerByPhoneResponse.newBuilder()
                 .setFarmer(x)
                 .build();
@@ -165,6 +163,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void editFarmer(editFarmerRequest request, StreamObserver<generalPutResponse> responseObserver) {
         String x = farmerDao.editFarmer(request.getEditedFarmer());
+        System.out.println("Edit Farmer - "+x);
         generalPutResponse res = generalPutResponse.newBuilder()
                 .setResp(x)
                 .build();
@@ -191,14 +190,14 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     //----------Product----------\\
     @Override
     public void createProduct(createProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        String temp = null;
+        String temp = "?";
 
         try {
             temp = productDao.createProduct(request.getNewProduct());
         } catch (Exception e) {
             temp = e.getMessage();
         }
-        System.out.println(temp);
+        System.out.println("Create Product - "+temp);
 
         generalPutResponse response = generalPutResponse.newBuilder()
                 .setResp(temp)
@@ -210,6 +209,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void getProductsByFarmer(getAllProductsByFarmerRequest request, StreamObserver<getAllProductsByFarmerResponse> responseObserver) {
         ArrayList<DtoProduct> list = productDao.getProductsByFarmer(request.getFarmer().getPhoneNumber());
+        System.out.println("Get Product by Farmer - size: "+list.size());
         getAllProductsByFarmerResponse res = getAllProductsByFarmerResponse.newBuilder()
                 .addAllAllProducts(list)
                 .build();
@@ -220,6 +220,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void getProductById(getProductByIdRequest request, StreamObserver<getProductByIdResponse> responseObserver) {
         DtoProduct x = productDao.getProductById(request.getId());
+        System.out.println("Get Product by id - "+x.getId());
         getProductByIdResponse res = getProductByIdResponse.newBuilder()
                 .setProduct(x)
                 .build();
@@ -231,6 +232,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void getAllProducts(getAllProductsRequest request, StreamObserver<getAllProductsResponse> responseObserver) {
         ArrayList<DtoProduct> list = productDao.getFilteredProducts(request.getParameters());
+        System.out.println("Get all Products - size: "+list.size());
         getAllProductsResponse res = getAllProductsResponse.newBuilder()
                 .addAllAllProducts(list)
                 .build();
@@ -240,14 +242,14 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
 
     @Override
     public void updateProduct(updateProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        String x = "wtf?";
+        String x = "?";
         try {
-            x = "w";
             x = productDao.editProduct(request.getProduct());
         } catch (Exception e) {
-            x = "tf";
             x = e.getMessage();
         }
+
+        System.out.println("Edit Product - "+x);
         generalPutResponse res = generalPutResponse.newBuilder()
                 .setResp(x)
                 .build();
@@ -264,7 +266,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
         } catch (Exception e) {
             temp = e.getMessage();
         }
-        System.out.println(temp);
+        System.out.println("Delete Product - "+temp);
 
         generalPutResponse response = generalPutResponse.newBuilder()
                 .setResp(temp)
