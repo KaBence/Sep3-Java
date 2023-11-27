@@ -50,7 +50,6 @@ public class FarmerDaoImplementation implements FarmerDao
                 boolean pesticidesOriginal = rs.getBoolean("pestecides");
                 String farmNameOriginal = rs.getString("farmName");
                 double ratingOriginal = rs.getDouble("rating");
-                System.out.println("Pesticides" + pesticides +" OriginalPest: " + pesticidesOriginal);
                if ((  pest==null||pest == pesticidesOriginal ) &&
                         (farmName.equals(farmNameOriginal) || farmName.isEmpty()) &&
                         (rating == ratingOriginal || rating == 0.0)) {
@@ -65,9 +64,7 @@ public class FarmerDaoImplementation implements FarmerDao
                             .build();
                     list.add(x);
 
-                } System.out.println(list);
-
-
+                }
             }
             return list;
         } catch (SQLException e) {
@@ -87,7 +84,6 @@ public class FarmerDaoImplementation implements FarmerDao
         String farmName= "";
         double rating=0.0;
         ArrayList<DtoFarmer> list = getAllFarmers(pesticides,farmName,rating);
-        System.out.println(list);
         for (int i = 0; i < list.size(); i++)
         {
             if (list.get(i).getPhoneNumber().equals(phoneNo))
@@ -102,7 +98,7 @@ public class FarmerDaoImplementation implements FarmerDao
     {
         String phoneNo = editedFarmer.getPhoneNumber();
         String password = editedFarmer.getPassword();
-        String repeatedPassword = editedFarmer.getPassword();
+        String repeatedPassword = editedFarmer.getRepeatPassword();
         String firstName = editedFarmer.getFirstName();
         String lastName = editedFarmer.getLastName();
         String address = editedFarmer.getAddress();
@@ -145,9 +141,8 @@ public class FarmerDaoImplementation implements FarmerDao
             psUser.setString(2, phoneNo);
             psUser.executeUpdate();
 
-
             PreparedStatement psFarmer = connection.prepareStatement(
-                    "UPDATE customer SET firstname = ?, lastname = ?, address = ?,pestecides = ?,farmName=?WHERE phonenumber = ?");
+                    "UPDATE Farmer SET firstname = ?, lastname = ?, address = ?,pestecides = ?,farmName=? WHERE phonenumber = ?");
             psFarmer.setString(1, firstName);
             psFarmer.setString(2, lastName);
             psFarmer.setString(3, address);
