@@ -36,7 +36,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
     @Override
     public void login(loginRequest request, StreamObserver<loginResponse> responseObserver) {
         String temp = null;
-        boolean pesticides= false;
+        int pesticides= 0;
         String farmName= " ";
         double rating=0.0;
         try {

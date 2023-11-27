@@ -105,7 +105,7 @@ message DtoFarmer
 }
 
 message getAllFarmersRequest{
-  bool pesticides =1;
+  int32 pesticides =1;
   string farmName =2;
   double rating =3;
 }
