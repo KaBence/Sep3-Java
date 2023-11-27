@@ -3,7 +3,7 @@ package Utility.DataBase.DaoImplementations.Product;
 import Utility.DataBase.Daos.Product.ProductDao;
 import sep.DtoCustomer;
 import sep.DtoProduct;
-import sep.ProductSearchParameters;
+
 
 import java.sql.*;
 import java.text.ParseException;
@@ -72,7 +72,10 @@ public class ProductDaoImplementation implements ProductDao {
 
     @Override
     public ArrayList<DtoProduct> getProductsByFarmer(String farmerId) {
-        ArrayList<DtoProduct> list = getAllProducts();
+       String type="";
+       double amount=0.0;
+       double price=0.0;
+        ArrayList<DtoProduct> list = getAllProducts(type,amount,price);
         ArrayList<DtoProduct> farmersProducts = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
@@ -84,7 +87,10 @@ public class ProductDaoImplementation implements ProductDao {
 
     @Override
     public DtoProduct getProductById(int productId) {
-        ArrayList<DtoProduct> list = getAllProducts();
+        String type="";
+        double amount=0.0;
+        double price=0.0;
+        ArrayList<DtoProduct> list = getAllProducts(type,amount,price);
         for (int i = 0; i < list.size(); i++)
         {
             if (list.get(i).getId() == productId) // will it work no idea
@@ -94,7 +100,7 @@ public class ProductDaoImplementation implements ProductDao {
     }
 
     @Override
-    public ArrayList<DtoProduct> getAllProducts() {
+    public ArrayList<DtoProduct> getAllProducts(String type, double amount, double price) {
         ArrayList<DtoProduct> list = new ArrayList<>();
         try (Connection connection = getConnection()) {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM  Product");
@@ -103,27 +109,33 @@ public class ProductDaoImplementation implements ProductDao {
             {
                 int productID = rs.getInt("productID");
                 boolean availability = rs.getBoolean("availability");
-                double amount = rs.getDouble("amount");
-                String type = rs.getString("type");
-                double price = rs.getDouble("price");
+                double amountOriginal = rs.getDouble("amount");
+                String typeOriginal = rs.getString("type");
+                double priceOriginal = rs.getDouble("price");
                 String pickedDate = rs.getString("pickedDate");
                 String expirationDate = rs.getString("expirationDate");
                 String farmerID =rs.getString("farmerID");
-
+                System.out.println("type " + type +" OriginalType " +typeOriginal);
+                System.out.println("amount "+amount +" OriginalAmount " + amountOriginal);
+                System.out.println("price " +price +" PriceOriginal " +priceOriginal);
+                if ((type == "" || type.equals(typeOriginal)) &&
+                        (amount <= 0.0 || amount == amountOriginal) &&
+                        (price <= 0.0 || price == priceOriginal))
+                {
                 DtoProduct x = DtoProduct.newBuilder()
                         .setId(productID)
                         .setAvailability(availability)
-                        .setAmount(amount)
-                        .setType(type)
-                        .setPrice(price)
+                        .setAmount(amountOriginal)
+                        .setType(typeOriginal)
+                        .setPrice(priceOriginal)
                         .setPickedDate(pickedDate)
                         .setExpirationDate(expirationDate)
                         .setFarmerId(farmerID)
-
                         .build();
 
-                list.add(x);
-
+                    list.add(x);
+                }
+                System.out.println(list);
             }
             return list;
         } catch (SQLException e)
@@ -132,12 +144,12 @@ public class ProductDaoImplementation implements ProductDao {
         }
     }
 
-    @Override //THIS SHIT MAY NOT BE WORKING IF SO CHECK WHAT IS NULL THEN CHECK WHAT IS NOT NULL THEN COMBINE THE FILTERS
+    /*  @Override //THIS SHIT MAY NOT BE WORKING IF SO CHECK WHAT IS NULL THEN CHECK WHAT IS NOT NULL THEN COMBINE THE FILTERS
     public ArrayList<DtoProduct> getFilteredProducts(ProductSearchParameters dto) {
         ArrayList<DtoProduct> all = getAllProducts();
         ArrayList<DtoProduct> filtered = new ArrayList<>();
 
-        if (!dto.getType().isEmpty())
+      if (!dto.getType().isEmpty())
         {
             for (int i = 0; i < all.size(); i++) {
                if(dto.getType().equals(all.get(i).getType()))
@@ -196,7 +208,7 @@ public class ProductDaoImplementation implements ProductDao {
             return all;
         else
             return filtered;
-    }
+    }*/
 
     @Override
     public String editProduct(DtoProduct dto) throws Exception {
