@@ -238,6 +238,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
 
     @Override
     public void updateProduct(updateProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
+        System.out.println(request.getProduct().getId());
         String x="wtf?";
         try {
             x="w";
