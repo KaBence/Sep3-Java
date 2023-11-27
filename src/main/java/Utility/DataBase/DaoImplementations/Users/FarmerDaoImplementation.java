@@ -28,44 +28,62 @@ public class FarmerDaoImplementation implements FarmerDao
                 "postgres", "password");
     }
 
+    //now its not possible to get only the farmers without pesticides, or allFarmers for the getFarmer method, solve that or try whith the sql statement
     @Override
-    public ArrayList<DtoFarmer> getAllFarmers()
-    {
+    public ArrayList<DtoFarmer> getAllFarmers(int pesticides, String farmName, double rating) {
         ArrayList<DtoFarmer> list = new ArrayList<>();
+        Boolean pest=null;
+        if(pesticides==1){
+            pest=true;
+        }
+        if(pesticides==2){
+            pest=false;
+        }
         try (Connection connection = getConnection()) {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM  Farmer");
             ResultSet rs = ps.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 String phonenumber = rs.getString("phonenumber");
                 String fistName = rs.getString("firstname");
                 String lastName = rs.getString("lastname");
                 String address = rs.getString("address");
-                boolean pesticides = rs.getBoolean("pestecides");
-                String farmName = rs.getString("farmName");
-                double rating = rs.getDouble("rating");
-                DtoFarmer x = DtoFarmer.newBuilder()
-                        .setPhoneNumber(phonenumber)
-                        .setFirstName(fistName)
-                        .setLastName(lastName)
-                        .setAddress(address)
-                        .setPesticides(pesticides)
-                        .setFarmName(farmName)
-                        .setRating(rating)
-                        .build();
-                list.add(x);
+                boolean pesticidesOriginal = rs.getBoolean("pestecides");
+                String farmNameOriginal = rs.getString("farmName");
+                double ratingOriginal = rs.getDouble("rating");
+               if ((  pest==null||pest == pesticidesOriginal ) &&
+                        (farmName.equals(farmNameOriginal) || farmName.isEmpty()) &&
+                        (rating == ratingOriginal || rating == 0.0)) {
+                    DtoFarmer x = DtoFarmer.newBuilder()
+                            .setPhoneNumber(phonenumber)
+                            .setFirstName(fistName)
+                            .setLastName(lastName)
+                            .setAddress(address)
+                            .setPesticides(pesticidesOriginal)
+                            .setFarmName(farmNameOriginal)
+                            .setRating(ratingOriginal)
+                            .build();
+                    list.add(x);
+
+                }
             }
             return list;
-        } catch (SQLException e)
-        {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());}
+
+        // here just try to do more ifs or combine it somehow
+
         }
-    }
+
+
+
 
     @Override
     public DtoFarmer getFarmersById(String phoneNo)
     {
-        ArrayList<DtoFarmer> list = getAllFarmers();
+        int pesticides= 0;
+        String farmName= "";
+        double rating=0.0;
+        ArrayList<DtoFarmer> list = getAllFarmers(pesticides,farmName,rating);
         for (int i = 0; i < list.size(); i++)
         {
             if (list.get(i).getPhoneNumber().equals(phoneNo))
@@ -80,7 +98,7 @@ public class FarmerDaoImplementation implements FarmerDao
     {
         String phoneNo = editedFarmer.getPhoneNumber();
         String password = editedFarmer.getPassword();
-        String repeatedPassword = editedFarmer.getPassword();
+        String repeatedPassword = editedFarmer.getRepeatPassword();
         String firstName = editedFarmer.getFirstName();
         String lastName = editedFarmer.getLastName();
         String address = editedFarmer.getAddress();
@@ -123,9 +141,8 @@ public class FarmerDaoImplementation implements FarmerDao
             psUser.setString(2, phoneNo);
             psUser.executeUpdate();
 
-
             PreparedStatement psFarmer = connection.prepareStatement(
-                    "UPDATE customer SET firstname = ?, lastname = ?, address = ?,pestecides = ?,farmName=?WHERE phonenumber = ?");
+                    "UPDATE Farmer SET firstname = ?, lastname = ?, address = ?,pestecides = ?,farmName=? WHERE phonenumber = ?");
             psFarmer.setString(1, firstName);
             psFarmer.setString(2, lastName);
             psFarmer.setString(3, address);
