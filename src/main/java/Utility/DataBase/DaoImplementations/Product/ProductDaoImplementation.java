@@ -119,8 +119,8 @@ public class ProductDaoImplementation implements ProductDao {
                 System.out.println("amount "+amount +" OriginalAmount " + amountOriginal);
                 System.out.println("price " +price +" PriceOriginal " +priceOriginal);
                 if ((type == "" || type.equals(typeOriginal)) &&
-                        (amount <= 0.0 || amount == amountOriginal) &&
-                        (price <= 0.0 || price == priceOriginal))
+                        (amount <= 0.0 || amount <= amountOriginal) &&
+                        (price <= 0.0 || price >= priceOriginal))
                 {
                 DtoProduct x = DtoProduct.newBuilder()
                         .setId(productID)

@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="editinf customer and farmer done">
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="famer claim debugging">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepGrpServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepGrpServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Product/ProductDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Product/ProductDaoImplementation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,10 +185,6 @@
       <workItem from="1700824472660" duration="609000" />
       <workItem from="1700832270460" duration="3406000" />
       <workItem from="1701080593060" duration="2014000" />
-      <workItem from="1701092735993" duration="43000" />
-      <workItem from="1701092852075" duration="49000" />
-      <workItem from="1701096559184" duration="120000" />
-      <workItem from="1701096695746" duration="4625000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />
@@ -286,15 +280,7 @@
       <option name="project" value="LOCAL" />
       <updated>1701080158355</updated>
     </task>
-    <task id="LOCAL-00013" summary="editinf customer and farmer done">
-      <option name="closed" value="true" />
-      <created>1701092592394</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1701092592394</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,7 +310,6 @@
     <MESSAGE value="cleaning after proof of concept" />
     <MESSAGE value="proto for product" />
     <MESSAGE value="changed method getallFarmers" />
-    <MESSAGE value="editinf customer and farmer done" />
-    <option name="LAST_COMMIT_MESSAGE" value="editinf customer and farmer done" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed method getallFarmers" />
   </component>
 </project>
