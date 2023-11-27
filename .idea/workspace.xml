@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="famer claim debugging">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/CustomerDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/CustomerDaoImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/FarmerDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/FarmerDaoImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Product/ProductDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Product/ProductDaoImplementation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
