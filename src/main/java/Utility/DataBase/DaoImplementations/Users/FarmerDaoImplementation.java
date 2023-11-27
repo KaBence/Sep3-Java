@@ -28,44 +28,59 @@ public class FarmerDaoImplementation implements FarmerDao
                 "postgres", "password");
     }
 
+    //now its not possible to get only the farmers without pesticides, or allFarmers for the getFarmer method, solve that or try whith the sql statement
     @Override
-    public ArrayList<DtoFarmer> getAllFarmers()
-    {
+    public ArrayList<DtoFarmer> getAllFarmers(boolean pesticides, String farmName, double rating) {
         ArrayList<DtoFarmer> list = new ArrayList<>();
         try (Connection connection = getConnection()) {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM  Farmer");
             ResultSet rs = ps.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 String phonenumber = rs.getString("phonenumber");
                 String fistName = rs.getString("firstname");
                 String lastName = rs.getString("lastname");
                 String address = rs.getString("address");
-                boolean pesticides = rs.getBoolean("pestecides");
-                String farmName = rs.getString("farmName");
-                double rating = rs.getDouble("rating");
-                DtoFarmer x = DtoFarmer.newBuilder()
-                        .setPhoneNumber(phonenumber)
-                        .setFirstName(fistName)
-                        .setLastName(lastName)
-                        .setAddress(address)
-                        .setPesticides(pesticides)
-                        .setFarmName(farmName)
-                        .setRating(rating)
-                        .build();
-                list.add(x);
+                boolean pesticidesOriginal = rs.getBoolean("pestecides");
+                String farmNameOriginal = rs.getString("farmName");
+                double ratingOriginal = rs.getDouble("rating");
+                System.out.println("Pesticides" + pesticides +" OriginalPest: " + pesticidesOriginal);
+               if ((pesticides == pesticidesOriginal || !pesticides ) &&
+                        (farmName.equals(farmNameOriginal) || farmName.isEmpty()) &&
+                        (rating == ratingOriginal || rating == 0.0)) {
+                    DtoFarmer x = DtoFarmer.newBuilder()
+                            .setPhoneNumber(phonenumber)
+                            .setFirstName(fistName)
+                            .setLastName(lastName)
+                            .setAddress(address)
+                            .setPesticides(pesticidesOriginal)
+                            .setFarmName(farmNameOriginal)
+                            .setRating(ratingOriginal)
+                            .build();
+                    list.add(x);
+
+                } System.out.println(list);
+
+
             }
             return list;
-        } catch (SQLException e)
-        {
-            throw new RuntimeException(e.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());}
+
+        // here just try to do more ifs or combine it somehow
+
         }
-    }
+
+
+
 
     @Override
     public DtoFarmer getFarmersById(String phoneNo)
     {
-        ArrayList<DtoFarmer> list = getAllFarmers();
+        boolean pesticides= false;
+        String farmName= "";
+        double rating=0.0;
+        ArrayList<DtoFarmer> list = getAllFarmers(pesticides,farmName,rating);
+        System.out.println(list);
         for (int i = 0; i < list.size(); i++)
         {
             if (list.get(i).getPhoneNumber().equals(phoneNo))

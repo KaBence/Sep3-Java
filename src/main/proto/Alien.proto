@@ -104,7 +104,11 @@ message DtoFarmer
   double rating = 7;
 }
 
-message getAllFarmersRequest{}
+message getAllFarmersRequest{
+  bool pesticides =1;
+  string farmName =2;
+  double rating =3;
+}
 
 message getAllFarmersResponse
 {

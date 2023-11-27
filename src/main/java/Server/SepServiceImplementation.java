@@ -36,13 +36,16 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
     @Override
     public void login(loginRequest request, StreamObserver<loginResponse> responseObserver) {
         String temp = null;
+        boolean pesticides= false;
+        String farmName= " ";
+        double rating=0.0;
         try {
             temp = loginDao.login(request.getLogin());
         } catch (Exception e) {
             temp=e.getMessage();
         }
         String out = "Not Found";
-       ArrayList<DtoFarmer> farmers = farmerDao.getAllFarmers();
+       ArrayList<DtoFarmer> farmers = farmerDao.getAllFarmers(pesticides,farmName,rating);
        ArrayList<DtoCustomer> customers = customerDao.getAllCustomers();
        boolean found = false;
        for (int i = 0; i < farmers.size(); i++)
@@ -141,7 +144,11 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase
     //----------Farmer----------\\
     @Override
     public void getAllFarmers(getAllFarmersRequest request, StreamObserver<getAllFarmersResponse> responseObserver) {
-        ArrayList<DtoFarmer> list = farmerDao.getAllFarmers();
+        System.out.println("Request received - Pesticides: " + request.getPesticides() +
+                ", FarmName: " + request.getFarmName() +
+                ", Rating: " + request.getRating());
+        ArrayList<DtoFarmer> list = farmerDao.getAllFarmers(request.getPesticides(), request.getFarmName(), request.getRating());
+        System.out.println("Number of farmers retrieved: " + list.size());
         getAllFarmersResponse res = getAllFarmersResponse.newBuilder()
                 .addAllAllFarmers(list)
                 .build();
