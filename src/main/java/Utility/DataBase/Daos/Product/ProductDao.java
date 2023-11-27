@@ -10,6 +10,6 @@ public interface ProductDao {
     DtoProduct getProductById(int productId);
     ArrayList<DtoProduct> getAllProducts();
     ArrayList<DtoProduct> getFilteredProducts(ProductSearchParameters dto);
-    String editProduct(DtoProduct dto);
+    String editProduct(DtoProduct dto) throws Exception;
     String deleteProduct(int id) throws Exception;
 }

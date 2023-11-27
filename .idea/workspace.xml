@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="proto for product">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/FarmerDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/FarmerDaoImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Users/FarmerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Users/FarmerDao.java" afterDir="false" />
