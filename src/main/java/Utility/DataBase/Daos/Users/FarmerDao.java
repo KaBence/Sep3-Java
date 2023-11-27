@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface FarmerDao
 {
-    ArrayList<DtoFarmer> getAllFarmers(boolean pesticides, String farmName, double rating );
+    ArrayList<DtoFarmer> getAllFarmers(int pesticides, String farmName, double rating );
     DtoFarmer getFarmersById(String phoneNo);
     String editFarmer(DtoRegisterFarmer editedFarmer);
 }

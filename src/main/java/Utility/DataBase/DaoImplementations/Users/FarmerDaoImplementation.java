@@ -30,8 +30,15 @@ public class FarmerDaoImplementation implements FarmerDao
 
     //now its not possible to get only the farmers without pesticides, or allFarmers for the getFarmer method, solve that or try whith the sql statement
     @Override
-    public ArrayList<DtoFarmer> getAllFarmers(boolean pesticides, String farmName, double rating) {
+    public ArrayList<DtoFarmer> getAllFarmers(int pesticides, String farmName, double rating) {
         ArrayList<DtoFarmer> list = new ArrayList<>();
+        Boolean pest=null;
+        if(pesticides==1){
+            pest=true;
+        }
+        if(pesticides==2){
+            pest=false;
+        }
         try (Connection connection = getConnection()) {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM  Farmer");
             ResultSet rs = ps.executeQuery();
@@ -44,7 +51,7 @@ public class FarmerDaoImplementation implements FarmerDao
                 String farmNameOriginal = rs.getString("farmName");
                 double ratingOriginal = rs.getDouble("rating");
                 System.out.println("Pesticides" + pesticides +" OriginalPest: " + pesticidesOriginal);
-               if ((pesticides == pesticidesOriginal || !pesticides ) &&
+               if ((  pest==null||pest == pesticidesOriginal ) &&
                         (farmName.equals(farmNameOriginal) || farmName.isEmpty()) &&
                         (rating == ratingOriginal || rating == 0.0)) {
                     DtoFarmer x = DtoFarmer.newBuilder()
@@ -76,7 +83,7 @@ public class FarmerDaoImplementation implements FarmerDao
     @Override
     public DtoFarmer getFarmersById(String phoneNo)
     {
-        boolean pesticides= false;
+        int pesticides= 0;
         String farmName= "";
         double rating=0.0;
         ArrayList<DtoFarmer> list = getAllFarmers(pesticides,farmName,rating);

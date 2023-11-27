@@ -272,7 +272,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700833794200</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="changed method getallFarmers">
+      <option name="closed" value="true" />
+      <created>1701080158355</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1701080158355</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,6 +309,7 @@
     <MESSAGE value="add product validation" />
     <MESSAGE value="cleaning after proof of concept" />
     <MESSAGE value="proto for product" />
-    <option name="LAST_COMMIT_MESSAGE" value="proto for product" />
+    <MESSAGE value="changed method getallFarmers" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed method getallFarmers" />
   </component>
 </project>
