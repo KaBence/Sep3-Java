@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="proto for product">
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="the filtering by pesticides=false is working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/FarmerDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Users/FarmerDaoImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Users/FarmerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Users/FarmerDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Product/ProductDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Product/ProductDaoImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Product/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Product/ProductDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -282,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701080158355</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="the filtering by pesticides=false is working">
+      <option name="closed" value="true" />
+      <created>1701081812082</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1701081812082</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,6 +320,7 @@
     <MESSAGE value="cleaning after proof of concept" />
     <MESSAGE value="proto for product" />
     <MESSAGE value="changed method getallFarmers" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed method getallFarmers" />
+    <MESSAGE value="the filtering by pesticides=false is working" />
+    <option name="LAST_COMMIT_MESSAGE" value="the filtering by pesticides=false is working" />
   </component>
 </project>
