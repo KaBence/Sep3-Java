@@ -13,7 +13,7 @@ public class SepGrpServer
         Server server= ServerBuilder.forPort(1337).addService(new SepServiceImplementation()).build();
 
         server.start();
+        System.out.println("Server started...");
         server.awaitTermination();
-        System.out.println("Server started");
     }
 }
