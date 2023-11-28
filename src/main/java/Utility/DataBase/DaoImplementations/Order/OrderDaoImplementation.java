@@ -51,9 +51,7 @@ public class OrderDaoImplementation implements OrderDao {
                 PreparedStatement ps=connection.prepareStatement("insert into \"order\"(status,date,customerId) values (?,?,?)");
                 ps.setString(1,order.getStatus());
                 ps.setDate(2, Date.valueOf(order.getDate()));
-                System.out.println("2----------------------------------------------");
                 ps.setString(3,order.getCustomerId());
-
                 ps.executeUpdate();
 
 
@@ -74,19 +72,17 @@ public class OrderDaoImplementation implements OrderDao {
                 ps.executeUpdate();
 
                 double price=0;
-                double amount =0;
                 for (DtoOrderItem item:orderItems){
                     DtoProduct x=productDao.getProductById(item.getProductId());
                     if (!x.getFarmerId().equals(farmer))
                         break;
                     price+=x.getPrice();
-                    amount+=x.getAmount();
                 }
 
                 for(DtoOrderItem item:orderItems){
                     DtoProduct x=productDao.getProductById(item.getProductId());
                     if (!x.getFarmerId().equals(farmer)){
-                        ps=connection.prepareStatement("insert into Receipt(orderId,farmerid,customerId,processed,price,paymentmethod,text,amount) values (?,?,?,?,?,?,?,?)");
+                        ps=connection.prepareStatement("insert into Receipt(orderId,farmerid,customerId,processed,price,paymentmethod,text) values (?,?,?,?,?,?,?,?)");
                         ps.setInt(1,id);
                         ps.setString(2,farmer);
                         ps.setString(3,order.getCustomerId());
@@ -94,7 +90,6 @@ public class OrderDaoImplementation implements OrderDao {
                         ps.setDouble(5,price);
                         ps.setString(6,paymentMethod);
                         ps.setString(7,note);
-                        ps.setDouble(8,amount);
                         ps.executeUpdate();
                         break;
                     }
