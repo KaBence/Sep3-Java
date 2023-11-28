@@ -71,10 +71,7 @@ public class ProductDaoImplementation implements ProductDao {
     }
 
     @Override
-    public ArrayList<DtoProduct> getProductsByFarmer(String farmerId) {
-       String type="";
-       double amount=0.0;
-       double price=0.0;
+    public ArrayList<DtoProduct> getProductsByFarmer(String farmerId,String type, double amount, double price) {
         ArrayList<DtoProduct> list = getAllProducts(type,amount,price);
         ArrayList<DtoProduct> farmersProducts = new ArrayList<>();
 
