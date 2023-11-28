@@ -104,7 +104,8 @@ message DtoFarmer
   double rating = 7;
 }
 
-message getAllFarmersRequest{
+message getAllFarmersRequest
+{
   int32 pesticides =1;
   string farmName =2;
   double rating =3;
@@ -174,8 +175,6 @@ message DtoProduct
   string expirationDate = 7;
   string farmerId = 8;
 }
-
-
 message getAllProductsRequest{
   string type=1;
   double amount=2;
@@ -186,7 +185,6 @@ message getAllProductsResponse{
   repeated DtoProduct allProducts=1;
 }
 
-
 message createProductRequest
 {
   DtoProduct newProduct = 1;
@@ -195,6 +193,9 @@ message createProductRequest
 message getAllProductsByFarmerRequest
 {
   string farmer = 1;
+  string type=2;
+  double amount=3;
+  double price=4;
 }
 
 message getAllProductsByFarmerResponse
@@ -215,7 +216,7 @@ message getProductByIdResponse
 
 //Updating a product -> needs DTOProduct
 message updateProductRequest{
-  DtoProduct product = 1;
+  DtoProduct product=1;
 }
 
 message deleteProductRequest{
@@ -397,3 +398,4 @@ service SepService
   rpc getAllReviewsByFarmer(getAllReviewsByFarmerRequest) returns (getAllReviewsByFarmerResponse);
   rpc getReviewBy(getReviewByIdRequest) returns (getReviewByIdResponse);
 }
+

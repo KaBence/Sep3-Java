@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface ProductDao {
     String createProduct(DtoProduct dtoProduct) throws Exception;
-    ArrayList<DtoProduct> getProductsByFarmer(String farmerId);
+    ArrayList<DtoProduct> getProductsByFarmer(String farmerId,String type, double amount, double price);
     DtoProduct getProductById(int productId);
     ArrayList<DtoProduct> getAllProducts(String type, double amount, double price);
     //ArrayList<DtoProduct> getFilteredProducts(ProductSearchParameters dto);
