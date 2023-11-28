@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="update product one more exception">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Order/OrderDaoImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Order/OrderDao.java" afterDir="false" />
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="start for create order">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Order/OrderDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Order/OrderDaoImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Order/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Order/OrderDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +86,7 @@
       <recent name="C:\Users\veslo\IdeaProjects\Sep3-Java\src\main\java\Utility\Log" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SepGrpServer">
+  <component name="RunManager" selected="Application.SepClient">
     <configuration name="Bullshit" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Bullshit" />
       <module name="Sep3-Project" />
@@ -147,8 +148,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SepGrpServer" />
         <item itemvalue="Application.SepClient" />
+        <item itemvalue="Application.SepGrpServer" />
         <item itemvalue="Application.ProofServer" />
         <item itemvalue="Application.ProofClient" />
         <item itemvalue="Application.Bullshit" />
@@ -188,7 +189,7 @@
       <workItem from="1700824472660" duration="609000" />
       <workItem from="1700832270460" duration="3406000" />
       <workItem from="1701080593060" duration="2014000" />
-      <workItem from="1701163878177" duration="2179000" />
+      <workItem from="1701163878177" duration="11822000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />
@@ -284,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701080158355</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="start for create order">
+      <option name="closed" value="true" />
+      <created>1701172997059</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1701172997059</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,6 +323,7 @@
     <MESSAGE value="cleaning after proof of concept" />
     <MESSAGE value="proto for product" />
     <MESSAGE value="changed method getallFarmers" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed method getallFarmers" />
+    <MESSAGE value="start for create order" />
+    <option name="LAST_COMMIT_MESSAGE" value="start for create order" />
   </component>
 </project>

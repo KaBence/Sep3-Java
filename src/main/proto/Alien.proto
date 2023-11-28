@@ -143,6 +143,8 @@ message createOrderRequest
 {
   DtoOrder newOrder = 1;
   repeated DtoOrderItem orderItems = 2;
+  string PaymentMethod=3;
+  string note=4;
 }
 
 message getAllOrdersRequest{}

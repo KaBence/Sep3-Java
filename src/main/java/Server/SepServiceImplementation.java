@@ -178,7 +178,15 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     //----------Order----------\\
     @Override
     public void createNewOrder(createOrderRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        String x = orderDao.createOrder(request.getNewOrder(),request.getOrderItemsList());
+        String x;
+        try {
+            x=orderDao.createOrder(request.getNewOrder(),request.getOrderItemsList(),request.getPaymentMethod(),request.getNote());
+            System.out.println("Good "+x);
+        }
+        catch (Exception e){
+            x=e.getMessage();
+            System.out.println("Bad "+x);
+        }
 
         generalPutResponse res=generalPutResponse.newBuilder()
                 .setResp(x)

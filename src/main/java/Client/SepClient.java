@@ -4,6 +4,8 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import sep.*;
 
+import java.util.ArrayList;
+
 public class SepClient
 {
     public static void main(String[] args) {
@@ -13,7 +15,7 @@ public class SepClient
                 .build();
         SepServiceGrpc.SepServiceBlockingStub proofStub = SepServiceGrpc.newBlockingStub(managedChannel);
 
-        DtoRegisterCustomer x = DtoRegisterCustomer.newBuilder()
+        /*DtoRegisterCustomer x = DtoRegisterCustomer.newBuilder()
                 .setPhoneNumber("123456789")
                 .setPassword("password")
                 .setRepeatPassword("password")
@@ -48,6 +50,43 @@ public class SepClient
 
         loginRequest loginRequest = sep.loginRequest.newBuilder().setLogin(z).build();
         //generalPutResponse loginRes = proofStub.login(loginRequest);
-        //System.out.println(loginRes.getResp());
+        //System.out.println(loginRes.getResp());*/
+
+        DtoOrder dtoOrder=DtoOrder.newBuilder()
+                .setCustomerId("0000")
+                .setDate("2023-11-28")
+                .setStatus("Pending")
+                .build();
+
+        ArrayList<DtoOrderItem> dtoOrderItems=new ArrayList<>();
+
+        DtoOrderItem dtoOrderItem=DtoOrderItem.newBuilder()
+                .setAmount(100)
+                .setProductId(5)
+                .build();
+
+        DtoOrderItem dtoOrderItem2=DtoOrderItem.newBuilder()
+                .setAmount(1000)
+                .setProductId(2)
+                .build();
+
+        DtoOrderItem dtoOrderItem3=DtoOrderItem.newBuilder()
+                .setAmount(500)
+                .setProductId(4)
+                .build();
+
+        dtoOrderItems.add(dtoOrderItem3);
+        dtoOrderItems.add(dtoOrderItem2);
+        dtoOrderItems.add(dtoOrderItem);
+
+        createOrderRequest req2=createOrderRequest.newBuilder()
+                .setNewOrder(dtoOrder)
+                .addAllOrderItems(dtoOrderItems)
+                .setNote("Is this working?")
+                .setPaymentMethod("Paypal")
+                .build();
+
+        generalPutResponse res2=proofStub.createNewOrder(req2);
+        System.out.println(res2.getResp());
     }
 }
