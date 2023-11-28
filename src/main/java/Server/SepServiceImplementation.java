@@ -1,10 +1,12 @@
 package Server;
 
+import Utility.DataBase.DaoImplementations.Order.OrderDaoImplementation;
 import Utility.DataBase.DaoImplementations.Product.ProductDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.CustomerDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.FarmerDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.LoginDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.RegisterDaoImplementation;
+import Utility.DataBase.Daos.Order.OrderDao;
 import Utility.DataBase.Daos.Product.ProductDao;
 import Utility.DataBase.Daos.Users.CustomerDao;
 import Utility.DataBase.Daos.Users.FarmerDao;
@@ -22,13 +24,15 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     private FarmerDao farmerDao;
 
     private ProductDao productDao;
+    private OrderDao orderDao;
 
     public SepServiceImplementation() {
-        this.registerDao = new RegisterDaoImplementation();
-        this.loginDao = new LoginDaoImplementation();
-        this.customerDao = new CustomerDaoImplementation();
-        this.farmerDao = new FarmerDaoImplementation();
-        this.productDao = new ProductDaoImplementation();
+        registerDao = new RegisterDaoImplementation();
+        loginDao = new LoginDaoImplementation();
+        customerDao = new CustomerDaoImplementation();
+        farmerDao = new FarmerDaoImplementation();
+        productDao = new ProductDaoImplementation();
+        orderDao=new OrderDaoImplementation();
     }
 
     //----------Login----------\\
@@ -174,7 +178,14 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     //----------Order----------\\
     @Override
     public void createNewOrder(createOrderRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        super.createNewOrder(request, responseObserver);
+        String x = orderDao.createOrder(request.getNewOrder(),request.getOrderItemsList());
+
+        generalPutResponse res=generalPutResponse.newBuilder()
+                .setResp(x)
+                .build();
+
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     @Override
