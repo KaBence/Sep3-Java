@@ -55,7 +55,6 @@ public class SepClient
         DtoOrder dtoOrder=DtoOrder.newBuilder()
                 .setCustomerId("0000")
                 .setDate("2023-11-28")
-                .setStatus("Pending")
                 .build();
 
         ArrayList<DtoOrderItem> dtoOrderItems=new ArrayList<>();
@@ -66,8 +65,8 @@ public class SepClient
                 .build();
 
         DtoOrderItem dtoOrderItem2=DtoOrderItem.newBuilder()
-                .setAmount(1000)
-                .setProductId(2)
+                .setAmount(100)
+                .setProductId(3)
                 .build();
 
         DtoOrderItem dtoOrderItem3=DtoOrderItem.newBuilder()
@@ -82,8 +81,8 @@ public class SepClient
         createOrderRequest req2=createOrderRequest.newBuilder()
                 .setNewOrder(dtoOrder)
                 .addAllOrderItems(dtoOrderItems)
-                .setNote("Is this working?")
-                .setPaymentMethod("Paypal")
+                .setNote("Debugging CreateOrder Ver. 320")
+                .setPaymentMethod("Google Pay")
                 .build();
 
         generalPutResponse res2=proofStub.createNewOrder(req2);
