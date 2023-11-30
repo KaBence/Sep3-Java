@@ -248,7 +248,7 @@ message DtoReceipt
   string customerId = 8;
 }
 
-message sendReceipt{
+message DtoSendReceipt{
   DtoReceipt receipt=1;
   repeated DtoOrderItem orderItems=2;
 }
@@ -260,7 +260,7 @@ message getAllReceiptsByFarmerRequest
 
 message getAllReceiptsByFarmerResponse
 {
-  repeated sendReceipt Receipts = 1;
+  repeated DtoSendReceipt Receipts = 1;
 }
 
 message getAllReceiptsByCustomerRequest{
@@ -268,7 +268,7 @@ message getAllReceiptsByCustomerRequest{
 }
 
 message getAllReceiptByCustomerResponse{
-  repeated sendReceipt receipts=1;
+  repeated DtoSendReceipt receipts=1;
 }
 
 message farmersApprovalRequest{
