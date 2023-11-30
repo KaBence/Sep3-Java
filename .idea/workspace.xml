@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="little cleanup in createOrder">
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="Create Order is functional">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Order/OrderDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Order/OrderDaoImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +189,7 @@
       <workItem from="1701198113553" duration="557000" />
       <workItem from="1701198967743" duration="384000" />
       <workItem from="1701204689870" duration="959000" />
-      <workItem from="1701278807154" duration="5070000" />
+      <workItem from="1701278807154" duration="7253000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />
@@ -310,7 +309,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701188815907</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Create Order is functional">
+      <option name="closed" value="true" />
+      <created>1701283914021</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1701283914022</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,6 +350,7 @@
     <MESSAGE value="start for create order" />
     <MESSAGE value="Create Order is working" />
     <MESSAGE value="little cleanup in createOrder" />
-    <option name="LAST_COMMIT_MESSAGE" value="little cleanup in createOrder" />
+    <MESSAGE value="Create Order is functional" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create Order is functional" />
   </component>
 </project>

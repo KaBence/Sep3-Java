@@ -196,15 +196,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
         responseObserver.onCompleted();
     }
 
-    @Override
-    public void getAllOrders(getAllOrdersRequest request, StreamObserver<getAllOrdersResponse> responseObserver) {
-        super.getAllOrders(request, responseObserver);
-    }
 
-    @Override
-    public void getOrderById(getOrderByIdRequest request, StreamObserver<getOrderByIdResponse> responseObserver) {
-        super.getOrderById(request, responseObserver);
-    }
 
     //----------Product----------\\
     @Override
@@ -307,18 +299,18 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
 
     //----------Receipt----------\\
     @Override
-    public void createReceipt(createReceiptRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        super.createReceipt(request, responseObserver);
+    public void getFarmersReceipt(getAllReceiptsByFarmerRequest request, StreamObserver<getAllReceiptsByFarmerResponse> responseObserver) {
+        super.getFarmersReceipt(request, responseObserver);
     }
 
     @Override
-    public void getAllReceipts(getAllReceiptsRequest request, StreamObserver<getAllReceiptsResponse> responseObserver) {
-        super.getAllReceipts(request, responseObserver);
+    public void getCustomersReceipt(getAllReceiptsByCustomerRequest request, StreamObserver<getAllReceiptByCustomerResponse> responseObserver) {
+        super.getCustomersReceipt(request, responseObserver);
     }
 
     @Override
-    public void getReceiptById(getReceiptByIdRequest request, StreamObserver<getReceiptByIdResponse> responseObserver) {
-        super.getReceiptById(request, responseObserver);
+    public void farmersApproval(farmersApprovalRequest request, StreamObserver<generalPutResponse> responseObserver) {
+        super.farmersApproval(request, responseObserver);
     }
 
     //----------Comment----------\\

@@ -148,23 +148,6 @@ message createOrderRequest
   string note=4;
 }
 
-message getAllOrdersRequest{}
-
-message getAllOrdersResponse
-{
-  repeated DtoOrder allOrders = 1;
-}
-
-message getOrderByIdRequest
-{
-  int32 id = 1;
-}
-
-message getOrderByIdResponse
-{
-  DtoOrder order = 1;
-}
-
 //----------Product----------\\
 
 message DtoProduct
@@ -265,31 +248,31 @@ message DtoReceipt
   string customerId = 8;
 }
 
-message createReceiptRequest
-{
-  DtoReceipt newReceipt = 1;
+message sendReceipt{
+  DtoReceipt receipt=1;
+  repeated DtoOrderItem orderItems=2;
 }
 
-message getAllReceiptsRequest
+message getAllReceiptsByFarmerRequest
 {
-  string user = 1;
+  string farmer = 1;
 }
 
-message getAllReceiptsResponse
+message getAllReceiptsByFarmerResponse
 {
-  repeated DtoReceipt allReceipts = 1;
+  repeated sendReceipt Receipts = 1;
 }
 
-message getReceiptByIdRequest
-{
-  int32 orderId = 1;
-  string farmerId = 2;
-  string customerId = 3;
+message getAllReceiptsByCustomerRequest{
+  string customer=1;
 }
 
-message getReceiptByIdResponse
-{
-  DtoReceipt receipt = 1;
+message getAllReceiptByCustomerResponse{
+  repeated sendReceipt receipts=1;
+}
+
+message farmersApprovalRequest{
+  bool approve=1;
 }
 
 //----------Comment----------\\
@@ -373,8 +356,6 @@ service SepService
 
   //--------Order--------\\
   rpc createNewOrder(createOrderRequest) returns (generalPutResponse);
-  rpc getAllOrders(getAllOrdersRequest) returns (getAllOrdersResponse);
-  rpc getOrderById(getOrderByIdRequest) returns (getOrderByIdResponse);
 
   //--------Product--------\\
   rpc createProduct(createProductRequest) returns (generalPutResponse);
@@ -389,9 +370,9 @@ service SepService
   rpc getAllOrderItemsFromOrder(getAllOrderItemsFromOrderRequest) returns (getAllOrderItemsFromOrderResponse);
 
   //--------Receipt--------\\
-  rpc createReceipt(createReceiptRequest) returns (generalPutResponse);
-  rpc getAllReceipts(getAllReceiptsRequest) returns (getAllReceiptsResponse);
-  rpc getReceiptById(getReceiptByIdRequest) returns (getReceiptByIdResponse);
+  rpc getFarmersReceipt(getAllReceiptsByFarmerRequest) returns (getAllReceiptsByFarmerResponse);
+  rpc getCustomersReceipt(getAllReceiptsByCustomerRequest) returns (getAllReceiptByCustomerResponse);
+  rpc farmersApproval(farmersApprovalRequest) returns(generalPutResponse);
 
   //--------Comment--------\\
   rpc postComment(putCommentRequest) returns (generalPutResponse);
