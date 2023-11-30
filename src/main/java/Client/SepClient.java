@@ -52,6 +52,7 @@ public class SepClient
         //generalPutResponse loginRes = proofStub.login(loginRequest);
         //System.out.println(loginRes.getResp());*/
 
+        /*
         DtoOrder dtoOrder=DtoOrder.newBuilder()
                 .setCustomerId("0000")
                 .setDate("2023-11-28")
@@ -87,5 +88,49 @@ public class SepClient
 
         generalPutResponse res2=proofStub.createNewOrder(req2);
         System.out.println(res2.getResp());
+
+         */
+
+        DtoReview dtoReview = DtoReview.newBuilder()
+                .setText("test")
+                .setStar(3.3)
+                .setFarmerId("1")
+                .setCustomerId("test")
+                .build();
+
+        postReviewRequest requestReview = postReviewRequest.newBuilder()
+                .setReview(dtoReview)
+                .build();
+
+        generalPutResponse response = proofStub.postReview(requestReview);
+        System.out.println("Review response: "+response);
+
+        //=========================================
+        DtoComment comment = DtoComment.newBuilder()
+                .setText("I hope i can see it")
+                .setFarmerId("1")
+                .setCustomerId("test")
+                .build();
+
+        putCommentRequest requestComment = putCommentRequest.newBuilder()
+                .setComment(comment)
+                .build();
+
+        generalPutResponse responseComment = proofStub.postComment(requestComment);
+        System.out.println("Comment Response: "+responseComment);
+
+
+        //========================================================
+        DtoFarmer x = DtoFarmer.newBuilder()
+                .setPhoneNumber("1")
+                .build();
+
+        getAllReviewsByFarmerRequest reviewsByFarmerRequest = getAllReviewsByFarmerRequest.newBuilder()
+                .setFarmer(x)
+                .build();
+
+        getAllReviewsByFarmerResponse getAllReviewsByFarmerResponse = proofStub.getAllReviewsByFarmer(reviewsByFarmerRequest);
+        System.out.println("All reviews by farmer: 1 - \n"+getAllReviewsByFarmerResponse);
+
     }
 }

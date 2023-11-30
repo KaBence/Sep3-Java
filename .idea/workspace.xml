@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="get receipts should be working for both">
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="rename of a message">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Review/ReviewDaoImplementation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Review/ReviewDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Order/OrderDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Order/OrderDaoImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Receipt/ReceiptDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Receipt/ReceiptDaoImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Receipt/ReceiptDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Receipt/ReceiptDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +192,7 @@
       <workItem from="1701198113553" duration="557000" />
       <workItem from="1701198967743" duration="384000" />
       <workItem from="1701204689870" duration="959000" />
-      <workItem from="1701278807154" duration="27908000" />
+      <workItem from="1701278807154" duration="18446000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />
@@ -337,15 +336,7 @@
       <option name="project" value="LOCAL" />
       <updated>1701343667500</updated>
     </task>
-    <task id="LOCAL-00019" summary="get receipts should be working for both">
-      <option name="closed" value="true" />
-      <created>1701357756187</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1701357756187</updated>
-    </task>
-    <option name="localTasksCounter" value="20" />
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,7 +372,6 @@
     <MESSAGE value="Create Order is functional" />
     <MESSAGE value="added proto methods" />
     <MESSAGE value="rename of a message" />
-    <MESSAGE value="get receipts should be working for both" />
-    <option name="LAST_COMMIT_MESSAGE" value="get receipts should be working for both" />
+    <option name="LAST_COMMIT_MESSAGE" value="rename of a message" />
   </component>
 </project>

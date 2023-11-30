@@ -3,6 +3,7 @@ package Server;
 import Utility.DataBase.DaoImplementations.Order.OrderDaoImplementation;
 import Utility.DataBase.DaoImplementations.Product.ProductDaoImplementation;
 import Utility.DataBase.DaoImplementations.Receipt.ReceiptDaoImplementation;
+import Utility.DataBase.DaoImplementations.Review.ReviewDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.CustomerDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.FarmerDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.LoginDaoImplementation;
@@ -10,6 +11,7 @@ import Utility.DataBase.DaoImplementations.Users.RegisterDaoImplementation;
 import Utility.DataBase.Daos.Order.OrderDao;
 import Utility.DataBase.Daos.Product.ProductDao;
 import Utility.DataBase.Daos.Receipt.ReceiptDao;
+import Utility.DataBase.Daos.Review.ReviewDao;
 import Utility.DataBase.Daos.Users.CustomerDao;
 import Utility.DataBase.Daos.Users.FarmerDao;
 import Utility.DataBase.Daos.Users.LoginDao;
@@ -29,6 +31,8 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     private OrderDao orderDao;
     private ReceiptDao receiptDao;
 
+    private ReviewDao reviewDao;
+
     public SepServiceImplementation() {
         registerDao = new RegisterDaoImplementation();
         loginDao = new LoginDaoImplementation();
@@ -37,6 +41,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
         productDao = new ProductDaoImplementation();
         orderDao=new OrderDaoImplementation();
         receiptDao=new ReceiptDaoImplementation();
+        reviewDao = new ReviewDaoImplementation();
     }
 
     //----------Login----------\\
@@ -381,22 +386,55 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     //----------Comment----------\\
     @Override
     public void postComment(putCommentRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        super.postComment(request, responseObserver);
+        String x;
+        try
+        {
+            x = reviewDao.postComment(request.getComment());
+        }
+        catch (Exception e)
+        {
+            x = e.getMessage();
+        }
+
+        generalPutResponse response = generalPutResponse.newBuilder()
+                .setResp(x)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     //----------Review----------\\
     @Override
-    public void postReview(postReviewRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        super.postReview(request, responseObserver);
+    public void postReview(postReviewRequest request, StreamObserver<generalPutResponse> responseObserver)
+    {
+        String x;
+        try {
+            x = reviewDao.createReview(request.getReview());
+        } catch (Exception e) {
+            x = e.getMessage();
+        }
+
+        generalPutResponse response = generalPutResponse.newBuilder()
+                .setResp(x)
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
-    public void getAllReviewsByFarmer(getAllReviewsByFarmerRequest request, StreamObserver<getAllReviewsByFarmerResponse> responseObserver) {
-        super.getAllReviewsByFarmer(request, responseObserver);
+    public void getAllReviewsByFarmer(getAllReviewsByFarmerRequest request, StreamObserver<getAllReviewsByFarmerResponse> responseObserver)
+    {
+        ArrayList<DtoReview> list = reviewDao.getAllReviewsByFarmer(request.getFarmer().getPhoneNumber());
+        getAllReviewsByFarmerResponse response = getAllReviewsByFarmerResponse.newBuilder()
+                .addAllAllReviews(list)
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
-    public void getReviewBy(getReviewByIdRequest request, StreamObserver<getReviewByIdResponse> responseObserver) {
-        super.getReviewBy(request, responseObserver);
+    public void getReviewBy(getReviewByIdRequest request, StreamObserver<getReviewByIdResponse> responseObserver)
+    {
     }
 }
