@@ -2,12 +2,14 @@ package Server;
 
 import Utility.DataBase.DaoImplementations.Order.OrderDaoImplementation;
 import Utility.DataBase.DaoImplementations.Product.ProductDaoImplementation;
+import Utility.DataBase.DaoImplementations.Receipt.ReceiptDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.CustomerDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.FarmerDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.LoginDaoImplementation;
 import Utility.DataBase.DaoImplementations.Users.RegisterDaoImplementation;
 import Utility.DataBase.Daos.Order.OrderDao;
 import Utility.DataBase.Daos.Product.ProductDao;
+import Utility.DataBase.Daos.Receipt.ReceiptDao;
 import Utility.DataBase.Daos.Users.CustomerDao;
 import Utility.DataBase.Daos.Users.FarmerDao;
 import Utility.DataBase.Daos.Users.LoginDao;
@@ -25,6 +27,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
 
     private ProductDao productDao;
     private OrderDao orderDao;
+    private ReceiptDao receiptDao;
 
     public SepServiceImplementation() {
         registerDao = new RegisterDaoImplementation();
@@ -33,6 +36,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
         farmerDao = new FarmerDaoImplementation();
         productDao = new ProductDaoImplementation();
         orderDao=new OrderDaoImplementation();
+        receiptDao=new ReceiptDaoImplementation();
     }
 
     //----------Login----------\\
@@ -287,30 +291,68 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     }
 
     //----------OrderItem----------\\
-    @Override
-    public void createNewOrderItem(createOrderItemRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        super.createNewOrderItem(request, responseObserver);
-    }
+
 
     @Override
     public void getAllOrderItemsFromOrder(getAllOrderItemsFromOrderRequest request, StreamObserver<getAllOrderItemsFromOrderResponse> responseObserver) {
-        super.getAllOrderItemsFromOrder(request, responseObserver);
+        ArrayList<DtoOrderItem> orderItems=orderDao.getOrderItemsById(request.getOrder().getOrderId());
+
+        getAllOrderItemsFromOrderResponse res=getAllOrderItemsFromOrderResponse.newBuilder()
+                        .addAllOrderItems(orderItems)
+                        .build();
+
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getAllOrderItemsByGroup(getAllOrderItemsByGroupRequest request, StreamObserver<getAllOrderItemsByGroupResponse> responseObserver) {
+        ArrayList<DtoOrderItem> orderItems=orderDao.getOrderItemsByGroup(request.getOrder().getOrderId());
+
+        getAllOrderItemsByGroupResponse res=getAllOrderItemsByGroupResponse.newBuilder()
+                .addAllOrderItems(orderItems)
+                .build();
+
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     //----------Receipt----------\\
     @Override
     public void getFarmersReceipt(getAllReceiptsByFarmerRequest request, StreamObserver<getAllReceiptsByFarmerResponse> responseObserver) {
-        super.getFarmersReceipt(request, responseObserver);
+        ArrayList<DtoSendReceipt> list =receiptDao.getReceiptsByFarmer(request.getFarmer());
+        getAllReceiptsByFarmerResponse res = getAllReceiptsByFarmerResponse.newBuilder()
+                .addAllReceipts(list)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void getCustomersReceipt(getAllReceiptsByCustomerRequest request, StreamObserver<getAllReceiptByCustomerResponse> responseObserver) {
-        super.getCustomersReceipt(request, responseObserver);
+        ArrayList<DtoSendReceipt> list =receiptDao.getReceiptsByCustomer(request.getCustomer());
+        getAllReceiptByCustomerResponse res = getAllReceiptByCustomerResponse.newBuilder()
+                .addAllReceipts(list)
+                .build();
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void farmersApproval(farmersApprovalRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        super.farmersApproval(request, responseObserver);
+        String x;
+        try {
+            x = receiptDao.FarmersApproval(request.getApprove(),request.getOrderId());
+        } catch (Exception e) {
+            x = e.getMessage();
+        }
+
+        generalPutResponse response = generalPutResponse.newBuilder()
+                .setResp(x)
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+
     }
 
     //----------Comment----------\\

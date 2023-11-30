@@ -216,11 +216,10 @@ message DtoOrderItem
   int32 orderId = 1;
   int32 productId = 2;
   double  amount = 3;
-}
+  string type=4;
+  double price=5;
+  string farmName=6;
 
-message createOrderItemRequest
-{
-  DtoOrderItem newOrderItem = 1;
 }
 
 message getAllOrderItemsFromOrderRequest
@@ -230,7 +229,15 @@ message getAllOrderItemsFromOrderRequest
 
 message getAllOrderItemsFromOrderResponse
 {
-  repeated DtoOrderItem allOrderItems = 1;
+  repeated DtoOrderItem OrderItems = 1;
+}
+
+message getAllOrderItemsByGroupRequest{
+  DtoOrder order=1;
+}
+
+message getAllOrderItemsByGroupResponse{
+  repeated DtoOrderItem OrderItems=1;
 }
 
 
@@ -239,7 +246,7 @@ message getAllOrderItemsFromOrderResponse
 message DtoReceipt
 {
   int32 orderId = 1;
-  double amount = 2;
+  bool processed = 2;
   double price = 3;
   string paymentMethod = 4;
   string paymentDate = 5;
@@ -250,7 +257,7 @@ message DtoReceipt
 
 message DtoSendReceipt{
   DtoReceipt receipt=1;
-  repeated DtoOrderItem orderItems=2;
+  string dateOfCreation=3;
 }
 
 message getAllReceiptsByFarmerRequest
@@ -273,6 +280,7 @@ message getAllReceiptByCustomerResponse{
 
 message farmersApprovalRequest{
   bool approve=1;
+  int32 orderId=2;
 }
 
 //----------Comment----------\\
@@ -366,8 +374,8 @@ service SepService
   rpc deleteProduct(deleteProductRequest) returns (generalPutResponse);
 
   //--------OrderItem--------\\
-  rpc createNewOrderItem(createOrderItemRequest) returns (generalPutResponse);
   rpc getAllOrderItemsFromOrder(getAllOrderItemsFromOrderRequest) returns (getAllOrderItemsFromOrderResponse);
+  rpc getAllOrderItemsByGroup(getAllOrderItemsByGroupRequest) returns (getAllOrderItemsByGroupResponse);
 
   //--------Receipt--------\\
   rpc getFarmersReceipt(getAllReceiptsByFarmerRequest) returns (getAllReceiptsByFarmerResponse);

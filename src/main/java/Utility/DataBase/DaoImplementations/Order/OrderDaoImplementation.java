@@ -131,4 +131,80 @@ public class OrderDaoImplementation implements OrderDao {
             throw new Exception("Error: "+e.getMessage());
         }
     }
+
+    @Override
+    public ArrayList<DtoOrderItem> getOrderItemsById(int orderId) {
+        ArrayList<DtoOrderItem> orderItems=new ArrayList<>();
+        try (Connection connection=getConnection()){
+            PreparedStatement ps=connection.prepareStatement("select o.orderID,p.productID,OrderItem.amount,p.type,p.price,f.farmName from orderitem\n" +
+                    "    join \"order\" o on o.orderID = orderitem.orderID\n" +
+                    "    join product p on orderitem.productID = p.productid\n" +
+                    "    join farmer f on f.phonenumber = p.farmerid\n" +
+                    "    where o.orderid=?;");
+            ps.setInt(1,orderId);
+            ResultSet rs= ps.executeQuery();
+            while (rs.next()){
+                int productId=rs.getInt(2);
+                double amount=rs.getDouble(3);
+                String type=rs.getString(4);
+                double price=rs.getDouble(5);
+                String farmName=rs.getString(6);
+
+                DtoOrderItem orderItem=DtoOrderItem.newBuilder()
+                        .setOrderId(orderId)
+                        .setProductId(productId)
+                        .setType(type)
+                        .setAmount(amount)
+                        .setPrice(price)
+                        .setFarmName(farmName)
+                        .build();
+                orderItems.add(orderItem);
+            }
+            return orderItems;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public ArrayList<DtoOrderItem> getOrderItemsByGroup(int orderId) {
+        ArrayList<DtoOrderItem> orderItems=new ArrayList<>();
+        int orderGroup=0;
+        try (Connection connection=getConnection()){
+            PreparedStatement ps=connection.prepareStatement("select ordergroup from order where orderid=?;");
+            ps.setInt(1,orderId);
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()){
+                orderGroup=rs.getInt(1);
+            }
+            ps=connection.prepareStatement("select o.orderID,p.productID,OrderItem.amount,p.type,p.price,f.farmName from orderitem\n" +
+                    "    join \"order\" o on o.orderID = orderitem.orderID\n" +
+                    "    join product p on orderitem.productID = p.productid\n" +
+                    "    join farmer f on f.phonenumber = p.farmerid\n" +
+                    "    where o.orderGroup=?;");
+            ps.setInt(1,orderGroup);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                int productId=rs.getInt(2);
+                double amount=rs.getDouble(3);
+                String type=rs.getString(4);
+                double price=rs.getDouble(5);
+                String farmName=rs.getString(6);
+
+                DtoOrderItem orderItem=DtoOrderItem.newBuilder()
+                        .setOrderId(orderId)
+                        .setProductId(productId)
+                        .setType(type)
+                        .setAmount(amount)
+                        .setPrice(price)
+                        .setFarmName(farmName)
+                        .build();
+
+                orderItems.add(orderItem);
+            }
+            return orderItems;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

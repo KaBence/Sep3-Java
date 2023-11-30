@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="Create Order is functional">
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="rename of a message">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Receipt/ReceiptDaoImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Order/OrderDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Order/OrderDaoImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Order/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Order/OrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Receipt/ReceiptDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/Daos/Receipt/ReceiptDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -189,7 +194,7 @@
       <workItem from="1701198113553" duration="557000" />
       <workItem from="1701198967743" duration="384000" />
       <workItem from="1701204689870" duration="959000" />
-      <workItem from="1701278807154" duration="7253000" />
+      <workItem from="1701278807154" duration="18446000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />
@@ -317,7 +322,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701283914022</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="added proto methods">
+      <option name="closed" value="true" />
+      <created>1701343567081</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1701343567081</updated>
+    </task>
+    <task id="LOCAL-00018" summary="rename of a message">
+      <option name="closed" value="true" />
+      <created>1701343667500</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1701343667500</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,6 +372,8 @@
     <MESSAGE value="Create Order is working" />
     <MESSAGE value="little cleanup in createOrder" />
     <MESSAGE value="Create Order is functional" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Order is functional" />
+    <MESSAGE value="added proto methods" />
+    <MESSAGE value="rename of a message" />
+    <option name="LAST_COMMIT_MESSAGE" value="rename of a message" />
   </component>
 </project>
