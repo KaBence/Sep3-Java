@@ -333,7 +333,7 @@ message postReviewRequest
 
 message getAllReviewsByFarmerRequest
 {
-  DtoFarmer farmer = 1;
+  string farmer = 1;
 }
 
 message getAllReviewsByFarmerResponse
@@ -406,7 +406,6 @@ service SepService
 
   //--------Review--------\\
   rpc postReview(postReviewRequest) returns (generalPutResponse);
-  rpc getAllReviewsByFarmer(getAllReviewsByFarmerRequest) returns (getAllReviewsByFarmerResponse);
-  rpc getReviewBy(getReviewByIdRequest) returns (getReviewByIdResponse);
+    rpc getAllReviewsByFarmer(getAllReviewsByFarmerRequest) returns (getAllReviewsByFarmerResponse);
+    rpc getReviewBy(getReviewByIdRequest) returns (getReviewByIdResponse);
 }
-

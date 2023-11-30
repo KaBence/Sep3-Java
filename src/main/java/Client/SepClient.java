@@ -121,12 +121,8 @@ public class SepClient
 
 
         //========================================================
-        DtoFarmer x = DtoFarmer.newBuilder()
-                .setPhoneNumber("1")
-                .build();
-
         getAllReviewsByFarmerRequest reviewsByFarmerRequest = getAllReviewsByFarmerRequest.newBuilder()
-                .setFarmer(x)
+                .setFarmer("1")
                 .build();
 
         getAllReviewsByFarmerResponse getAllReviewsByFarmerResponse = proofStub.getAllReviewsByFarmer(reviewsByFarmerRequest);

@@ -425,7 +425,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void getAllReviewsByFarmer(getAllReviewsByFarmerRequest request, StreamObserver<getAllReviewsByFarmerResponse> responseObserver)
     {
-        ArrayList<DtoReview> list = reviewDao.getAllReviewsByFarmer(request.getFarmer().getPhoneNumber());
+        ArrayList<DtoReview> list = reviewDao.getAllReviewsByFarmer(request.getFarmer());
         getAllReviewsByFarmerResponse response = getAllReviewsByFarmerResponse.newBuilder()
                 .addAllAllReviews(list)
                 .build();
