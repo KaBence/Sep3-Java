@@ -86,14 +86,14 @@ public class OrderDaoImplementation implements OrderDao {
                         DtoProduct x=productDao.getProductById(orderItems.get(j).getProductId());
                         if (!x.getFarmerId().equals(farmers.get(i)))
                             break;
-                        price+=x.getPrice()*x.getAmount();
+                        price+=x.getPrice()*orderItems.get(j).getAmount();
                     }
                 }
                 //Going through the orderitems and creating them if the next order would be for another farmer it is creating the receipt instead
                 for(int j=counter;j<orderItems.size();j++){
                     DtoProduct x=productDao.getProductById(orderItems.get(j).getProductId());
                     if (!x.getFarmerId().equals(farmers.get(i))){
-                        ps=connection.prepareStatement("insert into Receipt(orderId,farmerid,customerId,processed,price,paymentmethod,text) values (?,?,?,?,?,?,?)");
+                        ps=connection.prepareStatement("insert into Receipt(orderId,farmerid,customerId,processed,price,paymentmethod,text,status) values (?,?,?,?,?,?,?,?)");
                         ps.setInt(1,id);
                         if (farmers.get(i).equals("--------")){
                             ps.setString(2, farmers.get(--i));
@@ -106,6 +106,7 @@ public class OrderDaoImplementation implements OrderDao {
                         ps.setDouble(5,price);
                         ps.setString(6,paymentMethod);
                         ps.setString(7,note);
+                        ps.setString(8,"Pending");
                         ps.executeUpdate();
                         counter=j;
                         break;

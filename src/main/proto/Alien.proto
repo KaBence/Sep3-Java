@@ -253,30 +253,47 @@ message DtoReceipt
   string text = 6;
   string farmerId = 7;
   string customerId = 8;
+  string status=9;
 }
 
 message DtoSendReceipt{
   DtoReceipt receipt=1;
-  string dateOfCreation=3;
+  string dateOfCreation=2;
 }
 
-message getAllReceiptsByFarmerRequest
+message DtoCustomerSendReceipt{
+  repeated string farmNames=1;
+  double combinedPrice=2;
+  string dateOfCreation=3;
+  repeated DtoReceipt receipts=4;
+}
+
+message getPendingReceiptsByFarmerRequest
 {
   string farmer = 1;
 }
 
-message getAllReceiptsByFarmerResponse
-{
-  repeated DtoSendReceipt Receipts = 1;
+message getApprovedReceiptsByFarmerRequest{
+  string farmer=1;
 }
 
-message getAllReceiptsByCustomerRequest{
+message getRejectedReceiptsByFarmerRequest{
+  string farmer=1;
+}
+
+message getReceiptsResponse{
+  repeated DtoSendReceipt receipts=1;
+}
+
+message getReceiptsByCustomerRequest{
   string customer=1;
 }
 
-message getAllReceiptByCustomerResponse{
-  repeated DtoSendReceipt receipts=1;
+message getReceiptsByCustomerResponse{
+  repeated DtoCustomerSendReceipt receipts=1;
 }
+
+
 
 message farmersApprovalRequest{
   bool approve=1;
@@ -378,8 +395,10 @@ service SepService
   rpc getAllOrderItemsByGroup(getAllOrderItemsByGroupRequest) returns (getAllOrderItemsByGroupResponse);
 
   //--------Receipt--------\\
-  rpc getFarmersReceipt(getAllReceiptsByFarmerRequest) returns (getAllReceiptsByFarmerResponse);
-  rpc getCustomersReceipt(getAllReceiptsByCustomerRequest) returns (getAllReceiptByCustomerResponse);
+  rpc getPendingFarmersReceipt(getPendingReceiptsByFarmerRequest) returns (getReceiptsResponse);
+  rpc getApprovedFarmersReceipt(getApprovedReceiptsByFarmerRequest) returns (getReceiptsResponse);
+  rpc getRejectedFarmersReceipt(getRejectedReceiptsByFarmerRequest) returns (getReceiptsResponse);
+  rpc getCustomersReceipt(getReceiptsByCustomerRequest) returns(getReceiptsByCustomerResponse);
   rpc farmersApproval(farmersApprovalRequest) returns(generalPutResponse);
 
   //--------Comment--------\\

@@ -205,7 +205,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     //----------Product----------\\
     @Override
     public void createProduct(createProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        String temp = "?";
+        String temp;
 
         try {
             temp = productDao.createProduct(request.getNewProduct());
@@ -257,7 +257,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
 
     @Override
     public void updateProduct(updateProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        String x = "?";
+        String x;
         try {
             x = productDao.editProduct(request.getProduct());
         } catch (Exception e) {
@@ -274,7 +274,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
 
     @Override
     public void deleteProduct(deleteProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
-        String temp = null;
+        String temp;
 
         try {
             temp = productDao.deleteProduct(request.getId());
@@ -318,24 +318,47 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     }
 
     //----------Receipt----------\\
+
+
     @Override
-    public void getFarmersReceipt(getAllReceiptsByFarmerRequest request, StreamObserver<getAllReceiptsByFarmerResponse> responseObserver) {
-        ArrayList<DtoSendReceipt> list =receiptDao.getReceiptsByFarmer(request.getFarmer());
-        getAllReceiptsByFarmerResponse res = getAllReceiptsByFarmerResponse.newBuilder()
-                .addAllReceipts(list)
+    public void getPendingFarmersReceipt(getPendingReceiptsByFarmerRequest request, StreamObserver<getReceiptsResponse> responseObserver) {
+        ArrayList<DtoSendReceipt> receipts=receiptDao.getPendingReceiptsByFarmer(request.getFarmer());
+
+        getReceiptsResponse res=getReceiptsResponse.newBuilder()
+                .addAllReceipts(receipts)
                 .build();
+
         responseObserver.onNext(res);
         responseObserver.onCompleted();
     }
 
     @Override
-    public void getCustomersReceipt(getAllReceiptsByCustomerRequest request, StreamObserver<getAllReceiptByCustomerResponse> responseObserver) {
-        ArrayList<DtoSendReceipt> list =receiptDao.getReceiptsByCustomer(request.getCustomer());
-        getAllReceiptByCustomerResponse res = getAllReceiptByCustomerResponse.newBuilder()
-                .addAllReceipts(list)
+    public void getApprovedFarmersReceipt(getApprovedReceiptsByFarmerRequest request, StreamObserver<getReceiptsResponse> responseObserver) {
+        ArrayList<DtoSendReceipt> receipts=receiptDao.getApprovedReceiptsByFarmer(request.getFarmer());
+
+        getReceiptsResponse res=getReceiptsResponse.newBuilder()
+                .addAllReceipts(receipts)
                 .build();
+
         responseObserver.onNext(res);
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getRejectedFarmersReceipt(getRejectedReceiptsByFarmerRequest request, StreamObserver<getReceiptsResponse> responseObserver) {
+        ArrayList<DtoSendReceipt> receipts=receiptDao.getRejectedReceiptsByFarmer(request.getFarmer());
+
+        getReceiptsResponse res=getReceiptsResponse.newBuilder()
+                .addAllReceipts(receipts)
+                .build();
+
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getCustomersReceipt(getReceiptsByCustomerRequest request, StreamObserver<getReceiptsByCustomerResponse> responseObserver) {
+        ArrayList<DtoCustomerSendReceipt> receipts=receiptDao.getReceiptsByCustomer(request.getCustomer());
     }
 
     @Override
