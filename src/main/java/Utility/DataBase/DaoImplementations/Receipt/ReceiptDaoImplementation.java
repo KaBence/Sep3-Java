@@ -174,7 +174,8 @@ public class ReceiptDaoImplementation implements ReceiptDao {
     public ArrayList<DtoSendReceipt> getPendingReceiptsByFarmer(String farmer) {
         ArrayList<DtoSendReceipt> receipts=new ArrayList<>();
         try (Connection connection=getConnection()){
-            PreparedStatement ps=connection.prepareStatement(pendingRequestQuery());
+            PreparedStatement ps=connection.prepareStatement(pendingRequestQuery("?"));
+            ps.setString(1,farmer);
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
                 int orderId=rs.getInt(1);
@@ -293,7 +294,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
         }
     }
 
-    private String pendingRequestQuery(){
+    private String pendingRequestQuery(String farmerid){
         return "WITH RankedReceipts AS (\n" +
                 "    SELECT\n" +
                 "        orderID,\n" +
@@ -319,6 +320,6 @@ public class ReceiptDaoImplementation implements ReceiptDao {
                 "    paymentDate,\n" +
                 "    text\n" +
                 "FROM RankedReceipts\n" +
-                "WHERE row_num = 1 AND processed = false;";
+                "WHERE row_num = 1 AND processed = false and farmerid="+farmerid+";";
     }
 }
