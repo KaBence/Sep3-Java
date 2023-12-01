@@ -11,6 +11,9 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
+
 
 public class OrderDaoImplementation implements OrderDao {
 
@@ -33,6 +36,7 @@ public class OrderDaoImplementation implements OrderDao {
                 "jdbc:postgresql://localhost:5432/postgres?currentSchema=distributionsystem",
                 "postgres", "password");
     }
+
     @Override
     public String createOrder(DtoOrder order, List<DtoOrderItem> orderItems,String paymentMethod,String note) throws Exception {
         if (orderItems.isEmpty())
@@ -41,6 +45,7 @@ public class OrderDaoImplementation implements OrderDao {
             throw new Exception("Error: There is no payment method");
         //initialize
         List<String> farmers=new ArrayList<>();
+        orderItems.sort(Comparator.comparing(DtoOrderItem::getFarmName));
         int orderGroup=0;
         //counts how many farmers are there in the order
         for (DtoOrderItem item: orderItems){

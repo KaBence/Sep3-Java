@@ -133,6 +133,8 @@ public class ReceiptDaoImplementation implements ReceiptDao {
                         farmNames.add(rs2.getString(1));
                     }
 
+                    totalPrice+=price;
+
                     if (paymentDate==null)
                         paymentDate="";
 
