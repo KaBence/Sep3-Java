@@ -37,7 +37,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
     public ArrayList<DtoSendReceipt> getReceiptsByFarmer(String farmer) {
         ArrayList<DtoSendReceipt> receipts=new ArrayList<>();
         try (Connection connection=getConnection()){
-            PreparedStatement ps=connection.prepareStatement("select * from receipt where phonenumber=?;");
+            PreparedStatement ps=connection.prepareStatement("select * from receipt where farmerid=?;");
             ps.setString(1,farmer);
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
