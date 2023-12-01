@@ -34,7 +34,7 @@ public class RegisterDaoImplementation implements RegisterDao
     public String RegisterCustomer(DtoRegisterCustomer dtoCustomer)
     {
         if (dtoCustomer.getPhoneNumber().isEmpty())
-            return "Error: Phone number cannot be empty!";
+            return "Error: Username cannot be empty!";
         if (dtoCustomer.getPassword().isEmpty())
             return "Error: Password cannot be empty!";
         if (dtoCustomer.getRepeatPassword().isEmpty())
@@ -48,7 +48,7 @@ public class RegisterDaoImplementation implements RegisterDao
         if (dtoCustomer.getAddress().isEmpty())
             return "Error: Address cannot be empty!";
         if (dtoCustomer.getPhoneNumber().length()>=50)
-            return "Error: Phone number cannot be longer than 50 characters!";
+            return "Error: Username cannot be longer than 50 characters!";
         if (dtoCustomer.getPassword().length()>=50)
             return "Error: Password cannot be longer than 50 characters!";
         if (dtoCustomer.getFirstName().length()>=50)
@@ -79,7 +79,7 @@ public class RegisterDaoImplementation implements RegisterDao
             {
                 if (e.getMessage().contains("ERROR: duplicate key value"))
                 {
-                    return "Error: Phone number: "+dtoCustomer.getPhoneNumber()+", is already registered in the system";
+                    return "Error: Username: "+dtoCustomer.getPhoneNumber()+", is already registered in the system";
                 }
                 return "Error: Internal data base Error!\n"+e.getMessage();
             }
@@ -90,7 +90,7 @@ public class RegisterDaoImplementation implements RegisterDao
     public String RegisterFarmer(DtoRegisterFarmer dtoFarmer)
     {
         if (dtoFarmer.getPhoneNumber().isEmpty())
-            return "Error: Phone number cannot be empty!";
+            return "Error: Username cannot be empty!";
         if (dtoFarmer.getPassword().isEmpty())
             return "Error: Password cannot be empty!";
         if (dtoFarmer.getRepeatPassword().isEmpty())
@@ -106,7 +106,7 @@ public class RegisterDaoImplementation implements RegisterDao
         if (dtoFarmer.getFarmName().isEmpty())
             return  "Error: Farm name cannot be empty!";
         if (dtoFarmer.getPhoneNumber().length()>=50)
-            return "Error: Phone number cannot be longer than 50 characters!";
+            return "Error: Username cannot be longer than 50 characters!";
         if (dtoFarmer.getPassword().length()>=50)
             return "Error: Password cannot be longer than 50 characters!";
         if (dtoFarmer.getFirstName().length()>=50)
@@ -141,7 +141,7 @@ public class RegisterDaoImplementation implements RegisterDao
             {
                 if (e.getMessage().contains("ERROR: duplicate key value"))
                 {
-                    return "Error: Phone number: "+dtoFarmer.getPhoneNumber()+", is already registered in the system";
+                    return "Error: Username: "+dtoFarmer.getPhoneNumber()+", is already registered in the system";
                 }
                 return "Error: Internal data base Error!\n"+e.getMessage();
             }

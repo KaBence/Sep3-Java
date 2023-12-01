@@ -30,7 +30,7 @@ public class LoginDaoImplementation implements LoginDao
     public String login(DtoLogin dto) throws Exception {
         ArrayList<DtoLogin> list = new ArrayList<>();
         if (dto.getPhoneNumber().isEmpty())
-            throw new Exception("Error: Phone number cannot be empty!");
+            throw new Exception("Error: Username cannot be empty!");
         if (dto.getPassword().isEmpty())
             throw new Exception("Error: Password cannot be empty!");
         else

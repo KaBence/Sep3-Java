@@ -44,7 +44,7 @@ public class ProductDaoImplementation implements ProductDao {
         if (dtoProduct.getExpirationDate().equals("0001-01-01"))
             throw new Exception("Error: Expiration date cannot be empty");
         if (dtoProduct.getPickedDate().equals("9999-12-12") || dtoProduct.getExpirationDate().equals("9999-12-12"))
-            throw new Exception("Error: Invalid Date - Format Date is DD/MM/YYYY");
+            throw new Exception("Error: Invalid Date - Date Format is DD/MM/YYYY");
         if (dtoProduct.getAmount() == 0)
             throw new Exception("Error: Amount cannot be empty");
         if (expired.before(picked))

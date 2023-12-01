@@ -82,7 +82,7 @@ public class CustomerDaoImplementation implements CustomerDao
         System.out.println(repeatedPassword);
 
         if (phoneNo.isEmpty())
-            return "Error: Phone number cannot be empty!";
+            return "Error: Username cannot be empty!";
         if (password.isEmpty())
             return "Error: Password cannot be empty!";
         if (repeatedPassword.isEmpty())
@@ -96,7 +96,7 @@ public class CustomerDaoImplementation implements CustomerDao
         if (address.isEmpty())
             return "Error: Address cannot be empty!";
         if (phoneNo.length()>=50)
-            return "Error: Phone number cannot be longer than 50 characters!";
+            return "Error: Username cannot be longer than 50 characters!";
         if (password.length()>=50)
             return "Error: Password cannot be longer than 50 characters!";
         if (firstName.length()>=50)
