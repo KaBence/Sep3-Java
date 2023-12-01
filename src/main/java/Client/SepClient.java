@@ -89,7 +89,7 @@ public class SepClient
         generalPutResponse res2=proofStub.createNewOrder(req2);
         System.out.println(res2.getResp());
 
-         */
+
 
         DtoReview dtoReview = DtoReview.newBuilder()
                 .setText("test")
@@ -129,6 +129,21 @@ public class SepClient
 
         getAllReviewsByFarmerResponse getAllReviewsByFarmerResponse = proofStub.getAllReviewsByFarmer(reviewsByFarmerRequest);
         System.out.println("All reviews by farmer: 1 - \n"+getAllReviewsByFarmerResponse);
+        */
+
+        //=========================================================
+
+        getReceiptsByCustomerRequest req= getReceiptsByCustomerRequest.newBuilder().setCustomer("0000").build();
+
+        getReceiptsByCustomerResponse res=proofStub.getCustomersReceipt(req);
+
+        for (DtoCustomerSendReceipt item: res.getReceiptsList()){
+            for (DtoReceipt item2:item.getReceiptsList()){
+                System.out.println(item2.getOrderId());
+
+            }
+            System.out.println("==========");
+        }
 
     }
 }

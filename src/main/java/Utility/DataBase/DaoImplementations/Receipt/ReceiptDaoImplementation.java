@@ -9,6 +9,8 @@ import sep.DtoSendReceipt;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class ReceiptDaoImplementation implements ReceiptDao {
 
@@ -40,15 +42,16 @@ public class ReceiptDaoImplementation implements ReceiptDao {
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
                 int orderId=rs.getInt(1);
-                String farmerId=rs.getString(2);
-                String customerId=rs.getString(3);
-                boolean processed=rs.getBoolean(4);
-                double price=rs.getDouble(5);
-                String paymentMethod=rs.getString(6);
-                String paymentDate=rs.getString(7);
-                String note=rs.getString(8);
+                boolean processed=rs.getBoolean(2);
+                String status=rs.getString(3);
+                double price=rs.getDouble(4);
+                String paymentMethod=rs.getString(5);
+                String paymentDate=rs.getString(6);
+                String note=rs.getString(7);
+                String farmerId=rs.getString(8);
+                String customerId=rs.getString(9);
 
-                ps=connection.prepareStatement("select \"date\" from order where orderid=?;");
+                ps=connection.prepareStatement("select \"date\" from \"order\" where orderid=?;");
                 ps.setInt(1,orderId);
                 ResultSet rs1=ps.executeQuery();
                 String dateOfCreation="";
@@ -65,6 +68,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
                         .setPaymentMethod(paymentMethod)
                         .setPaymentDate(paymentDate)
                         .setText(note)
+                        .setStatus(status)
                         .build();
                 
 
@@ -86,7 +90,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
         ArrayList<DtoCustomerSendReceipt> all=new ArrayList<>();
         ArrayList<Integer> orderGroups=new ArrayList<>();
         try (Connection connection=getConnection()){
-            PreparedStatement items=connection.prepareStatement("select ordergroup from order where customerid=? group by ordergroup;");
+            PreparedStatement items=connection.prepareStatement("select ordergroup from \"order\" where customerid=? group by ordergroup;");
             items.setString(1,customer);
             ResultSet rsItems=items.executeQuery();
             while (rsItems.next()){
@@ -101,32 +105,36 @@ public class ReceiptDaoImplementation implements ReceiptDao {
                 double totalPrice=0;
                 PreparedStatement ps=connection.prepareStatement("select * from receipt join \"order\" o on o.orderID = receipt.orderID where Receipt.customerID=? and o.orderGroup=?;");
                 ps.setString(1,customer);
-                ps.setInt(1,item);
+                ps.setInt(2,item);
                 ResultSet rs=ps.executeQuery();
                 while (rs.next()){
+
                     int orderId=rs.getInt(1);
-                    String farmerId=rs.getString(2);
-                    String customerId=rs.getString(3);
-                    boolean processed=rs.getBoolean(4);
-                    double price=rs.getDouble(5);
-                    totalPrice+=price;
-                    String paymentMethod=rs.getString(6);
-                    String paymentDate=rs.getString(7);
-                    String note=rs.getString(8);
+                    boolean processed=rs.getBoolean(2);
+                    String status=rs.getString(3);
+                    double price=rs.getDouble(4);
+                    String paymentMethod=rs.getString(5);
+                    String paymentDate=rs.getString(6);
+                    String note=rs.getString(7);
+                    String farmerId=rs.getString(8);
+                    String customerId=rs.getString(9);
                     
-                    ps=connection.prepareStatement("select \"date\" from order where orderid=?;");
+                    ps=connection.prepareStatement("select \"date\" from \"order\" where orderid=?;");
                     ps.setInt(1,orderId);
                     ResultSet rs1=ps.executeQuery();
                     while (rs1.next()){
                         dateOfCreation=rs1.getString(1);
                     }
 
-                    ps=connection.prepareStatement("select farmname from farmer where farmerid=?");
+                    ps=connection.prepareStatement("select farmname from farmer where phonenumber=?");
                     ps.setString(1,farmerId);
                     ResultSet rs2=ps.executeQuery();
                     while (rs2.next()){
                         farmNames.add(rs2.getString(1));
                     }
+
+                    if (paymentDate==null)
+                        paymentDate="";
 
                     DtoReceipt receipt=DtoReceipt.newBuilder()
                             .setOrderId(orderId)
@@ -137,6 +145,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
                             .setPaymentMethod(paymentMethod)
                             .setPaymentDate(paymentDate)
                             .setText(note)
+                            .setStatus(status)
                             .build();
 
                     receipts.add(receipt);
@@ -158,18 +167,78 @@ public class ReceiptDaoImplementation implements ReceiptDao {
 
     @Override
     public ArrayList<DtoSendReceipt> getPendingReceiptsByFarmer(String farmer) {
-        return null;
+        ArrayList<DtoSendReceipt> receipts=new ArrayList<>();
+        try (Connection connection=getConnection()){
+            PreparedStatement ps=connection.prepareStatement(pendingRequestQuery());
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()){
+                int orderId=rs.getInt(1);
+                String farmerId=rs.getString(2);
+                String customerId=rs.getString(3);
+                boolean processed=rs.getBoolean(4);
+                String status=rs.getString(5);
+                double price=rs.getDouble(6);
+                String paymentMethod=rs.getString(7);
+                String paymentDate=rs.getString(8);
+                String note=rs.getString(9);
+
+                ps=connection.prepareStatement("select \"date\" from \"order\" where orderid=?;");
+                ps.setInt(1,orderId);
+                ResultSet rs1=ps.executeQuery();
+                String dateOfCreation="";
+                while (rs1.next()){
+                    dateOfCreation=rs1.getString(1);
+                }
+
+                DtoReceipt receipt=DtoReceipt.newBuilder()
+                        .setOrderId(orderId)
+                        .setFarmerId(farmerId)
+                        .setCustomerId(customerId)
+                        .setProcessed(processed)
+                        .setPrice(price)
+                        .setPaymentMethod(paymentMethod)
+                        .setPaymentDate(paymentDate)
+                        .setText(note)
+                        .setStatus(status)
+                        .build();
+
+
+                DtoSendReceipt sendReceipt=DtoSendReceipt.newBuilder()
+                        .setReceipt(receipt)
+                        .setDateOfCreation(dateOfCreation)
+                        .build();
+
+                receipts.add(sendReceipt);
+            }
+            return receipts;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
     @Override
     public ArrayList<DtoSendReceipt> getApprovedReceiptsByFarmer(String farmer) {
-        return null;
+        ArrayList<DtoSendReceipt> all=getReceiptsByFarmer(farmer);
+        ArrayList<DtoSendReceipt> receipts=new ArrayList<>();
+
+        for (DtoSendReceipt item:all){
+            if (item.getReceipt().getProcessed()&&item.getReceipt().getStatus().equals("Accepted"))
+                receipts.add(item);
+        }
+        return receipts;
     }
 
     @Override
     public ArrayList<DtoSendReceipt> getRejectedReceiptsByFarmer(String farmer) {
-        return null;
+        ArrayList<DtoSendReceipt> all=getReceiptsByFarmer(farmer);
+        ArrayList<DtoSendReceipt> receipts=new ArrayList<>();
+
+        for (DtoSendReceipt item:all){
+            if (item.getReceipt().getProcessed()&&item.getReceipt().getStatus().equals("Rejected"))
+                receipts.add(item);
+        }
+        return receipts;
     }
 
     @Override
@@ -185,10 +254,6 @@ public class ReceiptDaoImplementation implements ReceiptDao {
             ps.setInt(2,orderId);
             ps.executeUpdate();
 
-            ps=connection.prepareStatement("update receipt set status=? where orderid=?");
-            ps.setString(1,status);
-            ps.setInt(2,orderId);
-            ps.executeUpdate();
 
             ps=connection.prepareStatement("select price,paymentmethod,text,farmerid,customerid from receipt where orderid=?;");
             ps.setInt(1,orderId);
@@ -220,5 +285,32 @@ public class ReceiptDaoImplementation implements ReceiptDao {
         }
     }
 
-
+    private String pendingRequestQuery(){
+        return "WITH RankedReceipts AS (\n" +
+                "    SELECT\n" +
+                "        orderID,\n" +
+                "        farmerID,\n" +
+                "        customerID,\n" +
+                "        processed,\n" +
+                "        status,\n" +
+                "        price,\n" +
+                "        paymentMethod,\n" +
+                "        paymentDate,\n" +
+                "        text,\n" +
+                "        ROW_NUMBER() OVER (PARTITION BY orderID ORDER BY processed DESC) AS row_num\n" +
+                "    FROM Receipt\n" +
+                ")\n" +
+                "SELECT\n" +
+                "    orderID,\n" +
+                "    farmerID,\n" +
+                "    customerID,\n" +
+                "    processed,\n" +
+                "    status,\n" +
+                "    price,\n" +
+                "    paymentMethod,\n" +
+                "    paymentDate,\n" +
+                "    text\n" +
+                "FROM RankedReceipts\n" +
+                "WHERE row_num = 1 AND processed = false;";
+    }
 }

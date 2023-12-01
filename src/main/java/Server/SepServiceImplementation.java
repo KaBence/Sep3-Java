@@ -364,6 +364,13 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void getCustomersReceipt(getReceiptsByCustomerRequest request, StreamObserver<getReceiptsByCustomerResponse> responseObserver) {
         ArrayList<DtoCustomerSendReceipt> receipts=receiptDao.getReceiptsByCustomer(request.getCustomer());
+
+        getReceiptsByCustomerResponse res=getReceiptsByCustomerResponse.newBuilder()
+                .addAllReceipts(receipts)
+                .build();
+
+        responseObserver.onNext(res);
+        responseObserver.onCompleted();
     }
 
     @Override
