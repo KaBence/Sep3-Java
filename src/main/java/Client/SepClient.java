@@ -96,6 +96,7 @@ public class SepClient
                 .setStar(3.3)
                 .setFarmerId("1")
                 .setCustomerId("test")
+                .setOrderId(4)
                 .build();
 
         postReviewRequest requestReview = postReviewRequest.newBuilder()
@@ -110,6 +111,7 @@ public class SepClient
                 .setText("I hope i can see it")
                 .setFarmerId("1")
                 .setCustomerId("test")
+                .setUsername("test")
                 .build();
 
         putCommentRequest requestComment = putCommentRequest.newBuilder()

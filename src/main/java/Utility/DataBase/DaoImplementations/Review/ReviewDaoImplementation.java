@@ -36,15 +36,21 @@ public class ReviewDaoImplementation implements ReviewDao
             throw new Exception("Error: Star must be from range 1-5!");
         else {
             try (Connection connection = getConnection()) {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO Review(text, star, farmerID, customerID) VALUES (?,?,?,?)");
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO Review(text, star, farmerID, customerID,orderId) VALUES (?,?,?,?,?)");
                 ps.setString(1, dto.getText());
                 ps.setDouble(2, dto.getStar());
                 ps.setString(3, dto.getFarmerId());
                 ps.setString(4, dto.getCustomerId());
+                ps.setInt(5,dto.getOrderId());
                 ps.executeUpdate();
                 return "Success!";
 
-            } catch (SQLException e) {
+            } catch (SQLException e)
+            {
+                if (e.getMessage().contains("ERROR: duplicate key value violates unique constraint"))
+                {
+                    throw new Exception("Error: You already left the review on this order");
+                }
                 throw new Exception("Error: Internal data base Error!\n" + e.getMessage());
             }
         }
@@ -68,6 +74,7 @@ public class ReviewDaoImplementation implements ReviewDao
                double star = rs.getDouble(2);
                String farmerId = rs.getString(3);
                String customerId = rs.getString(4);
+               int orderId = rs.getInt(5);
                ArrayList<DtoComment> comments = getAllCommentsByReview(farmerId,customerId);
 
                DtoReview x = DtoReview.newBuilder()
@@ -75,6 +82,7 @@ public class ReviewDaoImplementation implements ReviewDao
                        .setStar(star)
                        .setFarmerId(farmerId)
                        .setCustomerId(customerId)
+                       .setOrderId(orderId)
                        .addAllComments(comments)
                        .build();
 
@@ -97,14 +105,15 @@ public class ReviewDaoImplementation implements ReviewDao
         {
             try (Connection connection = getConnection())
             {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO Comment(text,farmerID,customerID) VALUES (?,?,?)");
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO Comment(text,farmerID,customerID,username) VALUES (?,?,?,?)");
                 ps.setString(1,comment.getText());
                 ps.setString(2,comment.getFarmerId());
                 ps.setString(3,comment.getCustomerId());
+                ps.setString(4,comment.getUsername());
                 ps.executeUpdate();
                 return "Success!";
             } catch (SQLException e) {
-                throw new Exception("Error: Text cannot be empty!");
+                throw new Exception("Error: Internal data base Error!\n" + e.getMessage());
             }
         }
     }
@@ -127,12 +136,14 @@ public class ReviewDaoImplementation implements ReviewDao
                 String text = rs.getString(2);
                 String farmerId = rs.getString(3);
                 String customerId = rs.getString(4);
+                String username = rs.getString(5);
 
                 DtoComment x = DtoComment.newBuilder()
                         .setCommentId(id)
                         .setText(text)
                         .setFarmerId(farmerId)
                         .setCustomerId(customerId)
+                        .setUsername(username)
                         .build();
 
                 list.add(x);

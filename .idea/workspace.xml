@@ -7,7 +7,7 @@
     <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="rename of a message">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/SepClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Review/ReviewDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Review/ReviewDaoImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +84,7 @@
       <recent name="C:\Users\veslo\IdeaProjects\Sep3-Java\src\main\java\Utility\Log" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SepGrpServer">
+  <component name="RunManager" selected="Application.SepClient">
     <configuration name="Bullshit" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Bullshit" />
       <module name="Sep3-Project" />
@@ -146,8 +146,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SepGrpServer" />
         <item itemvalue="Application.SepClient" />
+        <item itemvalue="Application.SepGrpServer" />
         <item itemvalue="Application.ProofServer" />
         <item itemvalue="Application.ProofClient" />
         <item itemvalue="Application.Bullshit" />
@@ -192,6 +192,7 @@
       <workItem from="1701198967743" duration="384000" />
       <workItem from="1701204689870" duration="959000" />
       <workItem from="1701278807154" duration="18446000" />
+      <workItem from="1701430759388" duration="1520000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />
