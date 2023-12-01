@@ -20,6 +20,9 @@ import io.grpc.stub.StreamObserver;
 import sep.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase {
     private RegisterDao registerDao;
@@ -187,9 +190,12 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     //----------Order----------\\
     @Override
     public void createNewOrder(createOrderRequest request, StreamObserver<generalPutResponse> responseObserver) {
+        List<DtoOrderItem> orderItems = new ArrayList<>(request.getOrderItemsList());
+        Collections.sort(orderItems, Comparator.comparing(DtoOrderItem::getFarmName));
+
         String x;
         try {
-            x=orderDao.createOrder(request.getNewOrder(),request.getOrderItemsList(),request.getPaymentMethod(),request.getNote());
+            x=orderDao.createOrder(request.getNewOrder(),orderItems,request.getPaymentMethod(),request.getNote());
             System.out.println("Good "+x);
         }
         catch (Exception e){

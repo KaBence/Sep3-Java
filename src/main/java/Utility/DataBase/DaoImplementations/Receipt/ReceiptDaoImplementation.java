@@ -59,6 +59,9 @@ public class ReceiptDaoImplementation implements ReceiptDao {
                     dateOfCreation=rs1.getString(1);
                 }
 
+                if (paymentDate==null)
+                    paymentDate="";
+
                 DtoReceipt receipt=DtoReceipt.newBuilder()
                         .setOrderId(orderId)
                         .setFarmerId(farmerId)
@@ -191,6 +194,9 @@ public class ReceiptDaoImplementation implements ReceiptDao {
                 while (rs1.next()){
                     dateOfCreation=rs1.getString(1);
                 }
+
+                if (paymentDate==null)
+                    paymentDate="";
 
                 DtoReceipt receipt=DtoReceipt.newBuilder()
                         .setOrderId(orderId)

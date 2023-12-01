@@ -5,6 +5,8 @@ import io.grpc.ManagedChannelBuilder;
 import sep.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class SepClient
 {
@@ -50,9 +52,9 @@ public class SepClient
 
         loginRequest loginRequest = sep.loginRequest.newBuilder().setLogin(z).build();
         //generalPutResponse loginRes = proofStub.login(loginRequest);
-        //System.out.println(loginRes.getResp());*/
+        //System.out.println(loginRes.getResp());
 
-        /*
+
         DtoOrder dtoOrder=DtoOrder.newBuilder()
                 .setCustomerId("0000")
                 .setDate("2023-11-28")
@@ -63,22 +65,38 @@ public class SepClient
         DtoOrderItem dtoOrderItem=DtoOrderItem.newBuilder()
                 .setAmount(100)
                 .setProductId(5)
+                .setFarmName("Dapper Dell")
                 .build();
 
         DtoOrderItem dtoOrderItem2=DtoOrderItem.newBuilder()
                 .setAmount(100)
                 .setProductId(3)
+                .setFarmName("Mordor")
                 .build();
 
         DtoOrderItem dtoOrderItem3=DtoOrderItem.newBuilder()
                 .setAmount(500)
                 .setProductId(4)
+                .setFarmName("Dapper Dell")
                 .build();
 
         dtoOrderItems.add(dtoOrderItem3);
         dtoOrderItems.add(dtoOrderItem2);
         dtoOrderItems.add(dtoOrderItem);
 
+        //Collections.sort(dtoOrderItems, Comparator.comparing(DtoOrderItem::getFarmName));
+
+
+        System.out.println("Sorted Order Items by Farm Name:");
+        for (DtoOrderItem item : dtoOrderItems) {
+            System.out.println("OrderID: " + item.getOrderId() +
+                    ", ProductID: " + item.getProductId() +
+                    ", Amount: " + item.getAmount() +
+                    ", Type: " + item.getType() +
+                    ", Price: " + item.getPrice() +
+                    ", FarmName: " + item.getFarmName());
+        }
+        /*
         createOrderRequest req2=createOrderRequest.newBuilder()
                 .setNewOrder(dtoOrder)
                 .addAllOrderItems(dtoOrderItems)
@@ -132,7 +150,7 @@ public class SepClient
         */
 
         //=========================================================
-
+/*
         getReceiptsByCustomerRequest req= getReceiptsByCustomerRequest.newBuilder().setCustomer("0000").build();
 
         getReceiptsByCustomerResponse res=proofStub.getCustomersReceipt(req);
@@ -144,6 +162,42 @@ public class SepClient
             }
             System.out.println("==========");
         }
+*/
 
+        //====================================================
+        /*getPendingReceiptsByFarmerRequest req=getPendingReceiptsByFarmerRequest.newBuilder().setFarmer("12345").build();
+
+        getReceiptsResponse res=proofStub.getPendingFarmersReceipt(req);
+
+        for (DtoSendReceipt item:res.getReceiptsList()){
+            System.out.println("OrderID: " + item.getReceipt().getOrderId() +
+                    ", Status: " + item.getReceipt().getStatus() +
+                    ", FarmerID: " + item.getReceipt().getFarmerId() +
+                    ", CustomerID: " + item.getReceipt().getCustomerId() +
+                    ", Text: " + item.getReceipt().getText() +
+                    ", method: " + item.getReceipt().getPaymentMethod());
+        }
+        */
+        //=========================================================
+        /*
+        farmersApprovalRequest req=farmersApprovalRequest.newBuilder().setOrderId(2).setApprove(false).build();
+
+        generalPutResponse res=proofStub.farmersApproval(req);
+
+        System.out.println(res.getResp());
+        */
+        //=========================================
+        getRejectedReceiptsByFarmerRequest req=getRejectedReceiptsByFarmerRequest.newBuilder().setFarmer("0147").build();
+
+        getReceiptsResponse res=proofStub.getRejectedFarmersReceipt(req);
+
+        for (DtoSendReceipt item:res.getReceiptsList()){
+            System.out.println("OrderID: " + item.getReceipt().getOrderId() +
+                    ", Status: " + item.getReceipt().getStatus() +
+                    ", FarmerID: " + item.getReceipt().getFarmerId() +
+                    ", CustomerID: " + item.getReceipt().getCustomerId() +
+                    ", Text: " + item.getReceipt().getText() +
+                    ", method: " + item.getReceipt().getPaymentMethod());
+        }
     }
 }

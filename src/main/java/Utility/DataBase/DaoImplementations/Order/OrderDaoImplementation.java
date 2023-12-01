@@ -45,7 +45,6 @@ public class OrderDaoImplementation implements OrderDao {
             throw new Exception("Error: There is no payment method");
         //initialize
         List<String> farmers=new ArrayList<>();
-        orderItems.sort(Comparator.comparing(DtoOrderItem::getFarmName));
         int orderGroup=0;
         //counts how many farmers are there in the order
         for (DtoOrderItem item: orderItems){

@@ -100,7 +100,7 @@ public class ProductDaoImplementation implements ProductDao {
     public ArrayList<DtoProduct> getAllProducts(String type, double amount, double price) {
         ArrayList<DtoProduct> list = new ArrayList<>();
         try (Connection connection = getConnection()) {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM  Product");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM  Product where availability=true");
             ResultSet rs = ps.executeQuery();
             while (rs.next())
             {
@@ -132,7 +132,6 @@ public class ProductDaoImplementation implements ProductDao {
 
                     list.add(x);
                 }
-                System.out.println(list);
             }
             return list;
         } catch (SQLException e)
