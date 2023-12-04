@@ -141,11 +141,7 @@ public class OrderDaoImplementation implements OrderDao {
     public ArrayList<DtoOrderItem> getOrderItemsById(int orderId) {
         ArrayList<DtoOrderItem> orderItems=new ArrayList<>();
         try (Connection connection=getConnection()){
-            PreparedStatement ps=connection.prepareStatement("select o.orderID,p.productID,OrderItem.amount,p.type,p.price,f.farmName from orderitem\n" +
-                    "    join \"order\" o on o.orderID = orderitem.orderID\n" +
-                    "    join product p on orderitem.productID = p.productid\n" +
-                    "    join farmer f on f.phonenumber = p.farmerid\n" +
-                    "    where o.orderid=?;");
+            PreparedStatement ps=connection.prepareStatement("select orderID,p.productID,orderitem.amount,p.type,p.price,farmName from orderitem join distributionsystem.product p on orderitem.productID = p.productid join distributionsystem.product p2 on orderitem.productID = p2.productid join distributionsystem.farmer f on f.phonenumber = p.farmerid where orderID=?;");
             ps.setInt(1,orderId);
             ResultSet rs= ps.executeQuery();
             while (rs.next()){
@@ -176,17 +172,13 @@ public class OrderDaoImplementation implements OrderDao {
         ArrayList<DtoOrderItem> orderItems=new ArrayList<>();
         int orderGroup=0;
         try (Connection connection=getConnection()){
-            PreparedStatement ps=connection.prepareStatement("select ordergroup from order where orderid=?;");
+            PreparedStatement ps=connection.prepareStatement("select ordergroup from \"order\" where orderid=?;");
             ps.setInt(1,orderId);
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
                 orderGroup=rs.getInt(1);
             }
-            ps=connection.prepareStatement("select o.orderID,p.productID,OrderItem.amount,p.type,p.price,f.farmName from orderitem\n" +
-                    "    join \"order\" o on o.orderID = orderitem.orderID\n" +
-                    "    join product p on orderitem.productID = p.productid\n" +
-                    "    join farmer f on f.phonenumber = p.farmerid\n" +
-                    "    where o.orderGroup=?;");
+            ps=connection.prepareStatement("select OrderItem.orderID,p.productID,orderitem.amount,p.type,p.price,farmName from orderitem join distributionsystem.product p on orderitem.productID = p.productid join distributionsystem.product p2 on orderitem.productID = p2.productid join distributionsystem.farmer f on f.phonenumber = p.farmerid join \"order\" o on o.orderID = orderitem.orderID where o.orderGroup=?;");
             ps.setInt(1,orderGroup);
             rs=ps.executeQuery();
             while (rs.next()){
