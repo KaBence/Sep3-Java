@@ -306,7 +306,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
 
     @Override
     public void getAllOrderItemsFromOrder(getAllOrderItemsFromOrderRequest request, StreamObserver<getAllOrderItemsFromOrderResponse> responseObserver) {
-        ArrayList<DtoOrderItem> orderItems=orderDao.getOrderItemsById(request.getOrder().getOrderId());
+        ArrayList<DtoOrderItem> orderItems=orderDao.getOrderItemsById(request.getOrderId());
 
         getAllOrderItemsFromOrderResponse res=getAllOrderItemsFromOrderResponse.newBuilder()
                         .addAllOrderItems(orderItems)
@@ -318,7 +318,7 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
 
     @Override
     public void getAllOrderItemsByGroup(getAllOrderItemsByGroupRequest request, StreamObserver<getAllOrderItemsByGroupResponse> responseObserver) {
-        ArrayList<DtoOrderItem> orderItems=orderDao.getOrderItemsByGroup(request.getOrder().getOrderId());
+        ArrayList<DtoOrderItem> orderItems=orderDao.getOrderItemsByGroup(request.getOrderId());
 
         getAllOrderItemsByGroupResponse res=getAllOrderItemsByGroupResponse.newBuilder()
                 .addAllOrderItems(orderItems)

@@ -224,7 +224,7 @@ message DtoOrderItem
 
 message getAllOrderItemsFromOrderRequest
 {
-  DtoOrder order = 1;
+  int32 orderId = 1;
 }
 
 message getAllOrderItemsFromOrderResponse
@@ -233,7 +233,7 @@ message getAllOrderItemsFromOrderResponse
 }
 
 message getAllOrderItemsByGroupRequest{
-  DtoOrder order=1;
+  int32 orderId=1;
 }
 
 message getAllOrderItemsByGroupResponse{
