@@ -308,7 +308,8 @@ message DtoComment
   string text = 2;
   string farmerId = 3;
   string customerId = 4;
-  string username = 5;
+  int32 orderId = 5;
+  string username = 6;
 }
 
 message putCommentRequest

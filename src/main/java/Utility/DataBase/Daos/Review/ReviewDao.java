@@ -10,5 +10,5 @@ public interface ReviewDao
     String createReview(DtoReview dto) throws Exception;
     ArrayList<DtoReview> getAllReviewsByFarmer(String farmer);
     String postComment(DtoComment comment) throws Exception;
-    ArrayList<DtoComment> getAllCommentsByReview(String farmer,String customer);
+    ArrayList<DtoComment> getAllCommentsByReview(String farmer,String customer,int order);
 }

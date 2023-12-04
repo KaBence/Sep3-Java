@@ -75,7 +75,7 @@ public class ReviewDaoImplementation implements ReviewDao
                String farmerId = rs.getString(3);
                String customerId = rs.getString(4);
                int orderId = rs.getInt(5);
-               ArrayList<DtoComment> comments = getAllCommentsByReview(farmerId,customerId);
+               ArrayList<DtoComment> comments = getAllCommentsByReview(farmerId,customerId,orderId);
 
                DtoReview x = DtoReview.newBuilder()
                        .setText(text)
@@ -105,11 +105,12 @@ public class ReviewDaoImplementation implements ReviewDao
         {
             try (Connection connection = getConnection())
             {
-                PreparedStatement ps = connection.prepareStatement("INSERT INTO Comment(text,farmerID,customerID,username) VALUES (?,?,?,?)");
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO Comment(text,farmerID,customerID,orderId,username) VALUES (?,?,?,?,?)");
                 ps.setString(1,comment.getText());
                 ps.setString(2,comment.getFarmerId());
                 ps.setString(3,comment.getCustomerId());
-                ps.setString(4,comment.getUsername());
+                ps.setInt(4,comment.getOrderId());
+                ps.setString(5,comment.getUsername());
                 ps.executeUpdate();
                 return "Success!";
             } catch (SQLException e) {
@@ -119,15 +120,16 @@ public class ReviewDaoImplementation implements ReviewDao
     }
 
     @Override
-    public ArrayList<DtoComment> getAllCommentsByReview(String farmer, String customer)
+    public ArrayList<DtoComment> getAllCommentsByReview(String farmer, String customer,int order)
     {
         ArrayList<DtoComment> list = new ArrayList<>();
 
         try (Connection connection = getConnection())
         {
-            PreparedStatement ps = connection.prepareStatement("select * from Comment where farmerid = ? and customerid = ?");
+            PreparedStatement ps = connection.prepareStatement("select * from Comment where farmerid = ? and customerid = ? and orderid = ?");
             ps.setString(1,farmer);
             ps.setString(2,customer);
+            ps.setInt(3,order);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next())
@@ -136,13 +138,15 @@ public class ReviewDaoImplementation implements ReviewDao
                 String text = rs.getString(2);
                 String farmerId = rs.getString(3);
                 String customerId = rs.getString(4);
-                String username = rs.getString(5);
+                int orderId = rs.getInt(5);
+                String username = rs.getString(6);
 
                 DtoComment x = DtoComment.newBuilder()
                         .setCommentId(id)
                         .setText(text)
                         .setFarmerId(farmerId)
                         .setCustomerId(customerId)
+                        .setOrderId(orderId)
                         .setUsername(username)
                         .build();
 
