@@ -31,7 +31,7 @@ public class RegisterDaoImplementation implements RegisterDao
 
 
     @Override
-    public String RegisterCustomer(DtoRegisterCustomer dtoCustomer)
+    public synchronized String RegisterCustomer(DtoRegisterCustomer dtoCustomer)
     {
         if (dtoCustomer.getPhoneNumber().isEmpty())
             return "Error: Username cannot be empty!";
@@ -87,7 +87,7 @@ public class RegisterDaoImplementation implements RegisterDao
     }
 
     @Override
-    public String RegisterFarmer(DtoRegisterFarmer dtoFarmer)
+    public synchronized String RegisterFarmer(DtoRegisterFarmer dtoFarmer)
     {
         if (dtoFarmer.getPhoneNumber().isEmpty())
             return "Error: Username cannot be empty!";

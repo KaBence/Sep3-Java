@@ -38,7 +38,7 @@ public class OrderDaoImplementation implements OrderDao {
     }
 
     @Override
-    public String createOrder(DtoOrder order, List<DtoOrderItem> orderItems,String paymentMethod,String note) throws Exception {
+    public synchronized String createOrder(DtoOrder order, List<DtoOrderItem> orderItems,String paymentMethod,String note) throws Exception {
         if (orderItems.isEmpty())
             throw new Exception("Error: There are no orderItems");
         if (paymentMethod==null)
@@ -138,7 +138,7 @@ public class OrderDaoImplementation implements OrderDao {
     }
 
     @Override
-    public ArrayList<DtoOrderItem> getOrderItemsById(int orderId) {
+    public synchronized ArrayList<DtoOrderItem> getOrderItemsById(int orderId) {
         ArrayList<DtoOrderItem> orderItems=new ArrayList<>();
         try (Connection connection=getConnection()){
             PreparedStatement ps=connection.prepareStatement("select orderID,p.productID,orderitem.amount,p.type,p.price,farmName from orderitem join distributionsystem.product p on orderitem.productID = p.productid join distributionsystem.product p2 on orderitem.productID = p2.productid join distributionsystem.farmer f on f.phonenumber = p.farmerid where orderID=?;");
@@ -168,7 +168,7 @@ public class OrderDaoImplementation implements OrderDao {
     }
 
     @Override
-    public ArrayList<DtoOrderItem> getOrderItemsByGroup(int orderId) {
+    public synchronized ArrayList<DtoOrderItem> getOrderItemsByGroup(int orderId) {
         ArrayList<DtoOrderItem> orderItems=new ArrayList<>();
         int orderGroup=0;
         try (Connection connection=getConnection()){

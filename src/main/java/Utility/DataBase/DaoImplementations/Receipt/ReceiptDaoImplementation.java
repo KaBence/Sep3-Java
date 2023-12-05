@@ -2,19 +2,13 @@ package Utility.DataBase.DaoImplementations.Receipt;
 
 import Utility.DataBase.Daos.Receipt.ReceiptDao;
 import sep.DtoCustomerSendReceipt;
-import sep.DtoOrderItem;
 import sep.DtoReceipt;
 import sep.DtoSendReceipt;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
 
 public class ReceiptDaoImplementation implements ReceiptDao {
-
-
     public ReceiptDaoImplementation() {
         try
         {
@@ -34,7 +28,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
     }   
 
     @Override
-    public ArrayList<DtoSendReceipt> getReceiptsByFarmer(String farmer) {
+    public synchronized ArrayList<DtoSendReceipt> getReceiptsByFarmer(String farmer) {
         ArrayList<DtoSendReceipt> receipts=new ArrayList<>();
         try (Connection connection=getConnection()){
             PreparedStatement ps=connection.prepareStatement("select * from receipt where farmerid=?;");
@@ -89,7 +83,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
     }
 
     @Override
-    public ArrayList<DtoCustomerSendReceipt> getReceiptsByCustomer(String customer) {
+    public synchronized ArrayList<DtoCustomerSendReceipt> getReceiptsByCustomer(String customer) {
         ArrayList<DtoCustomerSendReceipt> all=new ArrayList<>();
         ArrayList<Integer> orderGroups=new ArrayList<>();
         try (Connection connection=getConnection()){
@@ -170,7 +164,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
     }
 
     @Override
-    public ArrayList<DtoSendReceipt> getPendingReceiptsByFarmer(String farmer) {
+    public synchronized ArrayList<DtoSendReceipt> getPendingReceiptsByFarmer(String farmer) {
         ArrayList<DtoSendReceipt> receipts=new ArrayList<>();
         try (Connection connection=getConnection()){
             PreparedStatement ps=connection.prepareStatement(pendingRequestQuery("?"));
@@ -226,7 +220,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
 
 
     @Override
-    public ArrayList<DtoSendReceipt> getApprovedReceiptsByFarmer(String farmer) {
+    public synchronized ArrayList<DtoSendReceipt> getApprovedReceiptsByFarmer(String farmer) {
         ArrayList<DtoSendReceipt> all=getReceiptsByFarmer(farmer);
         ArrayList<DtoSendReceipt> receipts=new ArrayList<>();
 
@@ -238,7 +232,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
     }
 
     @Override
-    public ArrayList<DtoSendReceipt> getRejectedReceiptsByFarmer(String farmer) {
+    public synchronized ArrayList<DtoSendReceipt> getRejectedReceiptsByFarmer(String farmer) {
         ArrayList<DtoSendReceipt> all=getReceiptsByFarmer(farmer);
         ArrayList<DtoSendReceipt> receipts=new ArrayList<>();
 
@@ -250,7 +244,7 @@ public class ReceiptDaoImplementation implements ReceiptDao {
     }
 
     @Override
-    public String FarmersApproval(boolean approval, int orderId) throws Exception {
+    public synchronized String FarmersApproval(boolean approval, int orderId) throws Exception {
         String status;
         if (approval)
             status="Accepted";

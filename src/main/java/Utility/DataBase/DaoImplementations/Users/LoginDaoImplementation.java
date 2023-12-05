@@ -27,7 +27,7 @@ public class LoginDaoImplementation implements LoginDao
     }
 
     @Override
-    public String login(DtoLogin dto) throws Exception {
+    public synchronized String login(DtoLogin dto) throws Exception {
         ArrayList<DtoLogin> list = new ArrayList<>();
         if (dto.getPhoneNumber().isEmpty())
             throw new Exception("Error: Username cannot be empty!");

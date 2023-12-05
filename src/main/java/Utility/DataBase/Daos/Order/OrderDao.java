@@ -12,6 +12,4 @@ public interface OrderDao {
     ArrayList<DtoOrderItem> getOrderItemsById(int orderId);
 
     ArrayList<DtoOrderItem> getOrderItemsByGroup(int orderId);
-
-    //accept/decline order, getby farmer
 }

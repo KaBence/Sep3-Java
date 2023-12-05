@@ -29,7 +29,7 @@ public class CustomerDaoImplementation implements CustomerDao
     }
 
     @Override
-    public ArrayList<DtoCustomer> getAllCustomers()
+    public synchronized ArrayList<DtoCustomer> getAllCustomers()
     {
         ArrayList<DtoCustomer> list = new ArrayList<>();
         try (Connection connection = getConnection()) {
@@ -58,7 +58,7 @@ public class CustomerDaoImplementation implements CustomerDao
     }
 
     @Override
-    public DtoCustomer getCustomerById(String phoneNo)
+    public synchronized DtoCustomer getCustomerById(String phoneNo)
     {
         ArrayList<DtoCustomer> list = getAllCustomers();
         for (int i = 0; i < list.size(); i++)
@@ -70,7 +70,7 @@ public class CustomerDaoImplementation implements CustomerDao
     }
 
     @Override
-    public String editCustomer(DtoRegisterCustomer editedCustomer)
+    public synchronized String editCustomer(DtoRegisterCustomer editedCustomer)
     {
         String phoneNo = editedCustomer.getPhoneNumber();
         String password = editedCustomer.getPassword();

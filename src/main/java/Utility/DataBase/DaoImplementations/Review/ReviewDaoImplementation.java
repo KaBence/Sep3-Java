@@ -28,7 +28,7 @@ public class ReviewDaoImplementation implements ReviewDao
     }
 
     @Override
-    public String createReview(DtoReview dto) throws Exception
+    public synchronized String createReview(DtoReview dto) throws Exception
     {
         if (dto.getText().isEmpty())
             throw new Exception("Error: Text cannot be empty!");
@@ -57,7 +57,7 @@ public class ReviewDaoImplementation implements ReviewDao
     }
 
     @Override
-    public ArrayList<DtoReview> getAllReviewsByFarmer(String farmer)
+    public synchronized ArrayList<DtoReview> getAllReviewsByFarmer(String farmer)
     {
         ArrayList<DtoReview> list = new ArrayList<>();
 
@@ -97,7 +97,7 @@ public class ReviewDaoImplementation implements ReviewDao
     }
 
     @Override
-    public String postComment(DtoComment comment) throws Exception {
+    public synchronized String postComment(DtoComment comment) throws Exception {
         if (comment.getText().isEmpty()) {
             throw new Exception("Error: Text cannot be empty!");
         }
@@ -120,7 +120,7 @@ public class ReviewDaoImplementation implements ReviewDao
     }
 
     @Override
-    public ArrayList<DtoComment> getAllCommentsByReview(String farmer, String customer,int order)
+    public synchronized ArrayList<DtoComment> getAllCommentsByReview(String farmer, String customer,int order)
     {
         ArrayList<DtoComment> list = new ArrayList<>();
 

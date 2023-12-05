@@ -30,7 +30,7 @@ public class FarmerDaoImplementation implements FarmerDao
 
     //now its not possible to get only the farmers without pesticides, or allFarmers for the getFarmer method, solve that or try whith the sql statement
     @Override
-    public ArrayList<DtoFarmer> getAllFarmers(int pesticides, String farmName, double rating) {
+    public synchronized ArrayList<DtoFarmer> getAllFarmers(int pesticides, String farmName, double rating) {
         ArrayList<DtoFarmer> list = new ArrayList<>();
         Boolean pest=null;
         if(pesticides==1){
@@ -78,7 +78,7 @@ public class FarmerDaoImplementation implements FarmerDao
 
 
     @Override
-    public DtoFarmer getFarmersById(String phoneNo)
+    public synchronized DtoFarmer getFarmersById(String phoneNo)
     {
         int pesticides= 0;
         String farmName= "";
@@ -94,7 +94,7 @@ public class FarmerDaoImplementation implements FarmerDao
 
     //DtoRegisterFarmer is used for edit farmer as well
     @Override
-    public String editFarmer(DtoRegisterFarmer editedFarmer)
+    public synchronized String editFarmer(DtoRegisterFarmer editedFarmer)
     {
         String phoneNo = editedFarmer.getPhoneNumber();
         String password = editedFarmer.getPassword();

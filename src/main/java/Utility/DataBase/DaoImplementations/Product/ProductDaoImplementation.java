@@ -31,7 +31,7 @@ public class ProductDaoImplementation implements ProductDao {
                 "postgres", "password");
     }
     @Override
-    public String createProduct(DtoProduct dtoProduct) throws Exception {
+    public synchronized String createProduct(DtoProduct dtoProduct) throws Exception {
         Date picked = Date.valueOf(dtoProduct.getPickedDate());
         Date expired = Date.valueOf(dtoProduct.getExpirationDate());
 
@@ -71,7 +71,7 @@ public class ProductDaoImplementation implements ProductDao {
     }
 
     @Override
-    public ArrayList<DtoProduct> getProductsByFarmer(String farmerId,String type, double amount, double price) {
+    public synchronized ArrayList<DtoProduct> getProductsByFarmer(String farmerId,String type, double amount, double price) {
         ArrayList<DtoProduct> list = getAllProducts(type,amount,price);
         ArrayList<DtoProduct> farmersProducts = new ArrayList<>();
 
@@ -83,7 +83,7 @@ public class ProductDaoImplementation implements ProductDao {
     }
 
     @Override
-    public DtoProduct getProductById(int productId) {
+    public synchronized DtoProduct getProductById(int productId) {
         String type="";
         double amount=0.0;
         double price=0.0;
@@ -97,7 +97,7 @@ public class ProductDaoImplementation implements ProductDao {
     }
 
     @Override
-    public ArrayList<DtoProduct> getAllProducts(String type, double amount, double price) {
+    public synchronized ArrayList<DtoProduct> getAllProducts(String type, double amount, double price) {
         ArrayList<DtoProduct> list = new ArrayList<>();
         try (Connection connection = getConnection()) {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM  Product where availability=true");
@@ -140,74 +140,8 @@ public class ProductDaoImplementation implements ProductDao {
         }
     }
 
-    /*  @Override //THIS SHIT MAY NOT BE WORKING IF SO CHECK WHAT IS NULL THEN CHECK WHAT IS NOT NULL THEN COMBINE THE FILTERS
-    public ArrayList<DtoProduct> getFilteredProducts(ProductSearchParameters dto) {
-        ArrayList<DtoProduct> all = getAllProducts();
-        ArrayList<DtoProduct> filtered = new ArrayList<>();
-
-      if (!dto.getType().isEmpty())
-        {
-            for (int i = 0; i < all.size(); i++) {
-               if(dto.getType().equals(all.get(i).getType()))
-               {
-                   filtered.add(all.get(i));
-               }
-            }
-        }
-        if (dto.getPrice()!= 0)
-        {
-            if(filtered.isEmpty())
-            {
-                for (int i = 0; i < all.size(); i++) {
-                    if(dto.getPrice()<= all.get(i).getPrice())
-                    {
-                        filtered.add(all.get(i));
-                    }
-                }
-            }
-            else {
-                for (int i = 0; i < filtered.size(); i++) {
-                    if(dto.getPrice()> filtered.get(i).getPrice())
-                    {
-                        if (filtered.remove(i)!=null)
-                        {
-                            i--;
-                        }
-                    }
-                }
-            }
-        }
-        if(dto.getAmount()!=0)
-        {
-            if(filtered.isEmpty())
-            {
-                for (int i = 0; i < all.size(); i++) {
-                    if(dto.getAmount()<= all.get(i).getAmount())
-                    {
-                        filtered.add(all.get(i));
-                    }
-                }
-            }
-            else {
-                for (int i = 0; i < filtered.size(); i++) {
-                    if(dto.getAmount()> filtered.get(i).getAmount())
-                    {
-                        if (filtered.remove(i)!=null)
-                        {
-                            i--;
-                        }
-                    }
-                }
-            }
-        }
-        if(filtered.isEmpty())
-            return all;
-        else
-            return filtered;
-    }*/
-
     @Override
-    public String editProduct(DtoProduct dto) throws Exception {
+    public synchronized String editProduct(DtoProduct dto) throws Exception {
         boolean avl=true;
         Date exDate=Date.valueOf(dto.getExpirationDate());
         Date pDate= Date.valueOf(dto.getPickedDate());
@@ -216,7 +150,7 @@ public class ProductDaoImplementation implements ProductDao {
                 avl=false;
             if (dto.getAmount()<0)
                 throw new Exception("Error : There isn't enough products");
-            if (exDate.after(today()))
+            if (exDate.after(Date.valueOf(LocalDate.now())))
                 avl=false;
             if (exDate.before(pDate))
                 throw new Exception("Error : Expiration date cannot be before Picked date");
@@ -237,7 +171,7 @@ public class ProductDaoImplementation implements ProductDao {
     }
 
     @Override
-    public String deleteProduct(int id) throws Exception {
+    public synchronized String deleteProduct(int id) throws Exception {
         try(Connection connection = getConnection())
         {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM product WHERE productID = ?");
@@ -249,11 +183,5 @@ public class ProductDaoImplementation implements ProductDao {
         {
             throw new Exception("Error: Unable to remove product with id "+id);
         }
-    }
-
-
-    private Date today() {
-        LocalDate current = LocalDate.now();
-        return new Date(current.getDayOfMonth(), current.getMonthValue(), current.getYear());
     }
 }
