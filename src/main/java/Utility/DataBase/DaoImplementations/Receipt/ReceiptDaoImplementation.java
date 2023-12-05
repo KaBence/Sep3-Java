@@ -111,7 +111,6 @@ public class ReceiptDaoImplementation implements ReceiptDao {
                 ps.setInt(2,item);
                 ResultSet rs=ps.executeQuery();
                 while (rs.next()){
-
                     int orderId=rs.getInt(1);
                     boolean processed=rs.getBoolean(2);
                     String status=rs.getString(3);
