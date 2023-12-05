@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="get all orderitems by orderid ver 2">
-      <change afterPath="$PROJECT_DIR$/src/test/java/OrderDaoImplementationTest.java" afterDir="false" />
+    <list default="true" id="efca2f90-f85a-4a74-a430-c36b222fdd74" name="Changes" comment="made the dao method  synchronized">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Receipt/ReceiptDaoImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/DataBase/DaoImplementations/Receipt/ReceiptDaoImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepGrpServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepGrpServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/SepServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/proto/Alien.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/Alien.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +195,7 @@
       <workItem from="1701430759388" duration="4001000" />
       <workItem from="1701696166696" duration="9171000" />
       <workItem from="1701715452251" duration="627000" />
-      <workItem from="1701774416267" duration="4210000" />
+      <workItem from="1701774416267" duration="4993000" />
     </task>
     <task id="LOCAL-00001" summary="the database connection">
       <option name="closed" value="true" />
@@ -387,7 +387,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701695115274</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="something">
+      <option name="closed" value="true" />
+      <created>1701788232150</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1701788232150</updated>
+    </task>
+    <task id="LOCAL-00026" summary="made the dao method  synchronized">
+      <option name="closed" value="true" />
+      <created>1701788669251</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1701788669251</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,7 +421,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="the database connection" />
     <MESSAGE value="proto and maven are happy with each other now" />
     <MESSAGE value="client and server" />
     <MESSAGE value="Proto" />
@@ -429,6 +444,8 @@
     <MESSAGE value="Receipts should be fully done" />
     <MESSAGE value="get all orderitems by orderid" />
     <MESSAGE value="get all orderitems by orderid ver 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="get all orderitems by orderid ver 2" />
+    <MESSAGE value="something" />
+    <MESSAGE value="made the dao method  synchronized" />
+    <option name="LAST_COMMIT_MESSAGE" value="made the dao method  synchronized" />
   </component>
 </project>

@@ -25,16 +25,15 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase {
-    private RegisterDao registerDao;
-    private LoginDao loginDao;
-    private CustomerDao customerDao;
-    private FarmerDao farmerDao;
+    private final RegisterDao registerDao;
+    private final LoginDao loginDao;
+    private final CustomerDao customerDao;
+    private final FarmerDao farmerDao;
+    private final ProductDao productDao;
+    private final OrderDao orderDao;
+    private final ReceiptDao receiptDao;
 
-    private ProductDao productDao;
-    private OrderDao orderDao;
-    private ReceiptDao receiptDao;
-
-    private ReviewDao reviewDao;
+    private final ReviewDao reviewDao;
 
     public SepServiceImplementation() {
         registerDao = new RegisterDaoImplementation();
@@ -217,7 +216,6 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void createProduct(createProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
         String temp;
-
         try {
             temp = productDao.createProduct(request.getNewProduct());
         } catch (Exception e) {
@@ -286,7 +284,6 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
     @Override
     public void deleteProduct(deleteProductRequest request, StreamObserver<generalPutResponse> responseObserver) {
         String temp;
-
         try {
             temp = productDao.deleteProduct(request.getId());
         } catch (Exception e) {
@@ -444,10 +441,5 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
                 .build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
-    }
-
-    @Override
-    public void getReviewBy(getReviewByIdRequest request, StreamObserver<getReviewByIdResponse> responseObserver)
-    {
     }
 }

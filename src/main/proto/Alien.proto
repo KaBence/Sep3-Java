@@ -1,7 +1,6 @@
 syntax = "proto3";
 option java_multiple_files = true;
 
-
 package sep;
 
 //----------Login----------\\
@@ -293,8 +292,6 @@ message getReceiptsByCustomerResponse{
   repeated DtoCustomerSendReceipt receipts=1;
 }
 
-
-
 message farmersApprovalRequest{
   bool approve=1;
   int32 orderId=2;
@@ -344,16 +341,6 @@ message getAllReviewsByFarmerResponse
   repeated DtoReview allReviews = 1;
 }
 
-message getReviewByIdRequest
-{
-  string farmerId = 1;
-  string customerId = 2;
-}
-
-message getReviewByIdResponse
-{
-  DtoReview review = 1;
-}
 
 //----------GeneralPutResponse----------\\
 
@@ -377,6 +364,7 @@ service SepService
   rpc getAllCustomers(getAllCustomersRequest) returns (getAllCustomersResponse);
   rpc getCustomerByPhone(getCustomerByPhoneRequest) returns (getCustomerByPhoneResponse);
   rpc editCustomer(editCustomerRequest) returns (generalPutResponse);
+
   //--------Farmer--------\\
   rpc getAllFarmers(getAllFarmersRequest) returns (getAllFarmersResponse);
   rpc getFarmerByPhone(getFarmerByPhoneRequest) returns (getFarmerByPhoneResponse);
@@ -409,6 +397,5 @@ service SepService
 
   //--------Review--------\\
   rpc postReview(postReviewRequest) returns (generalPutResponse);
-    rpc getAllReviewsByFarmer(getAllReviewsByFarmerRequest) returns (getAllReviewsByFarmerResponse);
-    rpc getReviewBy(getReviewByIdRequest) returns (getReviewByIdResponse);
+  rpc getAllReviewsByFarmer(getAllReviewsByFarmerRequest) returns (getAllReviewsByFarmerResponse);
 }
