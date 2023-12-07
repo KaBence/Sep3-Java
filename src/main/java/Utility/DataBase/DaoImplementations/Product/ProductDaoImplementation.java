@@ -142,20 +142,15 @@ public class ProductDaoImplementation implements ProductDao {
 
     @Override
     public synchronized String editProduct(DtoProduct dto) throws Exception {
-        boolean avl=true;
         Date exDate=Date.valueOf(dto.getExpirationDate());
         Date pDate= Date.valueOf(dto.getPickedDate());
         try (Connection connection=getConnection()){
-            if (dto.getAmount()==0)
-                avl=false;
             if (dto.getAmount()<0)
                 throw new Exception("Error : There isn't enough products");
-            if (exDate.after(Date.valueOf(LocalDate.now())))
-                avl=false;
             if (exDate.before(pDate))
                 throw new Exception("Error : Expiration date cannot be before Picked date");
             PreparedStatement ps=connection.prepareStatement("update product set availability=?, amount=?,\"type\"=?,price=?,pickedDate=?,expirationDate=? where productid=?");
-            ps.setBoolean(1,avl);
+            ps.setBoolean(1,dto.getAvailability());
             ps.setDouble(2,dto.getAmount());
             ps.setString(3,dto.getType());
             ps.setDouble(4,dto.getPrice());

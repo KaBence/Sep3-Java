@@ -4,9 +4,6 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import sep.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class SepClient
 {

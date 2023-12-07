@@ -97,7 +97,8 @@ public class OrderDaoImplementation implements OrderDao {
                 for(int j=counter;j<orderItems.size();j++){
                     DtoProduct x=productDao.getProductById(orderItems.get(j).getProductId());
                     if (!x.getFarmerId().equals(farmers.get(i))){
-                        ps=connection.prepareStatement("insert into Receipt(orderId,farmerid,customerId,processed,price,paymentmethod,text,status) values (?,?,?,?,?,?,?,?)");
+                        ps=connection.prepareStatement("insert into Receipt(orderId,farmerid,customerId,processed,price," +
+                                "paymentmethod,text,status) values (?,?,?,?,?,?,?,?)");
                         ps.setInt(1,id);
                         if (farmers.get(i).equals("--------")){
                             ps.setString(2, farmers.get(--i));
