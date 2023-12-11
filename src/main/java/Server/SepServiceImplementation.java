@@ -25,15 +25,15 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase {
-    private final RegisterDao registerDao;
-    private final LoginDao loginDao;
-    private final CustomerDao customerDao;
-    private final FarmerDao farmerDao;
-    private final ProductDao productDao;
-    private final OrderDao orderDao;
-    private final ReceiptDao receiptDao;
+    private RegisterDao registerDao;
+    private  LoginDao loginDao;
+    private CustomerDao customerDao;
+    private  FarmerDao farmerDao;
+    private  ProductDao productDao;
+    private  OrderDao orderDao;
+    private ReceiptDao receiptDao;
 
-    private final ReviewDao reviewDao;
+    private ReviewDao reviewDao;
 
     public SepServiceImplementation() {
         registerDao = new RegisterDaoImplementation();
@@ -44,6 +44,11 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
         orderDao=new OrderDaoImplementation();
         receiptDao=new ReceiptDaoImplementation();
         reviewDao = new ReviewDaoImplementation();
+    }
+
+    public SepServiceImplementation(OrderDao orderDao, ProductDao productDao) {
+        this.orderDao = orderDao;
+        this.productDao=productDao;
     }
 
     //----------Login----------\\
@@ -243,7 +248,15 @@ public class SepServiceImplementation extends SepServiceGrpc.SepServiceImplBase 
 
     @Override
     public void getProductById(getProductByIdRequest request, StreamObserver<getProductByIdResponse> responseObserver) {
-        DtoProduct x = productDao.getProductById(request.getId());
+        DtoProduct x;
+        try {
+            x = productDao.getProductById(request.getId());
+        }
+        catch (Exception e){
+            x=DtoProduct.newBuilder()
+                    .setType(e.getMessage())
+                    .build();
+        }
         System.out.println("Get Product by id - "+x.getId());
         getProductByIdResponse res = getProductByIdResponse.newBuilder()
                 .setProduct(x)

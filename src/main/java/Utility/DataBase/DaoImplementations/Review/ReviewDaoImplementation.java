@@ -101,6 +101,8 @@ public class ReviewDaoImplementation implements ReviewDao
         if (comment.getText().isEmpty()) {
             throw new Exception("Error: Text cannot be empty!");
         }
+        if (comment.getFarmerId().equals(""))
+            throw new Exception("Error: Please select a farmer");
         else
         {
             try (Connection connection = getConnection())

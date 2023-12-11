@@ -39,10 +39,12 @@ public class OrderDaoImplementation implements OrderDao {
 
     @Override
     public synchronized String createOrder(DtoOrder order, List<DtoOrderItem> orderItems,String paymentMethod,String note) throws Exception {
-        if (orderItems.isEmpty())
+        if (orderItems==null||orderItems.isEmpty())
             throw new Exception("Error: There are no orderItems");
         if (paymentMethod==null)
             throw new Exception("Error: There is no payment method");
+        if (order==null)
+            throw new Exception("Error: There is no order");
         //initialize
         List<String> farmers=new ArrayList<>();
         int orderGroup=0;
@@ -132,9 +134,6 @@ public class OrderDaoImplementation implements OrderDao {
         }
         catch (SQLException e) {
             throw new Exception("Error: Internal data base Error!\n" + e.getMessage());
-        }
-        catch (Exception e){
-            throw new Exception("Error: "+e.getMessage());
         }
     }
 

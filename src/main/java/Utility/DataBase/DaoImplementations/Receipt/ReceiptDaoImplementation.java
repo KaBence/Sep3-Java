@@ -279,6 +279,21 @@ public class ReceiptDaoImplementation implements ReceiptDao {
                 ps.setString(9,customerId);
                 ps.executeUpdate();
             }
+
+            if (!approval){
+                ps=connection.prepareStatement("select * from orderitem where orderid=?");
+                ps.setInt(1,orderId);
+                ResultSet resultSet=ps.executeQuery();
+                while (resultSet.next()){
+                    int productId=resultSet.getInt(2);
+                    double amount=resultSet.getDouble(3);
+
+                    ps=connection.prepareStatement("update product set amount=amount+? where productid=?");
+                    ps.setDouble(1,amount);
+                    ps.setInt(2,productId);
+                    ps.executeUpdate();
+                }
+            }
             
 
             return "Success!";

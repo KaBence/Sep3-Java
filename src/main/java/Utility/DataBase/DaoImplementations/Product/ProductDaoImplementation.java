@@ -32,6 +32,8 @@ public class ProductDaoImplementation implements ProductDao {
     }
     @Override
     public synchronized String createProduct(DtoProduct dtoProduct) throws Exception {
+        if (dtoProduct==null)
+            throw new Exception("Error: There is no product");
         Date picked = Date.valueOf(dtoProduct.getPickedDate());
         Date expired = Date.valueOf(dtoProduct.getExpirationDate());
 
@@ -83,7 +85,7 @@ public class ProductDaoImplementation implements ProductDao {
     }
 
     @Override
-    public synchronized DtoProduct getProductById(int productId) {
+    public synchronized DtoProduct getProductById(int productId) throws Exception {
         String type="";
         double amount=0.0;
         double price=0.0;
@@ -93,7 +95,7 @@ public class ProductDaoImplementation implements ProductDao {
             if (list.get(i).getId() == productId) // will it work no idea
                 return list.get(i);
         }
-        throw new RuntimeException("Error: Product with "+ productId +" not found!");
+        throw new Exception("Error: Product with "+ productId +" not found!");
     }
 
     @Override
@@ -142,6 +144,8 @@ public class ProductDaoImplementation implements ProductDao {
 
     @Override
     public synchronized String editProduct(DtoProduct dto) throws Exception {
+        if (dto==null)
+            throw new Exception("Error: There is no product");
         Date exDate=Date.valueOf(dto.getExpirationDate());
         Date pDate= Date.valueOf(dto.getPickedDate());
         try (Connection connection=getConnection()){
@@ -167,6 +171,8 @@ public class ProductDaoImplementation implements ProductDao {
 
     @Override
     public synchronized String deleteProduct(int id) throws Exception {
+        if (id==0)
+            throw new Exception("Error: id is zero");
         try(Connection connection = getConnection())
         {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM product WHERE productID = ?");
