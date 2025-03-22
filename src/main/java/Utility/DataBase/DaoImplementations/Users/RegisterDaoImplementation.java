@@ -121,12 +121,14 @@ public class RegisterDaoImplementation implements RegisterDao
         {
             try (Connection connection = getConnection())
             {
-                PreparedStatement user= connection.prepareStatement("INSERT INTO  \"user\"(phonenumber,password) VALUES(?,?)");
+                PreparedStatement user= connection.prepareStatement
+                        ("INSERT INTO  \"user\"(phonenumber,password) VALUES(?,?)");
                 user.setString(1,dtoFarmer.getPhoneNumber());
                 user.setString(2,dtoFarmer.getPassword());
                 user.executeUpdate();
 
-                PreparedStatement farmer= connection.prepareStatement("INSERT INTO Farmer(phonenumber,firstname,lastname,address,pestecides,farmName) VALUES(?,?,?,?,?,?)");
+                PreparedStatement farmer= connection.prepareStatement
+                        ("INSERT INTO Farmer(phonenumber,firstname,lastname,address,pestecides,farmName) VALUES(?,?,?,?,?,?)");
                 farmer.setString(1,dtoFarmer.getPhoneNumber());
                 farmer.setString(2,dtoFarmer.getFirstName());
                 farmer.setString(3,dtoFarmer.getLastName());

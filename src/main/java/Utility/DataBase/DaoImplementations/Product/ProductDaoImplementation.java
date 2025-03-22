@@ -1,14 +1,10 @@
 package Utility.DataBase.DaoImplementations.Product;
 
 import Utility.DataBase.Daos.Product.ProductDao;
-import sep.DtoCustomer;
 import sep.DtoProduct;
 
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ProductDaoImplementation implements ProductDao {

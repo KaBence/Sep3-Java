@@ -1,7 +1,6 @@
 package Utility.DataBase.DaoImplementations.Users;
 
 import Utility.DataBase.Daos.Users.FarmerDao;
-import sep.DtoCustomer;
 import sep.DtoFarmer;
 import sep.DtoRegisterFarmer;
 
